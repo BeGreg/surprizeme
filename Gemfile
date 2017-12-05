@@ -15,6 +15,9 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
+gem 'devise'
+gem 'nokogiri'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'
