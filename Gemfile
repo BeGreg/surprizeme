@@ -21,7 +21,7 @@ gem 'openurl'
 gem 'phantomjs'
 gem 'poltergeist'
 gem 'capybara'
-
+gem 'pundit'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
