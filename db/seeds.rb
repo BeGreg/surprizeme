@@ -8,34 +8,27 @@
 
 puts "starting Amazon"
 
-
-puts 'starting Nokogiri'
-
 selection = []
-url = "https://www.leroymerlin.fr/v3/search/search.do?resultOffset=0&resultLimit=50&resultListShape=PLAIN&keyword=bois"
-html_file = open(url).read
-html_doc = Nokogiri::HTML(html_file)
-html_doc.search('.prd-infos').search('h3').each do |element|
-  title = element.text.strip
-  print title
-  url = element.search('a').first.attr('href')
-  selection << { name: title, url: url }
-end
 
-# url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+insolite"
-# html_file = open(url).read
-# html_doc = Nokogiri::HTML(html_file)
-# html_doc.search('.s-item-container').each do |element|
-#   unless element.search('.a-icon-alt').nil?
-#     rating = "#{element.search('.a-icon-alt').text.strip.first}.#{element.search('.a-icon-alt').text.strip[2]}"
-#     if rating.to_i >= 4
-#       title = element.search('.s-access-title').text.strip
-#       puts title
-#       puts rating.to_is
-#     else
-#     end
-#   end
-# end
+browser = Capybara.current_session
+url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+insolite&rh=n%3A13921051%2Ck%3Agadget+insolite&qid=1512384836&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
+browser.visit url
+
+products = browser.all 's-item-container'
+
+products.each do |article|
+    puts article.all 'a-icon-alt'
+
+  # has_css?
+  # unless article.all 'a-icon-alt'.nil?
+  #   rating = "#{article.all('.a-icon-alt').text.strip.first}.#{element.search('.a-icon-alt').text.strip[2]}"
+  #   if rating.to_i >= 4
+  #     title = element.search('.s-access-title').text.strip
+  #     puts title
+  #     puts rating.to_is
+  #   end
+  # end
+end
 #     print title
 #   url = element.search('a').first.attr('href')
 #   selection << { name: title, url: url }
