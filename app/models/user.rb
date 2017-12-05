@@ -5,9 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :surprises
   has_many :ratings
-  has_many :products, through :surprises
-  has_many :moments, through :surprises
-  has_many :representations, through :moments
+  has_many :products, through: :surprises
+  has_many :moments, through: :surprises
+  has_many :representations, through: :moments
   validates :first_name, presence:true
   validates :last_name, presence:true
   validates :email, presence:true, uniqueness:true
