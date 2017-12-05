@@ -17,6 +17,10 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'devise'
 gem 'nokogiri'
+gem 'openurl'
+gem 'phantomjs'
+gem 'poltergeist'
+gem 'capybara'
 
 
 group :development do
