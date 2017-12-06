@@ -1,2 +1,28 @@
 <h1>Products#index</h1>
 <p>Find me in app/views/products/index.html.erb</p>
+<table>
+  <% @products.each do |product| %>
+  <tr>
+    <td rowspan=8 ><img src="<%= product.photo_url1 %>" width="200px" alt="">
+    <img src="<%= product.photo_url2 %>" width="50px" alt="">
+  <img src="<%= product.photo_url3 %>" width="50px" alt="">
+<img src="<%= product.photo_url4 %>" width="50px" alt=""></td>
+  </tr>
+  <tr>
+    <td><%= product.url %>
+    </td>
+    </tr>
+    <tr><td><%= product.description %></td>
+    </tr>
+    <tr><td>price: <%= product.price.to_f %>€</td>
+    </tr>
+    <tr><td><%= product.supplier.name %></td>
+    </tr>
+    <tr><td>rating: <%= product.supplier_review %></td>
+    </tr>
+    <tr><td><%= product.supplier_category %> </td>
+    </tr>
+    <tr><td> ---------------------------</td>
+  </tr>
+  <% end %>
+</table>

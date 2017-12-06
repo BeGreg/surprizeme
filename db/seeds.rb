@@ -20,44 +20,6 @@ require 'open-uri'
 #   p selection
 # end
 
-# puts "starting les raffineurs, montres"
-# puts 'starting Nokogiri'
-
-# selection = []
-# url = "https://www.lesraffineurs.com/36-montres-et-bracelets"
-# html_file = open(url).read
-# html_doc = Nokogiri::HTML(html_file)
-# html_doc.search('.product-container').search('.product-name').each do |element|
-#   title = element.text.strip
-#   url = element.attr('href')
-#   selection << { name: title, url: url }
-#   p selection
-# end
-
-# puts "starting les raffineurs, soins"
-# puts 'starting Nokogiri'
-
-# selection = []
-# url = "https://www.lesraffineurs.com/37-soins-rasage-et-barbe"
-# html_file = open(url).read
-# html_doc = Nokogiri::HTML(html_file)
-# html_doc.search('.product-container').search('.product-name').each do |element|
-#   title = element.text.strip
-#   url = element.attr('href')
-#   selection << { name: title, url: url }
-#   p selection
-# end
-
-# puts "starting les raffineurs, experiences"
-# puts 'starting Nokogiri'
-
-# selection = []
-# url = "https://www.lesraffineurs.com/23-toutes-les-experiences"
-# html_file = open(url).read
-# html_doc = Nokogiri::HTML(html_file)
-# html_doc.search('.product-container').search('.product-name').each do |element|
-#   title = element.text.strip
-#   url = element.attr('href')
 #   selection << { name: title, url: url }
 #   p selection
 # end
