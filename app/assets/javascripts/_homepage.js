@@ -1,6 +1,6 @@
-const product = document.getElementById("product");
+const product = document.querySelector(".product-title");
 const product_form = document.querySelector(".product-form");
-const moment = document.getElementById("moment");
+const moment = document.querySelector(".moment-title");
 const moment_form = document.querySelector(".moment-form");
 
 const product_title = document.querySelector(".product-title");
