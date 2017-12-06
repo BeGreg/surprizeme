@@ -2,21 +2,47 @@
 
 
     <!-- Profile picture with dropdown list -->
-<div class="row">
+<div class="row home-selection">
 
-    <div class="col-xs-6" id="product">
-      <button class="title">PRODUIT</button>
+    <div class="col-xs-6 category-select" id="product">
+      <button class="product-title">PRODUIT</button>
+      <div class="product-form event-hide"> <%= render "../views/products/search" %>
+      </div>
     </div>
 
-    <div class="col-xs-6" id="moment">
-      <button class="title">MOMENT</button>
+    <div class="col-xs-6 category-select" id="moment">
+      <button class="moment-title">MOMENT</button>
+      <div class="moment-form event-hide"> <%= render "../views/moments/search" %>
+      </div>
     </div>
-    <div class="login"><a href="#">Se connecter</a></div>
-    <div class="headline">
 
+    <div class="login">
+      <%= link_to "S'enregistrer", new_user_registration_path %>
+      <%= link_to "Se connecter", new_user_session_path %>
     </div>
-    <div class="headline-text"> Sortez de votre bulle </br>et choisissez votre catégorie !</div>
-  </div>
+
+    <div class="headline move-down">
+    </div>
+
+    <div class="headline-text move-down"> Sortez de votre bulle </br>et choisissez votre catégorie !
+    </div>
 </div>
+<div class="how">
+    <%= link_to "Comment ça marche ?", {anchor: "how-it-works"}, {id: 'how-link'} %>
+
+</div>
+<div class="hide-how" id="how-it-works">
+    <p>Hello HELLO Hello</p>
+    <p>Hello HELLO Hello</p>
+    <p>Hello HELLO Hello</p>
+    <p>Hello HELLO Hello</p>
+    <p>Hello HELLO Hello</p>
+    <p>Hello HELLO Hello</p>
+    <p>Hello HELLO Hello</p>
+    <p>Hello HELLO Hello</p>
+    <p>Hello HELLO Hello</p>
+    <p>Hello HELLO Hello</p>
+</div>
+
 
 
