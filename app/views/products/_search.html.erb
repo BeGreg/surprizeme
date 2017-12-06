@@ -1,0 +1,29 @@
+
+
+<%= form_tag("/search", method: "get") do |f| %>
+  <div class="search-field">
+    <%= label_tag(:budget, "Votre budget max")  %>
+    <%= text_field_tag(:budget, nil, placeholder: "ex: 80€") %>
+  </div>
+  <div class="search-field">
+    <%= radio_button_tag(:gender, "male") %>
+    <%= label_tag(:gender_male, "Homme") %>
+    <%= radio_button_tag(:gender, "female") %>
+    <%= label_tag(:gender_female, "Femme") %>
+    <%= radio_button_tag(:gender, "indifferent") %>
+    <%= label_tag(:gender_indifferent, "Indifférent") %>
+  </div>
+  <div class="search-field">
+    <%= radio_button_tag(:surprise_type, "extravagent") %>
+    <%= label_tag(:surprise_type_extravagent, "Extravagant") %>
+    <%= radio_button_tag(:surprise_type, "moderate") %>
+    <%= label_tag(:surprise_type_moderate, "Modéré") %>
+
+    <%= radio_button_tag(:surprise_type, "indifferent") %>
+    <%= label_tag(:surprise_type_indifferent, "Indifférent") %>
+  </div>
+
+  <%= submit_tag("Search") %>
+  <% end %>
+
+

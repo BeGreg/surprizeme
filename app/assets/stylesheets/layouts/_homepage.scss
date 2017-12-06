@@ -1,48 +1,185 @@
+button:focus {outline:0;}
+
 body {
   width: 100%;
   height: 100%;
 
  }
-.row {
+
+.category-select {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.home-selection {
   position: relative;
   display: flex;
   justify-content: center;
 }
 
-.login {
+.product-form{
   position: absolute;
+  top: 55vh;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  right: 25px;
+.moment-form{
+  position: absolute;
+  top: 55vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cat-show{
+  opacity: 1;
+  max-height: 250px;
+  transition:             all 1500ms ease;
 
-  text-align: center;
+        // -moz-transition:    max-height 500ms ease;
+        // -ms-transition:     max-height 500ms ease;
+        // -o-transition:      max-height 500ms ease;
+        // -webkit-transition: max-height 500ms ease;
 
 }
-.headline {
 
+.event-hide{
+  opacity: 0;
+  max-height: 0;
+  transition:             all 1500ms ease;
+        // -moz-transition:    max-height 500ms ease;
+        // -ms-transition:     max-height 500ms ease;
+        // -o-transition:      max-height 500ms ease;
+        // -webkit-transition: max-height 500ms ease;
+}
+.login {
+  position: absolute;
+  right: 25px;
+  text-align: center;
+}
+
+.headline {
   position: absolute;
   height: 100px;
   width: 200px;
-  top: 15vh;
-
   border-top: 1px solid white;
   border-bottom: 1px solid white;
-
   text-align: center;
-
 }
+
 .headline-text {
   position: absolute;
-  text-align: center;
+  left: 50vh;
+  right: 50vh;
   font-family:'Catamaran', sans-serif;
   font-weight: lighter;
   font-size: 35px;
   color: white;
-  top: 15vh;
-  left: 50vh;
-  right: 50vh;
+  text-align: center;
 }
 
-.title {
+.move-down {
+  top: 15vh;
+  transition: top 1500ms;
+}
+
+.move-up {
+  top: 5vh;
+  transition: top 1500ms;
+}
+
+.how {
+  width: 100%;
+  position: absolute;
+  bottom: 5vh;
+  display: flex;
+  justify-content: center;
+}
+.hide-how{
+  display: none;
+  opacity: 0;
+  max-height: 0;
+  transition: all 1500ms;
+}
+
+.show-how{
+  position: absolute;
+  top: 100vh;
+  bottom: 0vh;
+  display: block;
+  max-height: 450px;
+  opacity: 1;
+  transition: all 1500ms;
+}
+
+#how-it-works {
+
+}
+
+.product-title {
+  position: absolute;
+  top: 25vh;
+  margin-left: auto;
+  margin-right: auto;
+  font-family:'Catamaran', sans-serif;
+  font-size: 60px;
+  font-weight: lighter;
+  color: white;
+
+  /*test*/
+  transition: color 0.25s;
+
+  &::before,
+  &::after {
+    border: 2px solid transparent;
+    width: 0;
+    height: 0;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+  }
+
+  &::after {
+    bottom: 0;
+    right: 0;
+  }
+
+  &:hover {
+    color: white;
+    font-size: 70px;
+    font-weight: bolder;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover::before {
+    border-top-color: white;
+    border-right-color: white;
+    transition:
+    width 0.25s ease-out,
+    height 0.25s ease-out 0.25s;
+  }
+
+  &:hover::after {
+    border-bottom-color: white;
+    border-left-color: white;
+    transition:
+    width 0.25s ease-out,
+    height 0.25s ease-out 0.25s;
+  }
+}
+
+.moment-title {
+  position: absolute;
+  top: 25vh;
+  margin-left: auto;
+  margin-right: auto;
   font-family:'Catamaran', sans-serif;
   font-size: 60px;
   font-weight: lighter;
@@ -103,7 +240,7 @@ button {
   border: 0;
   box-sizing: border-box;
   margin: 1em;
-  padding: 0.5em 1.5em;
+  padding: 0.25em 0.5em;
 
 
   color: white;
@@ -120,7 +257,7 @@ button {
   position: absolute;
   width: 100%;
   height: 100%;
-}
+ }
 }
 /*fin test*/
 
@@ -130,13 +267,10 @@ button {
   align-items: center;
   justify-content: center;
   height: 100vh;
-
-
   background: #AA076B; /* fallback for old browsers */
   background: -webkit-linear-gradient(to top right, #AA076B, #61045F); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to top right, #AA076B, #61045F);
   position: relative;
-
 }
 
 #product::after {
