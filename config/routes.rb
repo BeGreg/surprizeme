@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :users do
+  resources :users
+
+  resources :products do
     resources :ratings
   end
-
-  resources :products
   resources :moments
   resources :surprises
   resources :location
 
+  get "hot_or_not/", to: "ratings#hot_or_not"
 
-  post "hot_or_not/", to: "products#hot_or_not"
   get '/styleguide', to: 'pages#styleguide'
 
   root to: 'pages#home'
