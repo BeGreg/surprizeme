@@ -1,0 +1,21 @@
+
+<%= form_tag("/search", method: "get") do |f| %>
+  <div class="search-field">
+    <%= label_tag(:budget, "Votre budget max")  %>
+    <%= text_field_tag(:budget, nil, placeholder: "ex: 80€") %>
+  </div>
+  <div class="search-field">
+    <%= label_tag(:date, "Quand ?")  %>
+    <%= text_field_tag(:date, nil, placeholder: "28/03/2018") %>
+  </div>
+  <div class="search-field">
+    <%= label_tag(:city, "Où ?")  %>
+    <%= text_field_tag(:city, nil, placeholder: "Lyon") %>
+  </div>
+  <div class="search-field">
+    <%= label_tag(:quantity, "Pour combien de personnes ?")  %>
+    <%= text_field_tag(:quantity, nil, placeholder: "3") %>
+  </div>
+
+  <%= submit_tag("Search") %>
+  <% end %>
