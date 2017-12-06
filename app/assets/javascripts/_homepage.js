@@ -69,6 +69,7 @@ function TitleMove(x, y, a, b) {
 
 
 // what happens when you click on "Comment Ca marche ? "
+const category_select = document.querySelectorAll(".category-select");
 const howLink = document.getElementById("how-link");
 const howItWorks = document.getElementById("how-it-works");
 howLink.addEventListener("click", (event) => {
@@ -79,11 +80,15 @@ howLink.addEventListener("click", (event) => {
 
 function HowItWorks() {
   if (howItWorks.classList.contains("hide-how")) {
-    product.style.height="100vh";
-    moment.style.height="100vh";
+    category_select.forEach( function(x) {
+      x.style.height="100vh";
+    });
+
   }else{
-    product.style.height="200vh";
-    moment.style.height="200vh";
-  }
+    category_select.forEach(function(x) {
+      x.style.height="200vh";
+    });
+
+  };
 };
 
