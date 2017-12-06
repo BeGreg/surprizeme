@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
+
   skip_before_action :authenticate_user!, only: :search
+  
   def new
   end
 
@@ -19,7 +21,6 @@ class ProductsController < ApplicationController
     @product = unrated_products.sample
   end
 
-
   def search
     @budget = params[:budget]
     @gender = params[:gender]
@@ -32,10 +33,4 @@ class ProductsController < ApplicationController
     p @productList
     end
   end
-
-
-
-
-
-
 end

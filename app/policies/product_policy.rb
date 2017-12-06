@@ -15,4 +15,8 @@ class ProductPolicy < ApplicationPolicy
     # - user:   the `current_user` signed in with Devise.
   end
 
+  def hot_or_not?
+    return true
+  end
+
 end
