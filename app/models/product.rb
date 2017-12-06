@@ -11,6 +11,6 @@ class Product < ApplicationRecord
   validates :supplier_category, presence:true
   validates :status, presence:true
   validates :photo_url1, presence:true
-  # validates :delivery_price, presence:true
+  validates :delivery_price, presence:true
 
 end
