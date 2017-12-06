@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   get "hot_or_not/", to: "ratings#hot_or_not"
 
   get '/styleguide', to: 'pages#styleguide'
-  get 'search', to: 'products#search'
 
+  get 'search', to: 'products#search'
   root to: 'pages#home'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
