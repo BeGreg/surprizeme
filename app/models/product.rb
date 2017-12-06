@@ -9,8 +9,8 @@ class Product < ApplicationRecord
   validates :name, presence:true
   validates :supplier_review, presence:true
   validates :supplier_category, presence:true
-  validates :status, presence:true, default:"Créé"
+  validates :status, presence:true
   validates :photo_url1, presence:true
-  validates :delivery_price, prensence:true
+  # validates :delivery_price, presence:true
 
 end
