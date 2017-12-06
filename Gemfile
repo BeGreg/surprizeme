@@ -22,6 +22,8 @@ gem 'phantomjs'
 gem 'capybara'
 gem 'poltergeist'
 gem 'launchy'
+gem 'pundit'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'

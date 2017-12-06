@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :surprises
   resources :location
 
+
   post "hot_or_not/", to: "products#hot_or_not"
+  get '/styleguide', to: 'pages#styleguide'
 
   root to: 'pages#home'
 
