@@ -1,0 +1,68 @@
+[1m[1;34mBasicObject#methods[0m[0m: 
+  !  !=  ==  __id__  __send__  equal?  instance_eval  instance_exec
+[1m[1;34mKernel#methods[0m[0m: 
+  !~                       instance_of?                public_send             
+  <=>                      instance_variable_defined?  remove_instance_variable
+  ===                      instance_variable_get       respond_to?             
+  =~                       instance_variable_set       send                    
+  byebug                   instance_variables          singleton_class         
+  class                    is_a?                       singleton_method        
+  clone                    itself                      singleton_methods       
+  debugger                 kind_of?                    taint                   
+  define_singleton_method  method                      tainted?                
+  display                  methods                     tap                     
+  dup                      nil?                        to_enum                 
+  enum_for                 object_id                   to_s                    
+  eql?                     pretty_inspect              trust                   
+  extend                   private_methods             untaint                 
+  freeze                   protected_methods           untrust                 
+  frozen?                  public_method               untrusted?              
+  hash                     public_methods            
+[1m[1;34mPP::ObjectMixin#methods[0m[0m: 
+  pretty_print        pretty_print_inspect           
+  pretty_print_cycle  pretty_print_instance_variables
+[1m[1;34mJSON::Ext::Generator::GeneratorMethods::Object#methods[0m[0m: to_json
+[1m[1;34mObject#methods[0m[0m: __binding__  pry  psych_to_yaml  to_yaml  to_yaml_properties
+[1m[1;34mCapybara::SessionMatchers#methods[0m[0m: 
+  assert_current_path     has_current_path?   
+  assert_no_current_path  has_no_current_path?
+[1m[1;34mCapybara::Session#methods[0m[0m: 
+  accept_alert              fill_in                  inspect                 
+  accept_confirm            find                     mode                    
+  accept_prompt             find_all                 open_new_window         
+  all                       find_button              query                   
+  app                       find_by_id               raise_server_error!     
+  assert_all_of_selectors   find_field               refresh                 
+  assert_no_selector        find_link                refute_selector         
+  assert_no_text            first                    reset!                  
+  assert_no_title           go_back                  reset_session!          
+  assert_none_of_selectors  go_forward               resolve                 
+  assert_selector           has_button?              response_headers        
+  assert_text               has_checked_field?       save_and_open_page      
+  assert_title              has_content?             save_and_open_screenshot
+  attach_file               has_css?                 save_page               
+  body                      has_field?               save_screenshot         
+  check                     has_link?                select                  
+  choose                    has_no_button?           server                  
+  cleanup!                  has_no_checked_field?    source                  
+  click_button              has_no_content?          status_code             
+  click_link                has_no_css?              switch_to_frame         
+  click_link_or_button      has_no_field?            switch_to_window        
+  click_on                  has_no_link?             synchronized            
+  config                    has_no_select?           synchronized=           
+  configure                 has_no_selector?         text                    
+  current_host              has_no_table?            title                   
+  current_path              has_no_text?             uncheck                 
+  current_scope             has_no_title?            unselect                
+  current_url               has_no_unchecked_field?  using_wait_time         
+  current_window            has_no_xpath?            visit                   
+  dismiss_confirm           has_select?              window_opened_by        
+  dismiss_prompt            has_selector?            windows                 
+  document                  has_table?               within                  
+  driver                    has_text?                within_element          
+  evaluate_async_script     has_title?               within_fieldset         
+  evaluate_script           has_unchecked_field?     within_frame            
+  execute_script            has_xpath?               within_table            
+  field_labeled             html                     within_window           
+[1m[1;34minstance variables[0m[0m: [0;34m@app[0m  [0;34m@config[0m  [0;34m@driver[0m  [0;34m@mode[0m  [0;34m@server[0m  [0;34m@touched[0m
+[1m[1;34mclass variables[0m[0m: [1;34m@@instance_created[0m
