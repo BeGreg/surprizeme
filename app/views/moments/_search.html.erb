@@ -5,23 +5,29 @@
     <div class='generic-form'>
 
     <%= form_tag("/search", method: "get") do |f| %>
-      <div class="form-inputs inline">
-        <%= label_tag(:budget, "Budget")  %>
-        <%= text_field_tag(:budget, nil, placeholder: "ex: 80€") %>
-        <%= label_tag(:quantity, "Quantité")  %>
-        <%= text_field_tag(:quantity, nil, placeholder: "3") %>
+      <div class="double-form form-inputs">
+        <div class="budget">
+          <%= label_tag(:budget, "Budget max.")  %>
+          <%= text_field_tag(:budget, nil, placeholder: "ex: 80€") %>
+        </div>
+        <div class="quantity">
+          <%= label_tag(:quantity, "Quantité")  %>
+          <%= text_field_tag(:quantity, nil, placeholder: "3") %>
+        </div>
       </div>
-      <div class="form-inputs">
-        <%= label_tag(:date, "Quand ?")  %>
-        <%= text_field_tag(:date, nil, placeholder: "28/03/2018") %>
-      </div>
-      <div class="form-inputs">
-        <%= label_tag(:city, "Où ?")  %>
-        <%= text_field_tag(:city, nil, placeholder: "Lyon") %>
+      <div class="double-form form-inputs">
+        <div class="when">
+          <%= label_tag(:date, "Quand ?")  %>
+          <%= text_field_tag(:date, nil, placeholder: "28/03/2018") %>
+        </div>
+        <div class="where">
+          <%= label_tag(:city, "Où ?")  %>
+          <%= text_field_tag(:city, nil, placeholder: "Lyon") %>
+        </div>
       </div>
 
       <div class="form-actions">
-        <%= submit_tag "Search", class: "form-button" %>
+        <%= submit_tag "Surprenez-moi avec un Moment", class: "form-button" %>
       </div>
       <% end %>
     </div>

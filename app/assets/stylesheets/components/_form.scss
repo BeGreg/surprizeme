@@ -157,3 +157,10 @@ html, body {
             filter: brightness(1) grayscale(.5) opacity(.8);
 }
 
+
+
+.double-form {
+  display: flex ;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

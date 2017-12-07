@@ -6,12 +6,12 @@
     <div class='generic-form'>
 
     <%= form_tag("/search", method: "get") do |f| %>
-      <div class="form-inputs">
-        <%= label_tag(:budget, "Votre budget max")  %>
+      <div class="form-inputs inline">
+        <%= label_tag(:budget, "Budget max.")  %>
         <%= text_field_tag(:budget, nil, placeholder: "ex: 80€") %>
       </div>
       <div class="inline icon-selector">
-
+        <%= label_tag(:gender, "Sexe")  %>
         <%= radio_button_tag(:gender, "male") %>
         <%= label_tag(:gender_male, "Homme", class: "icon-card male") %>
         <%= radio_button_tag(:gender, "female") %>
@@ -20,6 +20,7 @@
         <%= label_tag(:gender_indifferent, "Indifférent", class: "icon-card indifferent") %>
       </div>
       <div class="icon-selector inline">
+        <%= label_tag(:surprise_type, "Type")  %>
         <%= radio_button_tag(:surprise_type, "extravagent") %>
         <%= label_tag(:surprise_type_extravagent, "Extravagant", class: "icon-card extravagant") %>
         <%= radio_button_tag(:surprise_type, "moderate") %>
