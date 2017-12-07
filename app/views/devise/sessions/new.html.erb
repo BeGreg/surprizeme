@@ -1,15 +1,25 @@
-<h2>Log in</h2>
+<div class='container form-container'>
+  <div class="form-title">
+    <h2>Log in</h2>
+</div>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, required: false, autofocus: true %>
-    <%= f.input :password, required: false %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  <div class="generic-form-container">
+    <div class='generic-form'>
+      <div class="form-description">
+        <p> Bienvenue sur SurpriZe me </p>
+        <p> Identifiez-vous </p>
+      </div>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-inputs">
+          <%= f.input :email, required: false, autofocus: true %>
+          <%= f.input :password, label:"Mot de passe", required: false %>
+          <%= f.input :remember_me, label:"Se souvenir de moi", as: :boolean if devise_mapping.rememberable? %>
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit, "S'identifier", class: 'form-button' %>
+        </div>
+      <% end %>
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
