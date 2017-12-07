@@ -1,0 +1,13 @@
+<div class="container">
+  <h1 style="text-align: center"><%= @product.name %></h1>
+  <div id="image-hon"><%= image_tag @product.photo_url1%></div>
+  <div class="row">
+    <div class="buttons">
+      <div class="not-surprising btn btn-warning"><%= link_to "Ce n'est pas surprenant...", product_ratings_path(@product, rating:true), method: :post %></div>
+      <div class="prix">Prix : <%= @product.price %>€</div>
+      <div class="surprising btn btn-success"><%= link_to "C'est surprenant!", product_ratings_path(@product, rating:true), method: :post %> </div>
+    </div>
+  </div>
+  <div><%= @product.description %></div>
+</div>
+
