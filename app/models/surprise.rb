@@ -5,5 +5,5 @@ class Surprise < ApplicationRecord
   validates :bill_first_name, presence:true
   validates :bill_last_name, presence:true
   validates :bill_address, presence:true
-  validates :status, default:"Initiée"
+  validates :status, presence:true
 end

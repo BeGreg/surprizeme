@@ -1,4 +1,5 @@
 class SurprisesController < ApplicationController
+
   def index
   end
 
@@ -9,5 +10,9 @@ class SurprisesController < ApplicationController
   end
 
   def edit
+  end
+  def surprise_details
+    @surprise = Surprise.new
+    authorize @surprise, :surprise_details?
   end
 end
