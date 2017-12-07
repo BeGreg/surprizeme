@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :surprises
   resources :location
 
+  get '/surprise_details', to: 'surprises#surprise_details'
+
   get "hot_or_not/", to: "ratings#hot_or_not"
 
   get '/styleguide', to: 'pages#styleguide'
