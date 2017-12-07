@@ -1,4 +1,5 @@
 class SurprisesController < ApplicationController
+    before_action :set_surprise, only: [:show, :edit, :update, :destroy]
   def index
   end
 
@@ -6,8 +7,16 @@ class SurprisesController < ApplicationController
   end
 
   def show
+    @product = Product.find(@surprise[:product_id])
   end
 
   def edit
   end
+
+  private
+
+  def set_surprise
+    @surprise = Surprise.find(params[:id])
+  end
+
 end
