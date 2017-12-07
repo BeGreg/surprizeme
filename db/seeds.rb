@@ -13,7 +13,7 @@ require 'capybara/poltergeist'
 # Configure Poltergeist to not blow up on websites with js errors aka every website with js
 # See more options at https://github.com/teampoltergeist/poltergeist#customization
 Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, js_errors: false, :phantomjs => Phantomjs.path)
+    Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
   end
 
   # Configure Capybara to use Poltergeist as the driver
@@ -35,11 +35,46 @@ selection = []
 browser = Capybara.current_session
 # url = "https://www.amazon.fr/gadget-high-tech-High-Tech/s?ie=UTF8&page=1&rh=n%3A13921051%2Ck%3Agadget%20high%20tech"
 # url pour test produit binding pry
-url = "https://www.amazon.fr/Organiseur-Universe-Accessoires-Electroniques-Capacit%C3%A9/dp/B014ZJKX1W/ref=sr_1_2?s=electronics&ie=UTF8&qid=1512513598&sr=1-2&keywords=gadget+high+tech"
+url = "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
 
 browser.visit url
 binding.pry
 products = browser.all '.s-item-container'
+
+
+# SCRAPBACK
+# browser.find('#add-to-cart-button').click
+# browser.all("input")[0].click
+# browser.find("#nav-cart").click
+# --------------------
+# browser.all('.exclusive')[1].click
+# browser.visit "https://www.lavantgardiste.com/commande"
+# browser.find('.standard-checkout').click
+# browser.fill_in 'email', with: 'gregory.blain@gmail.com'
+# browser.fill_in 'passwd', with: 'jE2Ob6k4'
+# browser.find_by_id('SubmitLogin').click
+# browser.has_checked_field?('addressesAreEquals')
+# browser.uncheck('addressesAreEquals')
+# browser.find('.button.button-small.btn.btn-default', visible: :all).click
+# browser.find_by_id('addressesAreEquals').trigger('click')
+# browser.find('a.btn', visible: :all).trigger('click')
+# browser.fill_in 'company', with: 'Le Wagon'
+# browser.fill_in 'address1', with: '23 rue Paul Montrochet'
+# browser.fill_in 'postcode', with: '69002'
+# browser.fill_in 'city', with: 'Lyon'
+# browser.fill_in 'phone_mobile', with: '0607830808'
+# browser.fill_in 'alias', with: 'Wagon'
+# browser.find_by_id('submitAddress').click
+# browser.select 'Wagon', from: 'id_address_delivery'
+# browser.select 'Mon adresse', from: 'id_address_invoice'
+
+
+
+
+
+
+
+
 
 
 
