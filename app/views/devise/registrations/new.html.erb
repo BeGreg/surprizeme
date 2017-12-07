@@ -9,17 +9,14 @@
     <div class='generic-form'>
       <div class="form-description">
         <p> Bienvenue sur SurpriZe me </p>
-        <p> Enregistrez-vous </p>
+        <p> Inscrivez-vous </p>
       </div>
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :first_name, required: true, autofocus: true %>
-    <%= f.input :last_name, required: true, autofocus: true %>
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
+    <%= f.input :first_name, label: "Prenom", required: true, autofocus: true %>
+    <%= f.input :last_name, label: "Nom", required: true, autofocus: true %>
   </div>
         <div class="form-inputs">
           <%= f.input :email, required: true, autofocus: true, placeholder: "you@surprize.me" %>
@@ -28,7 +25,7 @@
         </div>
 
         <div class="form-actions">
-          <%= f.button :submit, "S'enregistrer", class: 'form-button' %>
+          <%= f.button :submit, "S'inscrire", class: 'form-button' %>
         </div>
       <% end %>
 
