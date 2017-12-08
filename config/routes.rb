@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users,
+    controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   resources :users
 
   resources :products do
@@ -9,6 +11,8 @@ Rails.application.routes.draw do
   resources :moments
   resources :surprises
   resources :location
+
+  get '/surprise_details', to: 'surprises#surprise_details'
 
   get "hot_or_not/", to: "ratings#hot_or_not"
 
