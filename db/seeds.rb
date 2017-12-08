@@ -124,6 +124,9 @@ products = browser.all '.s-item-container'
 
 # Scrap Raffineurs
 puts 'startin les raffineurs, du palais, capybara'
+
+Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
+
 url = "https://www.lesraffineurs.com/18-du-palais"
 browser.visit url
 products = browser.all '.product-container'
