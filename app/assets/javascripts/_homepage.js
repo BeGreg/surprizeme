@@ -12,7 +12,7 @@ function homepageAnimation() {
 
 
   // What happens when you click on "Product"
-  product.addEventListener("click", (event) => {
+  product.addEventListener("click", function() {
 
     product_form.classList.toggle("event-hide");
     product_form.classList.toggle("cat-show");
@@ -25,7 +25,7 @@ function homepageAnimation() {
 
 
   // What happens when you click on "Moment"
-  moment.addEventListener("click", (event) => {
+  moment.addEventListener("click", function() {
 
     moment_form.classList.toggle("event-hide");
     moment_form.classList.toggle("cat-show");
@@ -73,7 +73,7 @@ function homepageAnimation() {
   const category_select = document.querySelectorAll(".category-select");
   const howLink = document.getElementById("how-link");
   const howItWorks = document.getElementById("how-it-works");
-  howLink.addEventListener("click", (event) => {
+  howLink.addEventListener("click", function() {
     howItWorks.classList.toggle("hide-how");
     howItWorks.classList.toggle("show-how");
     HowItWorks()
