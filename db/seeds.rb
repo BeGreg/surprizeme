@@ -5,9 +5,36 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'open-uri'
+# puts "starting les raffineurs, sac et maroquinerie"
+# puts 'starting Nokogiri'
 
-puts "starting Amazon"
+# selection = []
+# url = "https://www.lesraffineurs.com/35-sacs-et-maroquinerie"
+# html_file = open(url).read
+# html_doc = Nokogiri::HTML(html_file)
+# html_doc.search('.product-container').search('.product-name').each do |element|
+#   title = element.text.strip
+#   url = element.attr('href')
+#   selection << { name: title, url: url }
+#   p selection
+# end
 
+#   selection << { name: title, url: url }
+#   p selection
+# end
+
+# puts "starting les raffineurs, gosier"
+# puts 'starting Nokogiri'
+
+# selection = []
+# url = "https://www.lesraffineurs.com/19-du-gosier"
+# html_file = open(url).read
+# html_dol }
+#   p selection
+# end
+
+# Require the gems
 require 'capybara/poltergeist'
 
 # Configure Poltergeist to not blow up on websites with js errors aka every website with js
@@ -19,19 +46,10 @@ Capybara.register_driver :poltergeist do |app|
   # Configure Capybara to use Poltergeist as the driver
   Capybara.default_driver = :poltergeist
 
-selection = []
 
-# browser = Capybara.current_session
-# url = "https://www.leroymerlin.fr/v3/search/search.do?resultOffset=0&resultLimit=50&resultListShape=PLAIN&keyword=bois"
-# browser.visit url
-# products = browser.all '.prd-infos h3'
+puts 'startin les raffineurs, du palais, capybara'
 
-# products.each do |article|
-#   puts article.find("a")[:href]
-#   title_element = article.text
-#   puts title_element
-# end
-
+products_url = []
 browser = Capybara.current_session
 url = "https://www.amazon.fr/Organiseur-Universe-Accessoires-Electroniques-Capacit%C3%A9/dp/B014ZJKX1W/ref=sr_1_2?s=electronics&ie=UTF8&qid=1512727816&sr=1-2&keywords=gadget+high+tech"
 # url pour test produit binding pry
@@ -42,7 +60,7 @@ binding.pry
 products = browser.all '.s-item-container'
 
 
-# SCRAPBACK
+# SCRAPBACK TEST
 # browser.find('#add-to-cart-button').click
 # browser.all("input")[0].click
 # browser.find("#nav-cart").click
@@ -74,13 +92,7 @@ products = browser.all '.s-item-container'
 
 
 
-
-
-
-
-
-
-
+# Scrap Amazon
 
 products.each do |article|
   if article.has_css?('.a-icon-star')
@@ -98,25 +110,7 @@ products.each do |article|
       selection << product
     end
   end
-end
-
-selection.each do |product|
-  browser.visit product.url
-  product.description = browser.find_by_id('productDescription').text
-  if browser.has_no_text?(:visible, "Nouveau Prix")
-    price_text = browser.find_by_id('priceblock_ourprice').text
-  else
-    price_text = browser.find_by_id('priceblock_saleprice').text
-  end
-  product.price = price_text.last(5).gsub(",",".").to_f
-  product.characteristic = browser.all('.techD')[0].text
-  if browser.find_by_id('wayfinding-breadcrumbs_feature_div')
-    product.supplier_category = browser.find_by_id('wayfinding-breadcrumbs_feature_div').all('li').last.text
-  else
-    product.supplier_category = "Gadget"
-  end
-
-  script = browser.all('script', visible: false)[3].text(:all)
+   script = browser.all('script', visible: false)[3].text(:all)
   script.each do
     images = browser.find_by_id('landingImage')['data-a-dynamic-image'.to_sym]
     hash_images = (eval images).to_a
@@ -129,64 +123,61 @@ selection.each do |product|
   product.save!
 end
 
-# A CONSERVER pour scrapper les autres images
-# browser.all('script', visible: false)[3].text(:all)
-# <script type="text/javascript">
-# P.when('A').register("ImageBlockATF", function(A){
-#     var data = {
-#                 'colorImages': { 'initial': [
-#                   {
-#                     "hiRes":"https://images-na.ssl-images-amazon.com/images/I/61ytV%2BA1LUL._SL1001_.jpg",
-#                     "thumb":"https://images-na.ssl-images-amazon.com/images/I/51JnDmJAh1L._SX38_SY50_CR,0,0,38,50_.jpg",
-#                     "large":"https://images-na.ssl-images-amazon.com/images/I/51JnDmJAh1L.jpg",
-#                     "main":{"https://images-na.ssl-images-amazon.com/images/I/61ytV%2BA1LUL._SX536_.jpg":[357,536],"https://images-na.ssl-images-amazon.com/images/I/61ytV%2BA1LUL._SX603_.jpg":[402,603],"https://images-na.ssl-images-amazon.com/images/I/61ytV%2BA1LUL._SX666_.jpg":[444,666],"https://images-na.ssl-images-amazon.com/images/I/61ytV%2BA1LUL._SX730_.jpg":[486,730],"https://images-na.ssl-images-amazon.com/images/I/61ytV%2BA1LUL._SX818_.jpg":[545,818]
-#                     },
-#                     "variant":"MAIN",
-#                     "lowRes":null
-#                   },
-#                   {"hiRes":"https://images-na.ssl-images-amazon.com/images/I/61wc-P3EKqL._SL1001_.jpg","thumb":"https://images-na.ssl-images-amazon.com/images/I/51RUMZo32oL._SX38_SY50_CR,0,0,38,50_.jpg","large":"https://images-na.ssl-images-amazon.com/images/I/51RUMZo32oL.jpg","main":{"https://images-na.ssl-images-amazon.com/images/I/61wc-P3EKqL._SX536_.jpg":[357,536],"https://images-na.ssl-images-amazon.com/images/I/61wc-P3EKqL._SX603_.jpg":[402,603],"https://images-na.ssl-images-amazon.com/images/I/61wc-P3EKqL._SX666_.jpg":[444,666],"https://images-na.ssl-images-amazon.com/images/I/61wc-P3EKqL._SX730_.jpg":[486,730],"https://images-na.ssl-images-amazon.com/images/I/61wc-P3EKqL._SX818_.jpg":[545,818]},"variant":"PT01","lowRes":null},{"hiRes":"https://images-na.ssl-images-amazon.com/images/I/61M0x6HCs7L._SL1001_.jpg","thumb":"https://images-na.ssl-images-amazon.com/images/I/51d6DfG%2BkyL._SX38_SY50_CR,0,0,38,50_.jpg","large":"https://images-na.ssl-images-amazon.com/images/I/51d6DfG%2BkyL.jpg","main":{"https://images-na.ssl-images-amazon.com/images/I/61M0x6HCs7L._SX536_.jpg":[357,536],"https://images-na.ssl-images-amazon.com/images/I/61M0x6HCs7L._SX603_.jpg":[402,603],"https://images-na.ssl-images-amazon.com/images/I/61M0x6HCs7L._SX666_.jpg":[444,666],"https://images-na.ssl-images-amazon.com/images/I/61M0x6HCs7L._SX730_.jpg":[486,730],"https://images-na.ssl-images-amazon.com/images/I/61M0x6HCs7L._SX818_.jpg":[545,818]},"variant":"PT02","lowRes":null},{"hiRes":"https://images-na.ssl-images-amazon.com/images/I/61%2BGyxMWnmL._SL1001_.jpg","thumb":"https://images-na.ssl-images-amazon.com/images/I/51a-QoJvyPL._SX38_SY50_CR,0,0,38,50_.jpg","large":"https://images-na.ssl-images-amazon.com/images/I/51a-QoJvyPL.jpg","main":{"https://images-na.ssl-images-amazon.com/images/I/61%2BGyxMWnmL._SX536_.jpg":[357,536],"https://images-na.ssl-images-amazon.com/images/I/61%2BGyxMWnmL._SX603_.jpg":[402,603],"https://images-na.ssl-images-amazon.com/images/I/61%2BGyxMWnmL._SX666_.jpg":[444,666],"https://images-na.ssl-images-amazon.com/images/I/61%2BGyxMWnmL._SX730_.jpg":[486,730],"https://images-na.ssl-images-amazon.com/images/I/61%2BGyxMWnmL._SX818_.jpg":[545,818]},"variant":"PT03","lowRes":null},{"hiRes":"https://images-na.ssl-images-amazon.com/images/I/61ipg7dqp1L._SL1001_.jpg","thumb":"https://images-na.ssl-images-amazon.com/images/I/51t4s2NXdDL._SX38_SY50_CR,0,0,38,50_.jpg","large":"https://images-na.ssl-images-amazon.com/images/I/51t4s2NXdDL.jpg","main":{"https://images-na.ssl-images-amazon.com/images/I/61ipg7dqp1L._SX536_.jpg":[357,536],"https://images-na.ssl-images-amazon.com/images/I/61ipg7dqp1L._SX603_.jpg":[402,603],"https://images-na.ssl-images-amazon.com/images/I/61ipg7dqp1L._SX666_.jpg":[444,666],"https://images-na.ssl-images-amazon.com/images/I/61ipg7dqp1L._SX730_.jpg":[486,730],"https://images-na.ssl-images-amazon.com/images/I/61ipg7dqp1L._SX818_.jpg":[545,818]},"variant":"PT04","lowRes":null},{"hiRes":"https://images-na.ssl-images-amazon.com/images/I/61RcRhE1GaL._SL1001_.jpg","thumb":"https://images-na.ssl-images-amazon.com/images/I/51LUMYjQRuL._SX38_SY50_CR,0,0,38,50_.jpg","large":"https://images-na.ssl-images-amazon.com/images/I/51LUMYjQRuL.jpg","main":{"https://images-na.ssl-images-amazon.com/images/I/61RcRhE1GaL._SX536_.jpg":[357,536],"https://images-na.ssl-images-amazon.com/images/I/61RcRhE1GaL._SX603_.jpg":[402,603],"https://images-na.ssl-images-amazon.com/images/I/61RcRhE1GaL._SX666_.jpg":[444,666],"https://images-na.ssl-images-amazon.com/images/I/61RcRhE1GaL._SX730_.jpg":[486,730],"https://images-na.ssl-images-amazon.com/images/I/61RcRhE1GaL._SX818_.jpg":[545,818]},"variant":"PT05","lowRes":null},{"hiRes":"https://images-na.ssl-images-amazon.com/images/I/61ukJ7wP1LL._SL1001_.jpg","thumb":"https://images-na.ssl-images-amazon.com/images/I/51OecRuuoZL._SX38_SY50_CR,0,0,38,50_.jpg","large":"https://images-na.ssl-images-amazon.com/images/I/51OecRuuoZL.jpg","main":{"https://images-na.ssl-images-amazon.com/images/I/61ukJ7wP1LL._SX536_.jpg":[386,536],"https://images-na.ssl-images-amazon.com/images/I/61ukJ7wP1LL._SX603_.jpg":[434,603],"https://images-na.ssl-images-amazon.com/images/I/61ukJ7wP1LL._SX666_.jpg":[479,666],"https://images-na.ssl-images-amazon.com/images/I/61ukJ7wP1LL._SX730_.jpg":[525,730],"https://images-na.ssl-images-amazon.com/images/I/61ukJ7wP1LL._SX818_.jpg":[588,818]},"variant":"PT06","lowRes":null}]},
-#                 'colorToAsin': {'initial': {}},
-#                 'holderRatio': 0.84,
-#                 'holderMaxHeight': 700,
-#                 'heroImage': {'initial': []},
-#                 'heroVideo': {'initial': []},
-#                 'spin360ColorData': {'initial': {}},
-#                 'spin360ColorEnabled': {'initial': 0},
-#                 'spin360ConfigEnabled': false,
-#                 'playVideoInImmersiveView':'false',
-#                 'videoIngressExperimentTreatment':'C',
-#                 'totalVideoCount':'0',
-#                 'videoIngressATFSlateThumbURL':'',
-#                 'weblabs' : {}
-#                 };
-#     A.trigger('P.AboveTheFold'); // trigger ATF event.
-#     return data;
-# });
-# </script>
 
-  # has_css?
-  # unless article.all 'a-icon-alt'.nil?
-  #   rating = "#{article.all('.a-icon-alt').text.strip.first}.#{element.search('.a-icon-alt').text.strip[2]}"
-  #   if rating.to_i >= 4
-  #     title = element.search('.s-access-title').text.strip
-  #     puts title
-  #     puts rating.to_is
-  #   end
-  # end
-#     print title
-#   url = element.search('a').first.attr('href')
-#   selection << { name: title, url: url }
-# end
 
-# puts 'starting Nokogiri'
+# Scrap Raffineurs
+url = "https://www.lesraffineurs.com/18-du-palais"
+browser.visit url
+products = browser.all '.product-container'
+products.each do |product|
+  products_url << product.find('.product-name')[:href]
+end
 
-# selection = []
-# url = "https://www.leroymerlin.fr/v3/search/search.do?resultOffset=0&resultLimit=50&resultListShape=PLAIN&keyword=bois"
-# html_file = open(url).read
-# html_doc = Nokogiri::HTML(html_file)
-# html_doc.search('.prd-infos').search('h3').each do |element|
-#   title = element.text.strip
-#   print title
-#   url = element.search('a').first.attr('href')
-#   selection << { name: title, url: url }
-# end
+products_url.each do |url|
+  browser = Capybara.current_session
+  browser.visit url
+p url
+  name = browser.find('.pb-center-column').find('h1').text.strip
+  price = browser.find('.price').find('span').text.strip
+  description = browser.find('.pb-center-column').find_by_id('short_description_block').first('p').text.strip
+  #photo of the produc
+  photo_one = browser.find('.product_img_list').find_by_id('product_img_thumb_1').find('img')[:src]
+
+  #If second photo exists, put in photo_two. Idem until photo_four
+  if browser.find('.product_img_list').has_field? ('product_img_thumb_2')
+    photo_two = browser.find('.product_img_list').find_by_id('product_img_thumb_2').find('img')[:src]
+  else
+    photo_two = nil
+  end
+
+  if browser.find('.product_img_list').has_field? ('product_img_thumb_3')
+    photo_three = browser.find('.product_img_list').find_by_id('product_img_thumb_3').find('img')[:src]
+  else
+    photo_three = nil
+  end
+
+  if browser.find('.product_img_list').has_field? ('product_img_thumb_4')
+    photo_four = browser.find('.product_img_list').find_by_id('product_img_thumb_4').find('img')[:src]
+  else
+    photo_four = nil
+  end
+
+  Product.create(
+    name: name,
+    url: url,
+    price: price.gsub('€', '').to_i,
+    description: description,
+    photo_url1: photo_one,
+    photo_url2: photo_two,
+    photo_url3: photo_three,
+    photo_url4: photo_four,
+    supplier_id: 1,
+    delivery_price: 6,
+    delivery_time: 3,
+    supplier_category: "Du Palais",
+    supplier_review: 0,
+    status: "Créé"
+    )
+end
+
+
