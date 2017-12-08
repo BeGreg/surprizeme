@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207165627) do
+ActiveRecord::Schema.define(version: 20171208104842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 20171207165627) do
     t.string   "photo_url2"
     t.string   "photo_url3"
     t.string   "photo_url4"
-    t.string   "status"
+    t.string   "status",            default: "scrappé"
     t.string   "surprise_category"
     t.integer  "location_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.index ["location_id"], name: "index_moments_on_location_id", using: :btree
   end
 
@@ -53,12 +53,12 @@ ActiveRecord::Schema.define(version: 20171207165627) do
     t.string   "photo_url2"
     t.string   "photo_url3"
     t.string   "photo_url4"
-    t.string   "status"
+    t.string   "status",                 default: "scrappé"
     t.string   "surprise_category"
     t.string   "gender"
     t.integer  "supplier_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.index ["supplier_id"], name: "index_products_on_supplier_id", using: :btree
   end
 
@@ -103,13 +103,13 @@ ActiveRecord::Schema.define(version: 20171207165627) do
     t.integer  "nb_persons"
     t.datetime "moment_date"
     t.float    "ticket_price"
-    t.string   "status"
+    t.string   "status",          default: "initiée"
     t.string   "type"
     t.integer  "user_id"
     t.integer  "product_id"
     t.integer  "moment_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.index ["moment_id"], name: "index_surprises_on_moment_id", using: :btree
     t.index ["product_id"], name: "index_surprises_on_product_id", using: :btree
     t.index ["user_id"], name: "index_surprises_on_user_id", using: :btree
@@ -122,15 +122,15 @@ ActiveRecord::Schema.define(version: 20171207165627) do
     t.string   "email"
     t.string   "address"
     t.string   "mobile_phone"
-    t.boolean  "rater"
-    t.boolean  "admin"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.boolean  "rater",                  default: false
+    t.boolean  "admin",                  default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"

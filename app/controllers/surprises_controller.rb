@@ -16,6 +16,10 @@ class SurprisesController < ApplicationController
   def edit
   end
 
+  def surprise_details
+    @surprise = Surprise.new
+    authorize @surprise, :surprise_details?
+  end
 
   private
 
@@ -24,11 +28,8 @@ class SurprisesController < ApplicationController
   end
 
 
-  
-  def surprise_details
-    @surprise = Surprise.new
-    authorize @surprise, :surprise_details?
-  end
+
+
 
 
   def initiate_prod_cookie

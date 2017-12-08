@@ -6,6 +6,6 @@ class Moment < ApplicationRecord
   validates :name, presence:true
   validates :url, presence:true, uniqueness:true
   validates :description, presence:true
-  validates :status, presence:true, default:"Créé"
+  validates :status, presence:true
   validates :photo_url1, presence:true
 end
