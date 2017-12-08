@@ -3,8 +3,15 @@ class SurprisePolicy < ApplicationPolicy
     def resolve
       scope
     end
-    def show?
+
+  end
+
+  def show?
       user.id == @surprise.user_id
     end
+
+  def surprise_details?
+    user
+
   end
 end
