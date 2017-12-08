@@ -4,8 +4,9 @@
   justify-content: center;
   background: -webkit-linear-gradient(to right, #61045F, #AA076B);
   background: linear-gradient(to right, #61045F, #AA076B);
+  background-attachment: fixed;
+  color: #FAFAFA;
   height: 100%;
-  color: cornsilk;
   font-family: $headers-font;
   width: 100%;
 }
@@ -25,10 +26,9 @@
       text-align: center;
   }
   p{
-      font-size: 22px;
+      font-size: 18px;
       font-weight: extra-light;
       text-align: justify;
-      font-weight: bold;
   }
 }
 
@@ -51,7 +51,7 @@
   font-size: 35px;
   text-decoration: none;
   a {
-    color: cornsilk;
+    color: #FAFAFA;
     letter-spacing: 6px;
   }
   i {
@@ -68,7 +68,7 @@
   font-weight: bold;
   justify-content: space-between;
   padding: 10px;
-  background-color: cornsilk;
+  background-color: #FAFAFA;
   color: black;
   border-radius: 0px 0px 5px 5px;
   height: 80px;

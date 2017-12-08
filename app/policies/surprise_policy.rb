@@ -14,4 +14,8 @@ class SurprisePolicy < ApplicationPolicy
     user
 
   end
+
+  def initiate_prod_cookie?
+    true
+  end
 end
