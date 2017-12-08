@@ -1,7 +1,7 @@
 function initCheckboxBillingAddress(){
-  const checkbox = document.getElementById('bill_address')
-  const billing_address = document.querySelector(".billing_address");
-  const delivery_address = document.querySelector(".delivery_address");
+  var checkbox = document.getElementById('bill_address')
+  var billing_address = document.querySelector(".billing_address");
+  var delivery_address = document.querySelector(".delivery_address");
 
   checkbox.addEventListener("click", function(){
     billing_address.classList.toggle("bill-hide");
