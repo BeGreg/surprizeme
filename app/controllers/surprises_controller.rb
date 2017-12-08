@@ -10,6 +10,7 @@ class SurprisesController < ApplicationController
 
   def show
     @product = Product.find(@surprise[:product_id])
+    authorize @surprise
   end
 
   def edit
