@@ -166,3 +166,17 @@ html, body {
   flex-direction: row;
   justify-content: space-evenly;
 }
+.address-box{
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+.billing_address{
+  border-left: solid lightgrey 3px;
+  padding-left: 20px;
+}
+
+.delivery_address{
+
+}

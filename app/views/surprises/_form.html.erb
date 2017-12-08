@@ -1,0 +1,39 @@
+
+<div class='container form-container'>
+  <div class="form-title">
+    <h2> Surprises Edit </h2>
+  </div>
+
+  <div class="generic-form-container">
+    <div class='generic-form'>
+      <div class="form-description">
+        <p> Veuillez remplir les champs suivant</p>
+      </div>
+
+      <%= simple_form_for(@surprise) do |f| %>
+      <%= f.error_notification %>
+      <div class="form-inputs address-box">
+        <div class="delivery_address">
+        <p>Veuillez choisir votre Adresse de livraison:</p>
+          <%= f.input :del_first_name, label:"Prenom", required: true, autofocus: true %>
+          <%= f.input :del_last_name, label:"Nom de famille", required: true, autofocus: true %>
+          <%= f.input :del_address, label:"Adresse", required: true, autofocus: true %>
+
+          <label for="bill_address">Utiliser cette adresse pour la facturation</label>
+          <input type="checkbox" id="bill_address" checked="checked">
+        </div>
+        <div class="billing_address hidden" >
+          <p>Veuillez choisir votre Adresse de facturation:</p>
+          <%= f.input :bill_first_name, label:"Prenom", required: true, autofocus: true %>
+          <%= f.input :bill_last_name, label:"Nom de famille", required: true, autofocus: true %>
+          <%= f.input :bill_address, label:"Adresse", required: true, autofocus: true %>
+        </div>
+
+      </div>
+      <div class="form-actions">
+        <%= f.button :submit, "S'enregistrer", class: 'form-button' %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
