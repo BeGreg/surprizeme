@@ -12,9 +12,9 @@ class User < ApplicationRecord
   validates :first_name, presence:true
   validates :last_name, presence:true
   validates :email, presence:true, uniqueness:true
+  validates :rater, presence:true
+  validates :admin, presence:true
 
-  # validates :rater, presence:true, default:fals
-  # validates :admin, presence:true, default:false
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.slice(:provider, :uid)
@@ -36,5 +36,4 @@ class User < ApplicationRecord
 
     return user
   end
-
 end
