@@ -136,28 +136,36 @@ end
 products_url.each do |url|
   browser = Capybara.current_session
   browser.visit url
-p url
   name = browser.find('.pb-center-column').find('h1').text.strip
   price = browser.find('.price').find('span').text.strip
   description = browser.find('.pb-center-column').find_by_id('short_description_block').first('p').text.strip
-  #photo of the produc
-  photo_one = browser.find('.product_img_list').find_by_id('product_img_thumb_1').find('img')[:src]
+
+  #photo of the product
+  results = []
+  elems = browser.all(".zoomWindow", visible: :all)
+  elems.each do |elem|
+    style = elem['style']
+
+    match = style.scan( /background-image\: url\((.+)\)/).last
+    results << match.first
+  end
+  photo_one = results[0]
 
   #If second photo exists, put in photo_two. Idem until photo_four
-  if browser.find('.product_img_list').has_field? ('product_img_thumb_2')
-    photo_two = browser.find('.product_img_list').find_by_id('product_img_thumb_2').find('img')[:src]
+  if !results[1].nil?
+    photo_two = results[1]
   else
     photo_two = nil
   end
 
-  if browser.find('.product_img_list').has_field? ('product_img_thumb_3')
-    photo_three = browser.find('.product_img_list').find_by_id('product_img_thumb_3').find('img')[:src]
+  if !results[2].nil?
+    photo_three = results[2]
   else
     photo_three = nil
   end
 
-  if browser.find('.product_img_list').has_field? ('product_img_thumb_4')
-    photo_four = browser.find('.product_img_list').find_by_id('product_img_thumb_4').find('img')[:src]
+  if !results[3].nil?
+    photo_four = results[3]
   else
     photo_four = nil
   end
@@ -178,6 +186,7 @@ p url
     supplier_review: 0,
     status: "Créé"
     )
+
 end
 
 
