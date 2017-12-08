@@ -8,4 +8,8 @@ class SurprisePolicy < ApplicationPolicy
   def surprise_details?
     user
   end
+
+  def initiate_prod_cookie?
+    true
+  end
 end
