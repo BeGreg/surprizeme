@@ -1,7 +1,7 @@
 
-<div class='container form-container'>
+<div class='container form-container' style="height: 100vh;">
   <div class="form-title">
-    <h2> Surprises Edit </h2>
+    <h2>Surprises Edit</h2>
   </div>
 
   <div class="generic-form-container">
@@ -22,7 +22,8 @@
           <label for="bill_address">Utiliser cette adresse pour la facturation</label>
           <input type="checkbox" id="bill_address" checked="checked">
         </div>
-        <div class="billing_address hidden" >
+
+        <div class="billing_address bill-hide" >
           <p>Veuillez choisir votre Adresse de facturation:</p>
           <%= f.input :bill_first_name, label:"Prenom", required: true, autofocus: true %>
           <%= f.input :bill_last_name, label:"Nom de famille", required: true, autofocus: true %>
@@ -31,7 +32,7 @@
 
       </div>
       <div class="form-actions">
-        <%= f.button :submit, "S'enregistrer", class: 'form-button' %>
+        <%= f.button :submit, "Continuer", class: 'form-button' %>
       </div>
       <% end %>
     </div>
