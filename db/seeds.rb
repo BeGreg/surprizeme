@@ -59,35 +59,35 @@ products = browser.all '.s-item-container'
 
 
 # Scrap Amazon
-puts "scrapping Amazon"
-products.each do |article|
-  if article.has_css?('.a-icon-star')
-    note = article.all('.a-icon-star')[0].text[0]
-    nb_note = article.all("a").last.text
+# puts "scrapping Amazon"
+# products.each do |article|
+#   if article.has_css?('.a-icon-star')
+#     note = article.all('.a-icon-star')[0].text[0]
+#     nb_note = article.all("a").last.text
 
-    if note.to_i > 3 || nb_note.to_i >= 5
-      puts name = article.find('.s-access-title').text
-      puts note = article.all('.a-icon-star')[0].text[0]
-      note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
-      print note.to_f
-      # print article.all('.s-access-detail-page')[:url]
-      print url = article.find('.s-access-detail-page')[:href]
-      product = Product.new(name: name, supplier_review: note.to_f, supplier_review_number: nb_note, url: url, status:"créé", supplier_id:1)
-      selection << product
-    end
-  end
-   script = browser.all('script', visible: false)[3].text(:all)
-  script.each do
-    images = browser.find_by_id('landingImage')['data-a-dynamic-image'.to_sym]
-    hash_images = (eval images).to_a
-    nb_photos = hash_images.size
-    product.photo_url1 = hash_images.first[0]
-    product.photo_url2 = hash_images[1][0] if nb_photos >= 2
-    product.photo_url3 = hash_images[2][0] if nb_photos >= 3
-    product.photo_url4 = hash_images[3][0] if nb_photos >= 4
-  end
-  product.save!
-end
+#     if note.to_i > 3 || nb_note.to_i >= 5
+#       puts name = article.find('.s-access-title').text
+#       puts note = article.all('.a-icon-star')[0].text[0]
+#       note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
+#       print note.to_f
+#       # print article.all('.s-access-detail-page')[:url]
+#       print url = article.find('.s-access-detail-page')[:href]
+#       product = Product.new(name: name, supplier_review: note.to_f, supplier_review_number: nb_note, url: url, status:"créé", supplier_id:1)
+#       selection << product
+#     end
+#   end
+#    script = browser.all('script', visible: false)[3].text(:all)
+#   script.each do
+#     images = browser.find_by_id('landingImage')['data-a-dynamic-image'.to_sym]
+#     hash_images = (eval images).to_a
+#     nb_photos = hash_images.size
+#     product.photo_url1 = hash_images.first[0]
+#     product.photo_url2 = hash_images[1][0] if nb_photos >= 2
+#     product.photo_url3 = hash_images[2][0] if nb_photos >= 3
+#     product.photo_url4 = hash_images[3][0] if nb_photos >= 4
+#   end
+#   product.save!
+# end
 
 
 
