@@ -40,17 +40,92 @@ require 'capybara/poltergeist'
 # Configure Poltergeist to not blow up on websites with js errors aka every website with js
 # See more options at https://github.com/teampoltergeist/poltergeist#customization
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, js_errors: false)
-end
+    Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+  end
 
-# Configure Capybara to use Poltergeist as the driver
-Capybara.default_driver = :poltergeist
+  # Configure Capybara to use Poltergeist as the driver
+  Capybara.default_driver = :poltergeist
 
 
 puts 'startin les raffineurs, du palais, capybara'
 
 products_url = []
 browser = Capybara.current_session
+url = "https://www.amazon.fr/Organiseur-Universe-Accessoires-Electroniques-Capacit%C3%A9/dp/B014ZJKX1W/ref=sr_1_2?s=electronics&ie=UTF8&qid=1512727816&sr=1-2&keywords=gadget+high+tech"
+# url pour test produit binding pry
+# url = "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
+
+browser.visit url
+binding.pry
+products = browser.all '.s-item-container'
+
+
+# SCRAPBACK TEST
+# browser.find('#add-to-cart-button').click
+# browser.all("input")[0].click
+# browser.find("#nav-cart").click
+# --------------------
+# browser.all('.exclusive')[1].click
+# browser.visit "https://www.lavantgardiste.com/commande"
+# browser.find('.standard-checkout').click
+# browser.fill_in 'email', with: 'gregory.blain@gmail.com'
+# browser.fill_in 'passwd', with: 'jE2Ob6k4'
+# browser.find_by_id('SubmitLogin').click
+# browser.has_checked_field?('addressesAreEquals')
+# browser.uncheck('addressesAreEquals')
+# browser.find('.button.button-small.btn.btn-default', visible: :all).click
+# browser.find_by_id('addressesAreEquals').trigger('click')
+# browser.find('a.btn', visible: :all).trigger('click')
+# browser.fill_in 'company', with: 'Le Wagon'
+# browser.fill_in 'address1', with: '23 rue Paul Montrochet'
+# browser.fill_in 'postcode', with: '69002'
+# browser.fill_in 'city', with: 'Lyon'
+# browser.fill_in 'phone_mobile', with: '0607830808'
+# browser.fill_in 'alias', with: 'Wagon'
+# browser.find_by_id('submitAddress').click
+# browser.select 'Wagon', from: 'id_address_delivery'
+# browser.select 'Mon adresse', from: 'id_address_invoice'
+# browser.find('.button.orange').click
+# browser.find_by_id('delivery_option_169482_0').trigger('click')
+# browser.find('.button.orange').click
+
+
+
+
+# Scrap Amazon
+
+products.each do |article|
+  if article.has_css?('.a-icon-star')
+    note = article.all('.a-icon-star')[0].text[0]
+    nb_note = article.all("a").last.text
+
+    if note.to_i > 3 || nb_note.to_i >= 5
+      puts name = article.find('.s-access-title').text
+      puts note = article.all('.a-icon-star')[0].text[0]
+      note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
+      print note.to_f
+      # print article.all('.s-access-detail-page')[:url]
+      print url = article.find('.s-access-detail-page')[:href]
+      product = Product.new(name: name, supplier_review: note.to_f, supplier_review_number: nb_note, url: url, status:"créé", supplier_id:1)
+      selection << product
+    end
+  end
+   script = browser.all('script', visible: false)[3].text(:all)
+  script.each do
+    images = browser.find_by_id('landingImage')['data-a-dynamic-image'.to_sym]
+    hash_images = (eval images).to_a
+    nb_photos = hash_images.size
+    product.photo_url1 = hash_images.first[0]
+    product.photo_url2 = hash_images[1][0] if nb_photos >= 2
+    product.photo_url3 = hash_images[2][0] if nb_photos >= 3
+    product.photo_url4 = hash_images[3][0] if nb_photos >= 4
+  end
+  product.save!
+end
+
+
+
+# Scrap Raffineurs
 url = "https://www.lesraffineurs.com/18-du-palais"
 browser.visit url
 products = browser.all '.product-container'

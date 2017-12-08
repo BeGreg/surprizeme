@@ -1,35 +1,28 @@
 <!-- marche avec form -->
 <!-- ajout pour container -->
 <div class='container form-container'>
-  <div class="form-title">
-    <h2>Sign up</h2>
-  </div>
-
   <div class="generic-form-container">
     <div class='generic-form'>
       <div class="form-description">
         <p> Bienvenue sur SurpriZe me </p>
-        <p> Enregistrez-vous </p>
+        <p> Inscrivez-vous </p>
         <%= render "devise/shared/links" %>
+
       </div>
+
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :first_name, required: true, autofocus: true %>
-    <%= f.input :last_name, required: true, autofocus: true %>
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
-  </div>
+        <div class="form-inputs">
+          <%= f.input :first_name, label: "Prenom", required: true, autofocus: true %>
+          <%= f.input :last_name, label: "Nom", required: true %>
+        </div>
         <div class="form-inputs">
           <%= f.input :email, required: true, autofocus: true, placeholder: "you@surprize.me" %>
           <%= f.input :password, label:"Mot de passe" ,required: true, hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length) %>
           <%= f.input :password_confirmation, label:"Confirmer le mot de passe" , required: true %>
         </div>
-
         <div class="form-actions">
-          <%= f.button :submit, "S'enregistrer", class: 'form-button' %>
+          <%= f.button :submit, "S'inscrire", class: 'form-button' %>
         </div>
       <% end %>
 
