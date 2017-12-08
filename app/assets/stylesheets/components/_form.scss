@@ -12,7 +12,8 @@ html, body {
   background: -webkit-linear-gradient(to right, #61045F, #AA076B);
   background: linear-gradient(to right, #61045F, #AA076B);
   width: 100%;
-  height: 100%;
+
+}
 
   .form-description{
     text-align: center;
@@ -27,9 +28,10 @@ html, body {
       display: inline-block;
       max-width: 700px;
       min-width: 500px;
-      padding: 30px 25px;
+      padding: 25px 25px;
       border-radius: 40px;
       margin: 5px 0;
+    }
 
       .form-actions {
         justify-content: center;
@@ -37,7 +39,7 @@ html, body {
       }
 
       .form-button {
-        margin-top: 35px;
+        margin-top: 25px;
         line-height: 0;
         font-size: 17px;
         display: inline-block;
@@ -70,6 +72,10 @@ html, body {
       display: block;
     }
 
+.inline {
+  display: flex;
+
+}
     .form-inputs {
       input {
         background-color: none;
@@ -90,5 +96,87 @@ html, body {
         }
       }
     }
+
+
+
+#budget {
+  margin-bottom: 5px;
+}
+.icon-selector {
+  display: flex;
+  justify-content: space-between;
+
+
+}
+.icon-selector input {
+  margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+
+.male{
+
   }
+.female{}
+.indifferent {}
+.extravagant {}
+.moderate {}
+
+.icon-selector input:active +.icon-card{opacity: 1;}
+.icon-selector input:checked +.icon-card{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+.icon-card{
+    background: -webkit-linear-gradient(to left, #61045F, #AA076B);
+    background: linear-gradient(to left, #61045F, #AA076B);
+    color: white !important;
+    border-radius: 30px;
+    padding: 5px 5px;
+    text-align: center;
+    vertical-align: center;
+    text-decoration: none;
+    display: flex;
+    font-size: 16px;
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width: 130px;
+    height: auto;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.2) grayscale(1) opacity(.6);
+       -moz-filter: brightness(1.2) grayscale(1) opacity(.6);
+            filter: brightness(1.2)  opacity(.6);
+}
+.icon-card:hover{
+    -webkit-filter: brightness(1) grayscale(.5) opacity(.8);
+       -moz-filter: brightness(1) grayscale(.5) opacity(.8);
+            filter: brightness(1) grayscale(.5) opacity(.8);
+}
+
+
+
+.double-form {
+  display: flex ;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.address-box{
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+.billing_address{
+  border-left: solid lightgrey 3px;
+  padding-left: 20px;
+}
+
+.delivery_address{
+
 }
