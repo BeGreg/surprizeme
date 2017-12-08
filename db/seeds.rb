@@ -9,7 +9,6 @@ require 'open-uri'
 # puts "starting les raffineurs, sac et maroquinerie"
 # puts 'starting Nokogiri'
 
-# selection = []
 # url = "https://www.lesraffineurs.com/35-sacs-et-maroquinerie"
 # html_file = open(url).read
 # html_doc = Nokogiri::HTML(html_file)
@@ -47,6 +46,7 @@ Capybara.register_driver :poltergeist do |app|
   Capybara.default_driver = :poltergeist
 
 
+selection = []
 
 products_url = []
 browser = Capybara.current_session
