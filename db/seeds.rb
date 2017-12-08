@@ -67,6 +67,10 @@ products = browser.all '.s-item-container'
 # browser.find_by_id('submitAddress').click
 # browser.select 'Wagon', from: 'id_address_delivery'
 # browser.select 'Mon adresse', from: 'id_address_invoice'
+# browser.find('.button.orange').click
+# browser.find_by_id('delivery_option_169482_0').trigger('click')
+# browser.find('.button.orange').click
+
 
 
 
