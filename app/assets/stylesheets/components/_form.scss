@@ -3,6 +3,7 @@ html, body {
   height: 100%;
 }
 
+
 .form-container {
   display: flex;
   flex-direction: column;
@@ -16,7 +17,9 @@ html, body {
 
 }
 
-
+.form-title {
+  color: white;
+}
   .form-description{
     text-align: center;
     color: $magenta;
@@ -163,22 +166,3 @@ html, body {
 
 
 
-.double-form {
-  display: flex ;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-.address-box{
-  display: flex;
-  justify-content: space-evenly;
-
-}
-
-.billing_address{
-  border-left: solid lightgrey 3px;
-  padding-left: 20px;
-}
-
-.delivery_address{
-
-}
