@@ -59,35 +59,26 @@ products = browser.all '.s-item-container'
 
 
 # Scrap Amazon
-# puts "scrapping Amazon"
-# products.each do |article|
-#   if article.has_css?('.a-icon-star')
-#     note = article.all('.a-icon-star')[0].text[0]
-#     nb_note = article.all("a").last.text
+puts "scrapping Amazon"
+products.each do |article|
+  if article.has_css?('.a-icon-star')
+    note = article.all('.a-icon-star')[0].text[0]
+    nb_note = article.all("a").last.text
 
-#     if note.to_i > 3 || nb_note.to_i >= 5
-#       puts name = article.find('.s-access-title').text
-#       puts note = article.all('.a-icon-star')[0].text[0]
-#       note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
-#       print note.to_f
-#       # print article.all('.s-access-detail-page')[:url]
-#       print url = article.find('.s-access-detail-page')[:href]
-#       product = Product.new(name: name, supplier_review: note.to_f, supplier_review_number: nb_note, url: url, status:"créé", supplier_id:1)
-#       selection << product
-#     end
-#   end
-#    script = browser.all('script', visible: false)[3].text(:all)
-#   script.each do
-#     images = browser.find_by_id('landingImage')['data-a-dynamic-image'.to_sym]
-#     hash_images = (eval images).to_a
-#     nb_photos = hash_images.size
-#     product.photo_url1 = hash_images.first[0]
-#     product.photo_url2 = hash_images[1][0] if nb_photos >= 2
-#     product.photo_url3 = hash_images[2][0] if nb_photos >= 3
-#     product.photo_url4 = hash_images[3][0] if nb_photos >= 4
-#   end
-#   product.save!
-# end
+    if note.to_i > 3 || nb_note.to_i >= 5
+      puts name = article.find('.s-access-title').text
+      puts note = article.all('.a-icon-star')[0].text[0]
+      note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
+      print note.to_f
+      # print article.all('.s-access-detail-page')[:url]
+      print url = article.find('.s-access-detail-page')[:href]
+      product = Product.new(name: name, supplier_review: note.to_f, supplier_review_number: nb_note, url: url, supplier_id:1)
+      selection << product
+    end
+  end
+  product.photo_url1 = browser.find('.imgTagWrapper img', visible: :all)[:src]
+  product.save!
+end
 
 
 
@@ -122,71 +113,70 @@ products = browser.all '.s-item-container'
 
 
 
-# Scrap Raffineurs
-puts 'startin les raffineurs, du palais, capybara'
+# # Scrap Raffineurs
+# puts 'startin les raffineurs, du palais, capybara'
 
-Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
+# Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
 
-url = "https://www.lesraffineurs.com/18-du-palais"
-browser.visit url
-products = browser.all '.product-container'
-products.each do |product|
-  products_url << product.find('.product-name')[:href]
-end
+# url = "https://www.lesraffineurs.com/18-du-palais"
+# browser.visit url
+# products = browser.all '.product-container'
+# products.each do |product|
+#   products_url << product.find('.product-name')[:href]
+# end
 
-products_url.each do |url|
-  browser = Capybara.current_session
-  browser.visit url
-  name = browser.find('.pb-center-column').find('h1').text.strip
-  price = browser.find('.price').find('span').text.strip
-  description = browser.find('.pb-center-column').find_by_id('short_description_block').first('p').text.strip
+# products_url.each do |url|
+#   browser = Capybara.current_session
+#   browser.visit url
+#   name = browser.find('.pb-center-column').find('h1').text.strip
+#   price = browser.find('.price').find('span').text.strip
+#   description = browser.find('.pb-center-column').find_by_id('short_description_block').first('p').text.strip
 
-  #photo of the product
-  results = []
-  elems = browser.all(".zoomWindow", visible: :all)
-  elems.each do |elem|
-    style = elem['style']
+#   #photo of the product
+#   results = []
+#   elems = browser.all(".zoomWindow", visible: :all)
+#   elems.each do |elem|
+#     style = elem['style']
 
-    match = style.scan( /background-image\: url\((.+)\)/).last
-    results << match.first
-  end
-  photo_one = results[0]
+#     match = style.scan( /background-image\: url\((.+)\)/).last
+#     results << match.first
+#   end
+#   photo_one = results[0]
 
-  #If second photo exists, put in photo_two. Idem until photo_four
-  if !results[1].nil?
-    photo_two = results[1]
-  else
-    photo_two = nil
-  end
+#   #If second photo exists, put in photo_two. Idem until photo_four
+#   if !results[1].nil?
+#     photo_two = results[1]
+#   else
+#     photo_two = nil
+#   end
 
-  if !results[2].nil?
-    photo_three = results[2]
-  else
-    photo_three = nil
-  end
+#   if !results[2].nil?
+#     photo_three = results[2]
+#   else
+#     photo_three = nil
+#   end
 
-  if !results[3].nil?
-    photo_four = results[3]
-  else
-    photo_four = nil
-  end
+#   if !results[3].nil?
+#     photo_four = results[3]
+#   else
+#     photo_four = nil
+#   end
 
-  Product.create(
-    name: name,
-    url: url,
-    price: price.gsub('€', '').to_i,
-    description: description,
-    photo_url1: photo_one,
-    photo_url2: photo_two,
-    photo_url3: photo_three,
-    photo_url4: photo_four,
-    supplier_id: 1,
-    delivery_price: 6,
-    delivery_time: 3,
-    supplier_category: "Du Palais",
-    supplier_review: 0,
-    status: "Créé"
-    )
-end
+#   Product.create(
+#     name: name,
+#     url: url,
+#     price: price.gsub('€', '').to_i,
+#     description: description,
+#     photo_url1: photo_one,
+#     photo_url2: photo_two,
+#     photo_url3: photo_three,
+#     photo_url4: photo_four,
+#     supplier_id: 1,
+#     delivery_price: 6,
+#     delivery_time: 3,
+#     supplier_category: "Du Palais",
+#     supplier_review: 0,
+#     )
+# end
 
 
