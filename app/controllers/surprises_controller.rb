@@ -25,8 +25,8 @@ class SurprisesController < ApplicationController
 
 
   def surprise_details
-    authorize @surprise
     @surprise = Surprise.new(product_id: session[:product_id])
+    authorize @surprise
   end
 
   def initiate_prod_cookie
