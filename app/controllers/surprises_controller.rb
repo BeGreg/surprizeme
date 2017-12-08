@@ -1,4 +1,7 @@
 class SurprisesController < ApplicationController
+
+    before_action :set_surprise, only: [:show, :edit, :update, :destroy]
+
   def index
   end
 
@@ -6,10 +9,27 @@ class SurprisesController < ApplicationController
   end
 
   def show
+    @product = Product.find(@surprise[:product_id])
   end
 
   def edit
   end
+
+  def surprise_details
+    @surprise = Surprise.new
+    authorize @surprise, :surprise_details?
+  end
+
+  private
+
+  def set_surprise
+    @surprise = Surprise.find(params[:id])
+  end
+
+
+
+
+
 
   def initiate_prod_cookie
     puts "ca commence!"
@@ -25,6 +45,8 @@ class SurprisesController < ApplicationController
   def surprise_params
      params.permit(:budget, :gender, :surprise_type)
   end
+
+
 
 end
 
