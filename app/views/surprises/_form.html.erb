@@ -7,7 +7,7 @@
   <div class="generic-form-container">
     <div class='generic-form'>
       <div class="form-description">
-        <p> Veuillez remplir les champs suivant</p>
+        <p> Veuillez remplir les champs suivants</p>
       </div>
 
       <%= simple_form_for(@surprise) do |f| %>
@@ -15,19 +15,19 @@
       <div class="form-inputs address-box">
         <div class="delivery_address">
         <p>Votre adresse de Livraison:</p>
-          <%= f.input :del_first_name, label:"Prenom", required: true, autofocus: true %>
-          <%= f.input :del_last_name, label:"Nom de famille", required: true, autofocus: true %>
-          <%= f.input :del_address, label:"Adresse", required: true, autofocus: true %>
+          <%= f.input :del_first_name, label:"Prenom", input_html: { value: @user.first_name }, required: true, autofocus: true %>
+          <%= f.input :del_last_name, label:"Nom de famille", input_html: { value: @user.last_name }, required: true, autofocus: true %>
+          <%= f.input :del_address, label:"Adresse", input_html: { value: @user.address }, required: true, autofocus: true %>
 
           <label for="bill_address">Utiliser cette adresse pour la facturation</label>
-          <input type="checkbox" id="bill_address" checked="checked">
+          <input type="checkbox" id="bill_address" checked="unchecked">
         </div>
 
         <div class="billing_address bill-hide" >
           <p>Votre adresse de Facturation:</p>
-          <%= f.input :bill_first_name, label:"Prenom", required: true, autofocus: true %>
-          <%= f.input :bill_last_name, label:"Nom de famille", required: true, autofocus: true %>
-          <%= f.input :bill_address, label:"Adresse", required: true, autofocus: true %>
+          <%= f.input :bill_first_name, label:"Prenom", input_html: { value: @user.first_name }, required: true, autofocus: true %>
+          <%= f.input :bill_last_name, label:"Nom de famille", input_html: { value: @user.last_name }, required: true, autofocus: true %>
+          <%= f.input :bill_address, label:"Adresse", input_html: { value: @user.address }, required: true, autofocus: true %>
         </div>
 
       </div>
