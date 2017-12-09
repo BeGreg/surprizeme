@@ -24,7 +24,8 @@ gem 'poltergeist'
 gem 'launchy'
 gem 'pundit'
 gem 'omniauth-facebook'
-gem 'selenium-webdriver', '~> 2.53', '>= 2.53.4'
+gem 'selenium-webdriver', '~> 3.8.0'
+gem 'geckodriver-helper'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

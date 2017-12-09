@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'open-uri'
+require 'capybara/poltergeist'
+require 'selenium-webdriver'
 # puts "starting les raffineurs, sac et maroquinerie"
 # puts 'starting Nokogiri'
 
@@ -33,87 +35,132 @@ require 'open-uri'
 #   p selection
 # end
 
-# Require the gems
-require 'capybara/poltergeist'
-
-# Configure Poltergeist to not blow up on websites with js errors aka every website with js
-# See more options at https://github.com/teampoltergeist/poltergeist#customization
-Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
-  end
+## Config for selenium ###
+# # # Configure to not blow up on websites with js errors aka every website with js
+# Capybara.register_driver :selenium do |app|
+#     Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+#   end
 
   # Configure Capybara to use Poltergeist as the driver
-  Capybara.default_driver = :poltergeist
+  # Capybara.default_driver = :selenium
 
 
-selection = []
 
-products_url = []
-browser = Capybara.current_session
-url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+insolite&rh=n%3A13921051%2Ck%3Agadget+insolite&qid=1512384836&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
-# url pour test produit binding pry
+
+## Config for Poltergeist ###
+
+# # Configure Poltergeist to not blow up on websites with js errors aka every website with js
+# # See more options at https://github.com/teampoltergeist/poltergeist#customization
+# Capybara.register_driver :poltergeist do |app|
+#     Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+#   end
+
+#   # Configure Capybara to use Poltergeist as the driver
+#   Capybara.default_driver = :poltergeist
+
+
+# selection = []
+
+# products_url = []
+# browser = Capybara.current_session
 # url = "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
+# # url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+insolite&rh=n%3A13921051%2Ck%3Agadget+insolite&qid=1512384836&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
+# # # url pour test produit binding pry
 
-browser.visit url
-products = browser.all '.s-item-container'
+# browser.visit url
+# # products = browser.all '.s-item-container'
 
-
-# Scrap Amazon
-puts "scrapping Amazon"
-products.each do |article|
-  if article.has_css?('.a-icon-star')
-    note = article.all('.a-icon-star')[0].text[0]
-    nb_note = article.all("a").last.text
-
-    if note.to_i > 3 || nb_note.to_i >= 5
-      puts name = article.find('.s-access-title').text
-      puts note = article.all('.a-icon-star')[0].text[0]
-      note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
-      print note.to_f
-      # print article.all('.s-access-detail-page')[:url]
-      print url = article.find('.s-access-detail-page')[:href]
-      product = Product.new(name: name, supplier_review: note.to_f, supplier_review_number: nb_note, url: url, supplier_id:1)
-      selection << product
-    end
-  end
-  product.photo_url1 = browser.find('.imgTagWrapper img', visible: :all)[:src]
-  product.save!
-end
+driver = Selenium::WebDriver.for :firefox
+driver.get "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
+binding.pry
 
 
 
-# SCRAPBACK TEST
+### Scrap Amazon ###
+# puts "scrapping Amazon"
+# products.each do |article|
+#   if article.has_css?('.a-icon-star')
+#     note = article.all('.a-icon-star')[0].text[0]
+#     nb_note = article.all("a").last.text
+
+#     if note.to_i > 3 || nb_note.to_i >= 5
+#       puts name = article.find('.s-access-title').text
+#       puts note = article.all('.a-icon-star')[0].text[0]
+#       note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
+#       print note.to_f
+#       # print article.all('.s-access-detail-page')[:url]
+#       print url = article.find('.s-access-detail-page')[:href]
+#       product = Product.new(name: name, supplier_review: note.to_f, supplier_review_number: nb_note, url: url, supplier_id:1)
+#       selection << product
+#     end
+#   end
+#   product.photo_url1 = browser.find('.imgTagWrapper img', visible: :all)[:src]
+#   product.save!
+# end
+
+
+
+
+### SCRAPBACK TEST (poltergeist) ###
 # browser.find('#add-to-cart-button').click
 # browser.all("input")[0].click
 # browser.find("#nav-cart").click
 # --------------------
-# browser.all('.exclusive')[1].click
-# browser.visit "https://www.lavantgardiste.com/commande"
-# browser.find('.standard-checkout').click
-# browser.fill_in 'email', with: 'gregory.blain@gmail.com'
-# browser.fill_in 'passwd', with: 'jE2Ob6k4'
-# browser.find_by_id('SubmitLogin').click
-# browser.has_checked_field?('addressesAreEquals')
-# browser.uncheck('addressesAreEquals')
-# browser.find('.button.button-small.btn.btn-default', visible: :all).click
-# browser.find_by_id('addressesAreEquals').trigger('click')
-# browser.find('a.btn', visible: :all).trigger('click')
-# browser.fill_in 'company', with: 'Le Wagon'
-# browser.fill_in 'address1', with: '23 rue Paul Montrochet'
-# browser.fill_in 'postcode', with: '69002'
-# browser.fill_in 'city', with: 'Lyon'
-# browser.fill_in 'phone_mobile', with: '0607830808'
-# browser.fill_in 'alias', with: 'Wagon'
-# browser.find_by_id('submitAddress').click
-# browser.select 'Wagon', from: 'id_address_delivery'
-# browser.select 'Mon adresse', from: 'id_address_invoice'
-# browser.find('.button.orange').click
-# browser.find_by_id('delivery_option_169482_0').trigger('click')
-# browser.find('.button.orange').click
+binding.pry
+browser.all('.exclusive')[1].click
+browser.visit "https://www.lavantgardiste.com/commande"
+browser.find('.standard-checkout').click
+browser.fill_in 'email', with: 'gregory.blain@gmail.com'
+browser.fill_in 'passwd', with: 'jE2Ob6k4'
+browser.find_by_id('SubmitLogin').click
+browser.has_checked_field?('addressesAreEquals')
+browser.uncheck('addressesAreEquals')
+browser.find('.button.button-small.btn.btn-default', visible: :all).click
+browser.find_by_id('addressesAreEquals').trigger('click')
+browser.find('a.btn', visible: :all).trigger('click')
+browser.fill_in 'company', with: 'Le Wagon'
+browser.fill_in 'address1', with: '23 rue Paul Montrochet'
+browser.fill_in 'postcode', with: '69002'
+browser.fill_in 'city', with: 'Lyon'
+browser.fill_in 'phone_mobile', with: '0607830808'
+browser.fill_in 'alias', with: 'Wagon'
+browser.find_by_id('submitAddress').click
+browser.select 'Wagon', from: 'id_address_delivery'
+browser.select 'Mon adresse', from: 'id_address_invoice'
+browser.find('.button.orange').trigger('click')
+browser.all("input")[0].trigger('click')
+browser.find('.button.orange').click
+# within_frame '__privateStripeFrame5' do { page.driver.browser.find_element(:id, 'cc-exp').send_keys '09' } end
 
 
 
-# # Scrap Raffineurs
+
+driver.find_elements(:class, "exclusive")
+browser.all('.exclusive')[1].click
+browser.visit "https://www.lavantgardiste.com/commande"
+browser.find('.standard-checkout').click
+browser.fill_in 'email', with: 'gregory.blain@gmail.com'
+browser.fill_in 'passwd', with: 'jE2Ob6k4'
+browser.find_by_id('SubmitLogin').click
+browser.has_checked_field?('addressesAreEquals')
+browser.uncheck('addressesAreEquals')
+browser.find('.button.button-small.btn.btn-default', visible: :all).click
+browser.find_by_id('addressesAreEquals').trigger('click')
+browser.find('a.btn', visible: :all).trigger('click')
+browser.fill_in 'company', with: 'Le Wagon'
+browser.fill_in 'address1', with: '23 rue Paul Montrochet'
+browser.fill_in 'postcode', with: '69002'
+browser.fill_in 'city', with: 'Lyon'
+browser.fill_in 'phone_mobile', with: '0607830808'
+browser.fill_in 'alias', with: 'Wagon'
+browser.find_by_id('submitAddress').click
+browser.select 'Wagon', from: 'id_address_delivery'
+browser.select 'Mon adresse', from: 'id_address_invoice'
+browser.find('.button.orange').trigger('click')
+browser.all("input")[0].trigger('click')
+browser.find('.button.orange').click
+
+### Scrap Raffineurs ###
 # puts 'startin les raffineurs, du palais, capybara'
 
 # Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
