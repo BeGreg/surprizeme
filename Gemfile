@@ -25,6 +25,7 @@ gem 'launchy'
 gem 'pundit'
 gem 'omniauth-facebook'
 gem 'selenium-webdriver', '~> 2.53', '>= 2.53.4'
+gem 'geocoder'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
