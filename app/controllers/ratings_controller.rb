@@ -5,9 +5,10 @@ class RatingsController < ApplicationController
   def create
     @rating = current_user.ratings.build(review_params)
     @rating.save
+    @product = Product.find(params.permit(:product_id)[:product_id])
+    @product.check_status
     authorize @rating
     redirect_to hot_or_not_path
-
   end
 
   def edit

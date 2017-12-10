@@ -12,9 +12,8 @@ function initCheckboxBillingAddress(){
   } else {
     delivery_address.style.padding = "0";
   };
-});
-
-  };
+  });
+};
 
 
 

@@ -7,7 +7,7 @@ class SurprisesController < ApplicationController
 
   def show
     @product = Product.find(@surprise[:product_id])
-    @product.status = "confirmé"
+    @surprise.update_attributes(status: "confirmé")
     # authorize @surprise
   end
 
@@ -25,6 +25,7 @@ class SurprisesController < ApplicationController
 
 
   def surprise_details
+    @user = current_user
     @surprise = Surprise.new(product_id: session[:product_id])
     authorize @surprise
   end
