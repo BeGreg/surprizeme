@@ -25,6 +25,7 @@ class SurprisesController < ApplicationController
 
 
   def surprise_details
+    @user = current_user
     @surprise = Surprise.new(product_id: session[:product_id])
     authorize @surprise
   end
