@@ -13,10 +13,3 @@ document.addEventListener("DOMContentLoaded", function() {
     google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
   }
 });
-
-// var input = document.getElementById('searchTextField');
-// var options = {
-// restriction totale à la France
-//   types: ['(cities)'],
-//   componentRestrictions: {country: 'fr'}
-// };
