@@ -219,6 +219,9 @@ GEM
       rails (>= 4.0, < 6)
       remotipart (~> 1.3)
       sass-rails (>= 4.0, < 6)
+    rails_admin_grid (0.0.1)
+      rails (>= 4.0.0)
+      rails_admin (>= 0.6.8)
     railties (5.0.6)
       actionpack (= 5.0.6)
       activesupport (= 5.0.6)
@@ -316,6 +319,7 @@ DEPENDENCIES
   pundit
   rails (= 5.0.6)
   rails_admin (>= 1.0.0.rc)
+  rails_admin_grid
   redis
   remotipart!
   sass-rails

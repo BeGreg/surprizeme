@@ -37,7 +37,7 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
-
+    grid                          # RailsAdminGrid
     ## With an audit adapter, you can add:
     # history_index
     # history_show
