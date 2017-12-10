@@ -93,6 +93,7 @@ GEM
       railties (>= 3.2, < 5.2)
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
+    geocoder (1.4.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     haml (5.0.4)
@@ -303,6 +304,7 @@ DEPENDENCIES
   devise
   figaro
   font-awesome-sass
+  geocoder
   jbuilder (~> 2.0)
   jquery-rails
   launchy
