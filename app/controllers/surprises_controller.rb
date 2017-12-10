@@ -7,7 +7,7 @@ class SurprisesController < ApplicationController
 
   def show
     @product = Product.find(@surprise[:product_id])
-    @product.status = "confirmé"
+    @surprise.update_attributes(status: "confirmé")
     # authorize @surprise
   end
 
