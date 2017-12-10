@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171208104842) do
+ActiveRecord::Schema.define(version: 20171210102937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 20171208104842) do
     t.string   "photo_url2"
     t.string   "photo_url3"
     t.string   "photo_url4"
-    t.string   "status",            default: "scrappé"
+    t.integer  "status",            default: 0
     t.string   "surprise_category"
     t.integer  "location_id"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.index ["location_id"], name: "index_moments_on_location_id", using: :btree
   end
 
@@ -53,12 +53,12 @@ ActiveRecord::Schema.define(version: 20171208104842) do
     t.string   "photo_url2"
     t.string   "photo_url3"
     t.string   "photo_url4"
-    t.string   "status",                 default: "scrappé"
+    t.integer  "status",                 default: 0
     t.string   "surprise_category"
     t.string   "gender"
     t.integer  "supplier_id"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["supplier_id"], name: "index_products_on_supplier_id", using: :btree
   end
 
