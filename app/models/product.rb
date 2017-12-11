@@ -13,6 +13,7 @@ class Product < ApplicationRecord
   validates :photo_url1, presence:true
   # validates :delivery_price, presence:true
   enum status: [ :scrapped, :modified, :unsurprising, :archived ]
+  monetize :price_cents
 
 def self.random(budget, gender, category)
     productList = []
