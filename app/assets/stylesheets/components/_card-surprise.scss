@@ -6,9 +6,9 @@
   background: linear-gradient(to right, #61045F, #AA076B);
   background-attachment: fixed;
   color: #FAFAFA;
-  height: 100%;
+  min-height: 100%;
   font-family: $headers-font;
-  width: 100%;
+  max-width: 100%;
 }
 
 .card-description{
@@ -38,6 +38,7 @@
   background-size: cover;
   position: relative;
   height: 500px;
+  max-width: 100%;
   display: flex;
   border-radius: 5px;
 }
