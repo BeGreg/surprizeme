@@ -65,50 +65,49 @@ Capybara.register_driver :selenium do |app|
 # # products = browser.all '.s-item-container'
 
 
-
-##### SCRAPPING RAFFINEURS WITH SELENIUM ######
-driver = Selenium::WebDriver.for :firefox
-driver.get "https://www.lesraffineurs.com/du-palais/827-coquetiers-les-barbus.html"
-sleep(5)
-driver.find_element(:id, 'add_to_cart').click
-sleep(5)
-driver.find_element(:class, 'button-medium').click
-sleep(5)
-driver.find_elements(:class, 'button-medium')[1].click
-sleep(5)
-driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
-driver.find_element(:id, 'passwd').send_keys("#######")
-driver.find_element(:id, 'SubmitLogin').click
-sleep(5)
-driver.find_elements(:tag_name, 'button')[2].submit
-sleep(10)
-driver.find_elements(:class, 'delivery_option_radio')[0].click
-
-driver.find_element(:id, 'cgv').click
-sleep(2)
-driver.find_element(:class, 'standard-checkout').click
-sleep(5)
-driver.find_element(:class, 'be2bill_link').click
-sleep(8)
-driver.switch_to.frame 'be2bill_iframe'
-sleep(2)
-driver.find_element(:id, 'b2b-ccnum-input').send_keys("#######")
-sleep(2)
-driver.find_element(:id, 'b2b-month-input').send_keys("0#")
-sleep(2)
-driver.find_element(:id, 'b2b-year-input').send_keys("20##")
-sleep(2)
-driver.find_element(:id, 'b2b-cvv-input').send_keys("#######")
-binding.pry
-sleep(2.5) # wait for the js to create the popup in response to pressing the button
-# driver.action.moveToElement(:id, 'b2b-submit')
-driver.find_element(:id, 'b2b-submit').submit
-
-
-###### SCRAPPING L'AVANGARDISTE WITH SELENIUM ######
+##### SCRAPPING ACHAT L'AVANGARDISTE WITH SELENIUM ######
 # driver = Selenium::WebDriver.for :firefox
 # driver.get "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
-# binding.pry
+# # binding.pry
+# driver.find_elements(:class, 'exclusive')[1].click
+# sleep(1)
+# driver.find_element(:class, 'shopping_cart').click
+# sleep(5)
+# driver.find_element(:class, 'standard-checkout').click
+# sleep(5)
+# # driver.find_element(:class, 'button-orange').click
+# # sleep(5)
+# driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
+# driver.find_element(:id, 'passwd').send_keys("jE2Ob6k4")
+# sleep(3)
+# driver.find_element(:id, 'SubmitLogin').click
+# sleep(3)
+# driver.find_elements(:tag_name, 'button')[0].click
+
+# sleep(3)
+# driver.find_elements(:class, 'delivery_option_radio')[0].click
+# driver.find_elements(:tag_name, 'button')[0].click
+
+# # bouton "Valider"
+# driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame3"]'))
+# driver.find_element(css: 'input[name="cardnumber"]').send_keys('####')
+
+# driver.switch_to.default_content
+# driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame5"]'))
+# driver.find_element(css: 'input[name="exp-date"]').send_keys('##/##')
+
+# driver.switch_to.default_content
+# driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame4"]'))
+# driver.find_element(css: 'input[name="cvc"]').send_keys('###')
+
+# driver.switch_to.default_content
+# driver.find_element(:class, 'stripe-submit-button').click
+
+
+
+##### SCRAPPING ACHAT RAFFINEURS WITH SELENIUM ######
+# driver = Selenium::WebDriver.for :firefox
+# driver.get "https://www.lesraffineurs.com/du-palais/827-coquetiers-les-barbus.html"
 # sleep(5)
 # driver.find_element(:id, 'add_to_cart').click
 # sleep(5)
@@ -130,20 +129,61 @@ driver.find_element(:id, 'b2b-submit').submit
 # sleep(5)
 # driver.find_element(:class, 'be2bill_link').click
 # sleep(8)
-# driver.switch_to.frame '__privateStripeFrame3'
+# driver.switch_to.frame 'be2bill_iframe'
 # sleep(2)
-# driver.find_element(:id, 'b2b-ccnum-input').send_keys("######")
+# driver.find_element(:id, 'b2b-ccnum-input').send_keys("4976530106535816")
 # sleep(2)
-# driver.find_element(:id, 'b2b-month-input').send_keys("0#")
+# driver.find_element(:id, 'b2b-month-input').send_keys("02")
 # sleep(2)
-# driver.find_element(:id, 'b2b-year-input').send_keys("##")
+# driver.find_element(:id, 'b2b-year-input').send_keys("2018")
 # sleep(2)
-# driver.find_element(:id, 'b2b-cvv-input').send_keys("####")
+# driver.find_element(:id, 'b2b-cvv-input').send_keys("479")
 # sleep(2.5) # wait for the js to create the popup in response to pressing the button
-# driver.find_element(:id, 'b2b-submit').submit
+# binding.pry
+# driver.find_element(:id, 'b2b-submit').click
 
 
-### Scrap Amazon ###
+##### SCRAPPING ACHAT L'AVANGARDISTE WITH SELENIUM ######
+# driver = Selenium::WebDriver.for :firefox
+# driver.get "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
+# # binding.pry
+# driver.find_elements(:class, 'exclusive')[1].click
+# sleep(1)
+# driver.find_element(:class, 'shopping_cart').click
+# sleep(5)
+# driver.find_element(:class, 'standard-checkout').click
+# sleep(5)
+# # driver.find_element(:class, 'button-orange').click
+# # sleep(5)
+# driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
+# driver.find_element(:id, 'passwd').send_keys("jE2Ob6k4")
+# sleep(3)
+# driver.find_element(:id, 'SubmitLogin').click
+# sleep(3)
+# driver.find_elements(:tag_name, 'button')[0].click
+
+# sleep(3)
+# driver.find_elements(:class, 'delivery_option_radio')[0].click
+# driver.find_elements(:tag_name, 'button')[0].click
+
+# # bouton "Valider"
+# driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame3"]'))
+# driver.find_element(css: 'input[name="cardnumber"]').send_keys('####')
+
+# driver.switch_to.default_content
+# driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame5"]'))
+# driver.find_element(css: 'input[name="exp-date"]').send_keys('##/##')
+
+# driver.switch_to.default_content
+# driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame4"]'))
+# driver.find_element(css: 'input[name="cvc"]').send_keys('###')
+
+# driver.switch_to.default_content
+# driver.find_element(:class, 'stripe-submit-button').click
+
+toto = 'foo'
+
+### SCRAPPING PRODUITS AMAZON ###
 # puts "scrapping Amazon"
 # products.each do |article|
 #   if article.has_css?('.a-icon-star')
@@ -164,42 +204,6 @@ driver.find_element(:id, 'b2b-submit').submit
 #   product.photo_url1 = browser.find('.imgTagWrapper img', visible: :all)[:src]
 #   product.save!
 # end
-
-
-
-
-### SCRAPBACK TEST (poltergeist) ###
-# browser.find('#add-to-cart-button').click
-# browser.all("input")[0].click
-# browser.find("#nav-cart").click
-# --------------------
-# binding.pry
-# browser.all('.exclusive')[1].click
-# browser.visit "https://www.lavantgardiste.com/commande"
-# browser.find('.standard-checkout').click
-# browser.fill_in 'email', with: 'gregory.blain@gmail.com'
-# browser.fill_in 'passwd', with: 'jE2Ob6k4'
-# browser.find_by_id('SubmitLogin').click
-# browser.has_checked_field?('addressesAreEquals')
-# browser.uncheck('addressesAreEquals')
-# browser.find('.button.button-small.btn.btn-default', visible: :all).click
-# browser.find_by_id('addressesAreEquals').trigger('click')
-# browser.find('a.btn', visible: :all).trigger('click')
-# browser.fill_in 'company', with: 'Le Wagon'
-# browser.fill_in 'address1', with: '23 rue Paul Montrochet'
-# browser.fill_in 'postcode', with: '69002'
-# browser.fill_in 'city', with: 'Lyon'
-# browser.fill_in 'phone_mobile', with: '0607830808'
-# browser.fill_in 'alias', with: 'Wagon'
-# browser.find_by_id('submitAddress').click
-# browser.select 'Wagon', from: 'id_address_delivery'
-# browser.select 'Mon adresse', from: 'id_address_invoice'
-# browser.find('.button.orange').trigger('click')
-# browser.all("input")[0].trigger('click')
-# browser.find('.button.orange').click
-# # within_frame '__privateStripeFrame5' do { page.driver.browser.find_element(:id, 'cc-exp').send_keys '09' } end
-
-
 
 
 # driver.find_elements(:class, "exclusive")[1].click
