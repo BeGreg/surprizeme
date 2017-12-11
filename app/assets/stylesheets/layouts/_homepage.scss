@@ -115,7 +115,7 @@ body {
 }
 
 #how-it-works {
-
+  display: flex;
 }
 
 .product-title {
@@ -416,4 +416,29 @@ body .flex{
       border-color:white;
     }
   }
+}
+
+#info-card{
+  justify-content: center;
+  border: lightgrey 3px;
+}
+
+#info-card p{
+  background-color: white;
+  margin-left: 98px;
+  margin-top: 10px;
+  border: solid #22254a 3px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 5px rgba(0,0,0,0.30), 0 8px 9px rgba(0,0,0,0.22);
+}
+#info-card p:hover {
+  box-shadow: 0 5px 6px rgba(0,0,0,0.31), 0 9px 10px rgba(0,0,0,0.23);
+}
+
+
+.gift-image {
+  width:120px;
+  height:100px;
+  margin-left: 120px;
 }
