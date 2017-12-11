@@ -64,25 +64,84 @@ Capybara.register_driver :selenium do |app|
 # browser.visit url
 # # products = browser.all '.s-item-container'
 
+
+
+##### SCRAPPING RAFFINEURS WITH SELENIUM ######
 driver = Selenium::WebDriver.for :firefox
-driver.get "https://www.lesraffineurs.com/du-temps-libre/722-affiches-carte-des-vins.html#/carte_des_vins-vignoble_de_la_vallee_du_rhone"
-binding.pry
+driver.get "https://www.lesraffineurs.com/du-palais/827-coquetiers-les-barbus.html"
+sleep(5)
+driver.find_element(:id, 'add_to_cart').click
+sleep(5)
+driver.find_element(:class, 'button-medium').click
+sleep(5)
+driver.find_elements(:class, 'button-medium')[1].click
+sleep(5)
+driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
+driver.find_element(:id, 'passwd').send_keys("#######")
+driver.find_element(:id, 'SubmitLogin').click
+sleep(5)
+driver.find_elements(:tag_name, 'button')[2].submit
+sleep(10)
+driver.find_elements(:class, 'delivery_option_radio')[0].click
 
-sleep(0.7) # wait for the js to create the popup in response to pressing the button
+driver.find_element(:id, 'cgv').click
+sleep(2)
+driver.find_element(:class, 'standard-checkout').click
+sleep(5)
+driver.find_element(:class, 'be2bill_link').click
+sleep(8)
 driver.switch_to.frame 'be2bill_iframe'
-driver.find_element(:id, 'b2b-ccnum-input').send_keys("gregory.blain@gmail.com")
+sleep(2)
+driver.find_element(:id, 'b2b-ccnum-input').send_keys("#######")
+sleep(2)
+driver.find_element(:id, 'b2b-month-input').send_keys("0#")
+sleep(2)
+driver.find_element(:id, 'b2b-year-input').send_keys("20##")
+sleep(2)
+driver.find_element(:id, 'b2b-cvv-input').send_keys("#######")
+binding.pry
+sleep(2.5) # wait for the js to create the popup in response to pressing the button
+# driver.action.moveToElement(:id, 'b2b-submit')
+driver.find_element(:id, 'b2b-submit').submit
 
-within_frame 'stripe_checkout_app' do # must be selenium
-  # fill_in 'card_number', with: '4242424242424242' no longer works
-  4.times {page.driver.browser.find_element(:id, 'card_number').send_keys('4242')}
 
-  # fill_in 'cc-exp', with: '5/2018' no longer works
-  page.driver.browser.find_element(:id, 'cc-exp').send_keys '5'
-  page.driver.browser.find_element(:id, 'cc-exp').send_keys '18'
+###### SCRAPPING L'AVANGARDISTE WITH SELENIUM ######
+# driver = Selenium::WebDriver.for :firefox
+# driver.get "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
+# binding.pry
+# sleep(5)
+# driver.find_element(:id, 'add_to_cart').click
+# sleep(5)
+# driver.find_element(:class, 'button-medium').click
+# sleep(5)
+# driver.find_elements(:class, 'button-medium')[1].click
+# sleep(5)
+# driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
+# driver.find_element(:id, 'passwd').send_keys("SurpriseMe")
+# driver.find_element(:id, 'SubmitLogin').click
+# sleep(5)
+# driver.find_elements(:tag_name, 'button')[2].submit
+# sleep(10)
+# driver.find_elements(:class, 'delivery_option_radio')[0].click
 
-  page.driver.browser.find_element(:id, 'cc-csc').send_keys '123'
-  find('button[type="submit"]').click
-end
+# driver.find_element(:id, 'cgv').click
+# sleep(2)
+# driver.find_element(:class, 'standard-checkout').click
+# sleep(5)
+# driver.find_element(:class, 'be2bill_link').click
+# sleep(8)
+# driver.switch_to.frame '__privateStripeFrame3'
+# sleep(2)
+# driver.find_element(:id, 'b2b-ccnum-input').send_keys("4979930223400398")
+# sleep(2)
+# driver.find_element(:id, 'b2b-month-input').send_keys("09")
+# sleep(2)
+# driver.find_element(:id, 'b2b-year-input').send_keys("18")
+# sleep(2)
+# driver.find_element(:id, 'b2b-cvv-input').send_keys("872")
+# sleep(2.5) # wait for the js to create the popup in response to pressing the button
+# driver.find_element(:id, 'b2b-submit').submit
+
 
 ### Scrap Amazon ###
 # puts "scrapping Amazon"
@@ -114,42 +173,13 @@ end
 # browser.all("input")[0].click
 # browser.find("#nav-cart").click
 # --------------------
-binding.pry
-browser.all('.exclusive')[1].click
-browser.visit "https://www.lavantgardiste.com/commande"
-browser.find('.standard-checkout').click
-browser.fill_in 'email', with: 'gregory.blain@gmail.com'
-browser.fill_in 'passwd', with: 'jE2Ob6k4'
-browser.find_by_id('SubmitLogin').click
-browser.has_checked_field?('addressesAreEquals')
-browser.uncheck('addressesAreEquals')
-browser.find('.button.button-small.btn.btn-default', visible: :all).click
-browser.find_by_id('addressesAreEquals').trigger('click')
-browser.find('a.btn', visible: :all).trigger('click')
-browser.fill_in 'company', with: 'Le Wagon'
-browser.fill_in 'address1', with: '23 rue Paul Montrochet'
-browser.fill_in 'postcode', with: '69002'
-browser.fill_in 'city', with: 'Lyon'
-browser.fill_in 'phone_mobile', with: '0607830808'
-browser.fill_in 'alias', with: 'Wagon'
-browser.find_by_id('submitAddress').click
-browser.select 'Wagon', from: 'id_address_delivery'
-browser.select 'Mon adresse', from: 'id_address_invoice'
-browser.find('.button.orange').trigger('click')
-browser.all("input")[0].trigger('click')
-browser.find('.button.orange').click
-# within_frame '__privateStripeFrame5' do { page.driver.browser.find_element(:id, 'cc-exp').send_keys '09' } end
-
-
-
-
-driver.find_elements(:class, "exclusive")[1].click
-driver.get "https://www.lavantgardiste.com/commande"
-driver.find_elements(:class, 'standard-checkout')[0].click
-driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
-driver.find_element(:id, 'passwd').send_keys("jE2Ob6k4")
-driver.find_element(:id, 'SubmitLogin').submit
-# driver.find_element(:id, 'SubmitLogin')[0].click
+# binding.pry
+# browser.all('.exclusive')[1].click
+# browser.visit "https://www.lavantgardiste.com/commande"
+# browser.find('.standard-checkout').click
+# browser.fill_in 'email', with: 'gregory.blain@gmail.com'
+# browser.fill_in 'passwd', with: 'jE2Ob6k4'
+# browser.find_by_id('SubmitLogin').click
 # browser.has_checked_field?('addressesAreEquals')
 # browser.uncheck('addressesAreEquals')
 # browser.find('.button.button-small.btn.btn-default', visible: :all).click
@@ -164,11 +194,41 @@ driver.find_element(:id, 'SubmitLogin').submit
 # browser.find_by_id('submitAddress').click
 # browser.select 'Wagon', from: 'id_address_delivery'
 # browser.select 'Mon adresse', from: 'id_address_invoice'
-driver.find_element(:tag_name, 'button').submit
-browser.all("input")[0].trigger('click')
-browser.find('.button.orange').click
-within_frame '__privateStripeFrame5' do page.driver.browser.find_element(:id, 'card_number').send_keys('4242')
-end
+# browser.find('.button.orange').trigger('click')
+# browser.all("input")[0].trigger('click')
+# browser.find('.button.orange').click
+# # within_frame '__privateStripeFrame5' do { page.driver.browser.find_element(:id, 'cc-exp').send_keys '09' } end
+
+
+
+
+# driver.find_elements(:class, "exclusive")[1].click
+# driver.get "https://www.lavantgardiste.com/commande"
+# driver.find_elements(:class, 'standard-checkout')[0].click
+# driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
+# driver.find_element(:id, 'passwd').send_keys("jE2Ob6k4")
+# driver.find_element(:id, 'SubmitLogin').submit
+# # driver.find_element(:id, 'SubmitLogin')[0].click
+# # browser.has_checked_field?('addressesAreEquals')
+# # browser.uncheck('addressesAreEquals')
+# # browser.find('.button.button-small.btn.btn-default', visible: :all).click
+# # browser.find_by_id('addressesAreEquals').trigger('click')
+# # browser.find('a.btn', visible: :all).trigger('click')
+# # browser.fill_in 'company', with: 'Le Wagon'
+# # browser.fill_in 'address1', with: '23 rue Paul Montrochet'
+# # browser.fill_in 'postcode', with: '69002'
+# # browser.fill_in 'city', with: 'Lyon'
+# # browser.fill_in 'phone_mobile', with: '0607830808'
+# # browser.fill_in 'alias', with: 'Wagon'
+# # browser.find_by_id('submitAddress').click
+# # browser.select 'Wagon', from: 'id_address_delivery'
+# # browser.select 'Mon adresse', from: 'id_address_invoice'
+# driver.find_element(:tag_name, 'button').submit
+# browser.all("input")[0].trigger('click')
+# browser.find('.button.orange').click
+# within_frame '__privateStripeFrame5' do page.driver.browser.find_element(:id, 'card_number').send_keys('4242')
+# end
+
 ### Scrap Raffineurs ###
 # puts 'startin les raffineurs, du palais, capybara'
 

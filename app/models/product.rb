@@ -16,7 +16,10 @@ class Product < ApplicationRecord
 
 def self.random(budget, gender, category)
     productList = []
-    Product.where(status: ["scrapped", "modified"]).each do |product|
+    Product.where(status: ["scrapped","modified"]).each do |product|
+      p product.budget_match?(budget)
+      p product.gender_match?(gender)
+      p product.category_match?(category)
       productList << product if product.budget_match?(budget) && product.gender_match?(gender) && product.category_match?(category)
     end
     puts productList
@@ -25,7 +28,7 @@ def self.random(budget, gender, category)
 
   def budget_match?(required_budget)
     #TODO : ajouter delivery price
-    (price < required_budget.to_i) && (price > (required_budget.to_i * 0.75))
+    (price < required_budget.to_i) && (price.to_i > (required_budget.to_i * 0.75))
   end
 
   def gender_match?(required_gender)
