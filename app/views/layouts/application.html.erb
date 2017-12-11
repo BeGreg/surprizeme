@@ -13,17 +13,6 @@
     <%= render 'shared/flashes' %>
     <%= yield %>
     <%= javascript_include_tag 'application' %>
-
-
-
-
-
-    <%= javascript_tag do %>
-        <%= yield :after_js %>
-    <% end %>
-
-
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyBTatMTb2qrJDAwzylTpE7DVHjzR_yCJQs"></script>
-
+    <%= yield :after_js %>
   </body>
 </html>
