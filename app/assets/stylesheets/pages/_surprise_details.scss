@@ -13,7 +13,7 @@
   opacity: 1;
   border-left: solid $magenta 1px;
   padding-left: 20px;
-  transition: all 1500ms ease;
+  transition: all 500ms ease;
 }
 
 .bill-hide {
@@ -22,7 +22,7 @@
   opacity: 0;
   max-width: 0;
   max-height: 0;
-  transition: max-width 1500ms ease;
+  transition: max-width 500ms ease;
 }
 
 
