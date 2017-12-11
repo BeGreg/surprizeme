@@ -1,18 +1,18 @@
 function homepageAnimation() {
-  const product = document.querySelector(".product-title");
-  const product_form = document.querySelector(".product-form");
-  const moment = document.querySelector(".moment-title");
-  const moment_form = document.querySelector(".moment-form");
+  var product = document.querySelector(".product-title");
+  var product_form = document.querySelector(".product-form");
+  var moment = document.querySelector(".moment-title");
+  var moment_form = document.querySelector(".moment-form");
 
-  const product_title = document.querySelector(".product-title");
-  const moment_title = document.querySelector(".moment-title");
+  var product_title = document.querySelector(".product-title");
+  var moment_title = document.querySelector(".moment-title");
 
-  const headline = document.querySelector(".headline");
-  const headline_text = document.querySelector(".headline-text");
+  var headline = document.querySelector(".headline");
+  var headline_text = document.querySelector(".headline-text");
 
 
   // What happens when you click on "Product"
-  product.addEventListener("click", (event) => {
+  product.addEventListener("click", function() {
 
     product_form.classList.toggle("event-hide");
     product_form.classList.toggle("cat-show");
@@ -25,7 +25,7 @@ function homepageAnimation() {
 
 
   // What happens when you click on "Moment"
-  moment.addEventListener("click", (event) => {
+  moment.addEventListener("click", function() {
 
     moment_form.classList.toggle("event-hide");
     moment_form.classList.toggle("cat-show");
@@ -70,10 +70,10 @@ function homepageAnimation() {
 
 
   // what happens when you click on "Comment Ca marche ? "
-  const category_select = document.querySelectorAll(".category-select");
-  const howLink = document.getElementById("how-link");
-  const howItWorks = document.getElementById("how-it-works");
-  howLink.addEventListener("click", (event) => {
+  var category_select = document.querySelectorAll(".category-select");
+  var howLink = document.getElementById("how-link");
+  var howItWorks = document.getElementById("how-it-works");
+  howLink.addEventListener("click", function() {
     howItWorks.classList.toggle("hide-how");
     howItWorks.classList.toggle("show-how");
     HowItWorks()

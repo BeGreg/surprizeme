@@ -24,6 +24,11 @@ gem 'poltergeist'
 gem 'launchy'
 gem 'pundit'
 gem 'omniauth-facebook'
+gem 'selenium-webdriver', '~> 2.53', '>= 2.53.4'
+gem 'geocoder'
+gem 'remotipart', github: 'mshibuya/remotipart'
+gem 'rails_admin', '>= 1.0.0.rc'
+gem 'rails_admin_grid'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

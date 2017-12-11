@@ -1,4 +1,7 @@
 # Require the gems
+
+puts "ok"
+
 require 'capybara/poltergeist'
 
 # Configure Poltergeist to not blow up on websites with js errors aka every website with js
