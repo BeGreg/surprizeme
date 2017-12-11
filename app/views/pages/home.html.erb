@@ -36,22 +36,23 @@
 </div>
 
 <div class="hide-how" id="how-it-works">
-  <div class="info-card">
-    <p>1/ Choisir une catégorie de Surprise</p>
-
+  <div class="col-xs-3 col-md-6-offset" id="info-card">
+    <%= image_tag "light.png", class: "gift-image"%>
+    <p> 1/ Choisir entre catégorie et Surprise</p>
   </div>
-  <div class="info-card">
-    <p>2/ S'inscrire ou se connecter</p>
-
+  <div class="col-xs-3 col-md-6-offset" id="info-card">
+    <%= image_tag "saisir.png", class: "gift-image"%>
+    <p> 2/ Saisir vos critères</p>
   </div>
-  <div class="info-card">
-    <p>3/ Payez</p>
-
+  <div class="col-xs-3 col-md-6-offset" id="info-card">
+    <%= image_tag "paid.png", class: "gift-image"%>
+    <p> 3/ Payez</p>
   </div>
-   <div class="info-card">
-    <p>4/ Decouvrez votre suprise</p>
-
+   <div class="col-xs-3 col-md-6-offset" id="info-card">
+    <%= image_tag "gift.png", class: "gift-image" %>
+    <p> 4/ Découvrez votre surprise !</p>
   </div>
+  btn btn-primary return
 </div>
 
 <% content_for :after_js do %>
