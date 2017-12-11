@@ -1,47 +1,54 @@
-<div class="card-surprise">
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <div class="card-description">
-        <div class="separator">
-          <h1><%= @product.name%></h1>
-          <br>
-          <div>
-            <% description = @product.description %>
-            <% if description.length > 400 %>
-            <p><%= description.first(400) %>...</p>
-            <% else %>
-            <p><%= description %></p>
-            <% end %>
+
+<div id="canvas">
+  <div class="card-surprise">
+    <div class="row" id="surprise-row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="card-description">
+          <div class="separator">
+            <h1><%= @product.name%></h1>
             <br>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-offset-4 col-sm-4">
-            <div class="card-thumbs">
-              <h2>SURPRIS ?</h2>
-                <a href="#" class="shrink-up"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
-                <a href="#" class="shrink-down"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
-            </div>
-          </div>
-        </div>
-          <% if description.length > 400 %>
             <div>
-              <h3>Description du produit :</h2>
+              <% description = @product.description %>
+              <% if description.length > 400 %>
+              <p><%= description.first(400) %>...</p>
+              <% else %>
               <p><%= description %></p>
+              <% end %>
+              <br>
             </div>
-          <% end %>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-4 col-sm-4">
+              <div class="card-thumbs">
+                <h2>SURPRIS ?</h2>
+                  <a href="#" class="shrink-up"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+                  <a href="#" class="shrink-down"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </div>
+            <% if description.length > 400 %>
+              <div>
+                <h3>Description du produit :</h2>
+                <p><%= description %></p>
+              </div>
+            <% end %>
+        </div>
       </div>
-    </div>
-    <div class="col-xs-12 col-sm-6" style="padding-right: 0;">
-     <div class="card-image" style="background-image: url('<%= @product.photo_url1 %>'); ">
+      <div class="col-xs-12 col-sm-6">
+        <div class="card-image" style="background-image: url('<%= @product.photo_url1 %>'); ">
+        </div>
+        <div class="info">
+        <br>
+        <p><i class="fa fa-shopping-bag" aria-hidden="true"></i> <%= @product.supplier.name %></p>
+         <p><i class="fa fa-star" aria-hidden="true"></i> Notes des internauts <%= @product.supplier_review %></p>
+         <p><i class="fa fa-tag" aria-hidden="true"></i> <%= @surprise.total_price %>    <i class="fa fa-eur" aria-hidden="true"></i></p>
+          <p><i class="fa fa-truck" aria-hidden="true"></i></i> Votre produit sera livré dans <%= @product.delivery_time %> jours</p>
+         </div>
       </div>
-      <div class="info">
-      <br>
-      <p><i class="fa fa-shopping-bag" aria-hidden="true"></i> <%= @product.supplier.name %></p>
-       <p><i class="fa fa-star" aria-hidden="true"></i> Notes des internauts <%= @product.supplier_review %></p>
-       <p><i class="fa fa-tag" aria-hidden="true"></i> <%= @surprise.total_price %>    <i class="fa fa-eur" aria-hidden="true"></i></p>
-        <p><i class="fa fa-truck" aria-hidden="true"></i></i> Votre produit sera livré dans <%= @product.delivery_time %> jours</p>
-       </div>
     </div>
   </div>
+
 </div>
+<% content_for :after_js do %>
+  scratchCard();
+<% end %>
