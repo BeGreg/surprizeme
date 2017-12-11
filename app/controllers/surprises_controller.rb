@@ -18,7 +18,7 @@ class SurprisesController < ApplicationController
     @surprise = Surprise.new(surprise_params2)
     @surprise.product_id = session[:product_id]
     @surprise.user_id = current_user.id
-    @surprise.total_price = @surprise.product.price
+    @surprise.amount = @surprise.product.price
     @surprise.save!
     redirect_to surprise_path(@surprise)
   end
