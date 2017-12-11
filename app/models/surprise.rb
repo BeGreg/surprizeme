@@ -7,4 +7,5 @@ class Surprise < ApplicationRecord
   validates :del_last_name, presence:true
   validates :del_address, presence:true
   validates :status, presence:true
+  monetize :amount_cents
 end

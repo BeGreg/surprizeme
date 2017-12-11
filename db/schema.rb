@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171210102937) do
+ActiveRecord::Schema.define(version: 20171211141345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20171210102937) do
     t.integer  "supplier_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.integer  "price_cents",            default: 0, null: false
     t.index ["supplier_id"], name: "index_products_on_supplier_id", using: :btree
   end
 
@@ -93,7 +94,6 @@ ActiveRecord::Schema.define(version: 20171210102937) do
   end
 
   create_table "surprises", force: :cascade do |t|
-    t.float    "total_price"
     t.string   "del_first_name"
     t.string   "del_last_name"
     t.string   "del_address"
@@ -110,6 +110,8 @@ ActiveRecord::Schema.define(version: 20171210102937) do
     t.integer  "moment_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "amount_cents",    default: 0,         null: false
+    t.jsonb    "payement"
     t.index ["moment_id"], name: "index_surprises_on_moment_id", using: :btree
     t.index ["product_id"], name: "index_surprises_on_product_id", using: :btree
     t.index ["user_id"], name: "index_surprises_on_user_id", using: :btree
