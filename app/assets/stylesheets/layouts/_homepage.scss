@@ -106,7 +106,7 @@ body {
   position: absolute;
   top: 100vh;
   bottom: 0vh;
-  display: block;
+  display: flex;
   max-height: 450px;
   opacity: 1;
   transition: all 1500ms;
