@@ -3,3 +3,36 @@
     display: none;
   }
 }
+.delivery_address {
+  width: 100%;
+}
+.bill-show {
+
+  width: 100%;
+  max-height: auto;
+  opacity: 1;
+  border-left: solid $magenta 1px;
+  padding-left: 20px;
+  transition: all 1500ms ease;
+}
+
+.bill-hide {
+  border: none;
+  padding-left: 0;
+  opacity: 0;
+  max-width: 0;
+  max-height: 0;
+  transition: max-width 1500ms ease;
+}
+
+
+.double-form {
+  display: flex ;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.address-box{
+  display: flex;
+  justify-content: space-evenly;
+
+}

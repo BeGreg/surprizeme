@@ -3,16 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>TODO</title>
+    <title>Surprize Me</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
   <body>
-    <% if notice || alert %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <% end %>
+    <%= render 'shared/flashes' %>
     <%= yield %>
     <%= javascript_include_tag 'application' %>
 
@@ -25,7 +22,7 @@
     <% end %>
 
 
-
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyBTatMTb2qrJDAwzylTpE7DVHjzR_yCJQs"></script>
 
   </body>
 </html>
