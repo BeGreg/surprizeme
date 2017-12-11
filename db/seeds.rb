@@ -132,13 +132,13 @@ driver.find_element(:id, 'b2b-submit').submit
 # sleep(8)
 # driver.switch_to.frame '__privateStripeFrame3'
 # sleep(2)
-# driver.find_element(:id, 'b2b-ccnum-input').send_keys("***REMOVED***")
+# driver.find_element(:id, 'b2b-ccnum-input').send_keys("######")
 # sleep(2)
-# driver.find_element(:id, 'b2b-month-input').send_keys("09")
+# driver.find_element(:id, 'b2b-month-input').send_keys("0#")
 # sleep(2)
-# driver.find_element(:id, 'b2b-year-input').send_keys("18")
+# driver.find_element(:id, 'b2b-year-input').send_keys("##")
 # sleep(2)
-# driver.find_element(:id, 'b2b-cvv-input').send_keys("***REMOVED***")
+# driver.find_element(:id, 'b2b-cvv-input').send_keys("####")
 # sleep(2.5) # wait for the js to create the popup in response to pressing the button
 # driver.find_element(:id, 'b2b-submit').submit
 
