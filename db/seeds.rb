@@ -50,12 +50,12 @@ selection = []
 
 products_url = []
 browser = Capybara.current_session
-url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+insolite&rh=n%3A13921051%2Ck%3Agadget+insolite&qid=1512384836&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
-# url pour test produit binding pry
-# url = "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
+# url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+insolite&rh=n%3A13921051%2Ck%3Agadget+insolite&qid=1512384836&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
+# # url pour test produit binding pry
+# # url = "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
 
-browser.visit url
-products = browser.all '.s-item-container'
+# browser.visit url
+# products = browser.all '.s-item-container'
 
 
 # Scrap Amazon
