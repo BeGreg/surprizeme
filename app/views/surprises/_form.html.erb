@@ -31,7 +31,7 @@
         </div>
 
       </div>
-      <div class="form-actions">
+      <div class="form-actions" >
         <%= f.button :submit, "Continuer", class: 'form-button' %>
       </div>
       <% end %>
@@ -43,3 +43,7 @@
   initCheckboxBillingAddress();
 <% end %>
 
+<%= form_tag surprises_path do %>
+  <%= hidden_field_tag 'surprise_id', @surprise.id %>
+  <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
+<% end %>
