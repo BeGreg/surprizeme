@@ -131,13 +131,13 @@ Capybara.register_driver :selenium do |app|
 # sleep(8)
 # driver.switch_to.frame 'be2bill_iframe'
 # sleep(2)
-# driver.find_element(:id, 'b2b-ccnum-input').send_keys("4976530106535816")
+# driver.find_element(:id, 'b2b-ccnum-input').send_keys("#####")
 # sleep(2)
-# driver.find_element(:id, 'b2b-month-input').send_keys("02")
+# driver.find_element(:id, 'b2b-month-input').send_keys("##")
 # sleep(2)
-# driver.find_element(:id, 'b2b-year-input').send_keys("2018")
+# driver.find_element(:id, 'b2b-year-input').send_keys("##")
 # sleep(2)
-# driver.find_element(:id, 'b2b-cvv-input').send_keys("479")
+# driver.find_element(:id, 'b2b-cvv-input').send_keys("###")
 # sleep(2.5) # wait for the js to create the popup in response to pressing the button
 # binding.pry
 # driver.find_element(:id, 'b2b-submit').click
