@@ -15,8 +15,8 @@
   margin: 0 auto;
   background-image: url(image-path('poulis.png'));
   background-size: cover;
-  -webkit-animation: poulis 3s linear 5s 1 alternate; /* Safari 4.0 - 8.0 */
-  animation: poulis 1.5s linear 5s 5 alternate;
+  -webkit-animation: poulis 3s linear 5.5s 1 alternate; /* Safari 4.0 - 8.0 */
+  animation: poulis 1.5s linear 5.5s 5 alternate;
   position:relative;
 
 }
@@ -32,8 +32,8 @@
   margin: 0 auto;
   position: absolute;
   top: 0px;
-  -webkit-animation: fil 3s linear 5s 1 alternate; /* Safari 4.0 - 8.0 */
-  animation: fil 1.5s linear 5s 5 alternate;
+  -webkit-animation: fil 3s linear 5.5s 1 alternate; /* Safari 4.0 - 8.0 */
+  animation: fil 1.5s linear 5.5s 5 alternate;
   position:relative;
 }
 
@@ -44,9 +44,6 @@
   background-size: cover;
   margin: 0 auto;
   position: absolute;
-  -webkit-animation: pince 3s linear 5s 1 alternate; /* Safari 4.0 - 8.0 */
-  animation: pince 1.5s linear 5s 5 alternate;
-  position:relative;
 }
 
 // Animation horizontale
