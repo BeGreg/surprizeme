@@ -43,6 +43,11 @@ class SurprisesController < ApplicationController
     session[:product_id] = @product_id
     redirect_to surprise_details_path
   end
+
+  def animation
+
+  end
+
   private
 
   def set_surprise
