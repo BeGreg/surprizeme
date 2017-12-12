@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :ratings
   end
   resources :moments
-  resources :surprises
+  resources :surprises do
+    resources :payments, only: [:new, :create]
+  end
   resources :location
 
   get '/surprise_details', to: 'surprises#surprise_details'
