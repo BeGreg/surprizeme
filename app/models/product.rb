@@ -52,14 +52,90 @@ def self.random(budget, gender, category)
   def scrap
     surprise_supplier = self.supplier.name
     case surprise_supplier
-      when "Amazon"
-        scrap_amazon
+      when "Raffineurs"
+        scrap_raffineurs
       when "L'Avant-Gardiste"
         scrap_avant_gardiste
       else
     end
   end
 
-  def scrap_amazon
+  def scrap_raffineurs
+    ##### SCRAPPING ACHAT RAFFINEURS WITH SELENIUM ######
+    driver = Selenium::WebDriver.for :firefox
+    driver.get self.url
+    sleep(5)
+    # Ajout panier
+    driver.find_element(:id, 'add_to_cart').click
+    sleep(5)
+    # Vue panier
+    driver.find_element(:class, 'button-medium').click
+    sleep(5)
+    # Validation panier
+    driver.find_elements(:class, 'button-medium')[1].click
+    sleep(5)
+    # Identification
+    driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
+    driver.find_element(:id, 'passwd').send_keys("###")
+    driver.find_element(:id, 'SubmitLogin').click
+    sleep(5)
+    # Validation adresse
+    driver.find_elements(:tag_name, 'button')[2].submit
+    sleep(5)
+    # Choix mode de livraison + validation cgv
+    driver.find_elements(:class, 'delivery_option_radio')[0].click
+    driver.find_element(:id, 'cgv').click
+    sleep(1)
+    driver.find_element(:class, 'standard-checkout').click
+    sleep(5)
+    # Choix mode de paiement
+    driver.find_element(:class, 'be2bill_link').click
+    sleep(8)
+    # Paiement
+    driver.switch_to.frame 'be2bill_iframe'
+    sleep(2)
+    driver.find_element(:id, 'b2b-ccnum-input').send_keys("######")
+    driver.find_element(:id, 'b2b-month-input').send_keys("######")
+    driver.find_element(:id, 'b2b-year-input').send_keys("#####")
+    driver.find_element(:id, 'b2b-cvv-input').send_keys("###")
+    sleep(1)
+    driver.find_element(:id, 'b2b-submit').click
+  end
 
+  def scrap_avant_gardiste
+    #### SCRAPPING ACHAT L'AVANGARDISTE WITH SELENIUM ######
+    driver = Selenium::WebDriver.for :firefox
+    driver.get self.url
+    # Ajout panier
+    driver.find_elements(:class, 'exclusive')[1].click
+    sleep(1)
+    # Affichage panier
+    driver.find_element(:class, 'shopping_cart').click
+    sleep(5)
+    # Validation panier
+    driver.find_element(:class, 'standard-checkout').click
+    sleep(5)
+    # Identification
+    driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
+    driver.find_element(:id, 'passwd').send_keys("#####")
+    driver.find_element(:id, 'SubmitLogin').click
+    sleep(3)
+    # Validation adresse livraison
+    driver.find_elements(:tag_name, 'button')[0].click
+    sleep(3)
+    # Choix mode livraison
+    driver.find_elements(:class, 'delivery_option_radio')[0].click
+    driver.find_elements(:tag_name, 'button')[0].click
+    # Paiement via Stripe
+    driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame3"]'))
+    driver.find_element(css: 'input[name="cardnumber"]').send_keys('####')
+    driver.switch_to.default_content
+    driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame5"]'))
+    driver.find_element(css: 'input[name="exp-date"]').send_keys('##/##')
+    driver.switch_to.default_content
+    driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame4"]'))
+    driver.find_element(css: 'input[name="cvc"]').send_keys('###')
+    driver.switch_to.default_content
+    driver.find_element(:class, 'stripe-submit-button').click
+  end
 end
