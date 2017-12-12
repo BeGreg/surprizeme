@@ -11,6 +11,10 @@ function homepageAnimation() {
   var headline_text = document.querySelector(".headline-text");
 
 
+  // What happens to title when selected
+
+
+
   // What happens when you click on "Product"
   product.addEventListener("click", function() {
 
@@ -21,7 +25,18 @@ function homepageAnimation() {
     HeadlineMove();
     TitleMove(product_form, moment_form, product_title, moment_title)
 
+    if (product_form.classList.contains("cat-show")) {
+      product.classList.add("cat-selected");
+      moment.classList.remove("cat-selected");
+
+    } else {
+      product.classList.remove("cat-selected");
+
+    }
+
+
   });
+
 
 
   // What happens when you click on "Moment"
@@ -33,6 +48,13 @@ function homepageAnimation() {
     product_form.classList.add("event-hide");
     HeadlineMove();
     TitleMove(moment_form, product_form, moment_title, product_title)
+    if (moment_form.classList.contains("cat-show")) {
+      moment.classList.add("cat-selected");
+      product.classList.remove("cat-selected");
+    } else {
+      moment.classList.remove("cat-selected");
+
+    }
 
   });
 
@@ -50,7 +72,7 @@ function homepageAnimation() {
       headline_text.classList.add("move-down");
       headline_text.classList.remove("move-up");
       product_title.style.top ="25vh"
-      product_title.style.transition = "all 1500ms"
+      product_title.style.transition = "all 200ms"
     }
   };
 
@@ -58,13 +80,13 @@ function homepageAnimation() {
   function TitleMove(x, y, a, b) {
     if (x.classList.contains("cat-show")) {
       a.style.top ="15vh"
-      a.style.transition = "all 1500ms"
+      a.style.transition = "all 500ms"
       b.style.top ="25vh"
-      b.style.transition = "all 1500ms"
+      b.style.transition = "all 500ms"
 
     }else{
       a.style.top ="25vh"
-      a.style.transition = "all 1500ms"
+      a.style.transition = "all 500ms"
       }
     }
 

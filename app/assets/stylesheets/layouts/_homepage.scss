@@ -20,21 +20,22 @@ body {
 
 .product-form{
   position: absolute;
-  top: 50vh;
+  top: 50%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .moment-form{
   position: absolute;
-  top: 50vh;
+  top: 50%;
   margin-left: auto;
   margin-right: auto;
 }
 .cat-show{
   opacity: 1;
   max-height: 250px;
-  transition:             all 500ms ease;
+  transition:             all 200ms ease;
+  visibility: visible;
 
         // -moz-transition:    max-height 500ms ease;
         // -ms-transition:     max-height 500ms ease;
@@ -46,7 +47,9 @@ body {
 .event-hide{
   opacity: 0;
   max-height: 0;
-  transition:             all 500ms ease;
+  transition:             all 200ms ease;
+  visibility: hidden;
+
         // -moz-transition:    max-height 500ms ease;
         // -ms-transition:     max-height 500ms ease;
         // -o-transition:      max-height 500ms ease;
@@ -82,12 +85,12 @@ body {
 
 .move-down {
   top: 15vh;
-  transition: top 500ms;
+  transition: top ease-in .2s;
 }
 
 .move-up {
   top: 5vh;
-  transition: top 500ms;
+  transition: top ease-in .2s;
 }
 
 .how {
@@ -102,7 +105,7 @@ body {
   display: none;
   opacity: 0;
   max-height: 0;
-  transition: all 500ms;
+  transition: all 200ms;
 }
 
 .show-how{
@@ -112,7 +115,7 @@ body {
   display: flex;
   max-height: 450px;
   opacity: 1;
-  transition: all 500ms;
+  transition: all 200ms;
 }
 
 #how-it-works {
@@ -121,7 +124,7 @@ body {
 
 .product-title {
   position: absolute;
-  top: 25vh;
+  top: 35vh;
   margin-left: auto;
   margin-right: auto;
   font-family:'Catamaran', sans-serif;
@@ -130,7 +133,7 @@ body {
   color: white;
 
   /*test*/
-  transition: color 0.25s;
+  transition: color 0.2s;
 
   &::before,
   &::after {
@@ -165,22 +168,22 @@ body {
     border-top-color: white;
     border-right-color: white;
     transition:
-    width 0.25s ease-out,
-    height 0.25s ease-out 0.25s;
+    width 0.2s ease-out,
+    height 0.2s ease-out 0.2s;
   }
 
   &:hover::after {
     border-bottom-color: white;
     border-left-color: white;
     transition:
-    width 0.25s ease-out,
-    height 0.25s ease-out 0.25s;
+    width 0.2s ease-out,
+    height 0.2s ease-out 0.2s;
   }
 }
 
 .moment-title {
   position: absolute;
-  top: 25vh;
+  top: 35vh;
   margin-left: auto;
   margin-right: auto;
   font-family:'Catamaran', sans-serif;
@@ -189,7 +192,7 @@ body {
   color: white;
 
   /*test*/
-  transition: color 0.25s;
+  transition: color 0.2s;
 
   &::before,
   &::after {
@@ -224,16 +227,16 @@ body {
     border-top-color: white;
     border-right-color: white;
     transition:
-    width 0.25s ease-out,
-    height 0.25s ease-out 0.25s;
+    width 0.2s ease-out,
+    height 0.2s ease-out 0.2s;
   }
 
   &:hover::after {
     border-bottom-color: white;
     border-left-color: white;
     transition:
-    width 0.25s ease-out,
-    height 0.25s ease-out 0.25s;
+    width 0.2s ease-out,
+    height 0.2s ease-out 0.2s;
   }
 }
 
@@ -328,7 +331,7 @@ opacity: 0.95;
  }
 
 // test
-$animation:0.3s all ease;
+$animation:0.2s all ease;
 *,
 *::before,
 *::after {
@@ -441,4 +444,35 @@ body .flex{
   width:120px;
   height:100px;
   margin-left: 120px;
+}
+
+
+.cat-selected {
+   & {
+    color: white;
+    font-size: 70px;
+    font-weight: bolder;
+  }
+
+  &::before,
+  &::after {
+    width: 100%;
+    height: 100%;
+  }
+
+  &::before {
+    border-top-color: white;
+    border-right-color: white;
+    transition:
+    width 0.2s ease-out,
+    height 0.2s ease-out 0.2s;
+  }
+
+  &::after {
+    border-bottom-color: white;
+    border-left-color: white;
+    transition:
+    width 0.2s ease-out,
+    height 0.2s ease-out 0.2s;
+  }
 }
