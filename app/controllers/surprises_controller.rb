@@ -7,7 +7,8 @@ class SurprisesController < ApplicationController
 
   def show
     @product = Product.find(@surprise[:product_id])
-    @surprise.update_attributes(status: "confirmé")
+    # @surprise.update_attributes(status: "confirmé")
+    # @surpise = Surprise.where(state: 'paid').find(params[:id])
     # authorize @surprise
   end
 
@@ -19,8 +20,10 @@ class SurprisesController < ApplicationController
     @surprise.product_id = session[:product_id]
     @surprise.user_id = current_user.id
     @surprise.amount = @surprise.product.price
+    @surprise.state = 'pending'
     @surprise.save!
-    redirect_to surprise_path(@surprise)
+    # redirect_to surprise_path(@surprise)
+    redirect_to new_surprise_payment_path(surprise_id: @surprise.id)
   end
 
 
