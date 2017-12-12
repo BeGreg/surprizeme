@@ -16,26 +16,22 @@ class Product < ApplicationRecord
   monetize :price_cents
 
 def self.random(budget, gender, category)
-    productList = []
+    product_list = []
     Product.where(status: ["scrapped", "modified"]).each do |product|
-      productList << product if product.budget_match?(budget) && product.gender_match?(gender) && product.category_match?(category)
+      product_list << product if product.budget_match?(budget) && product.gender_match?(gender) && product.category_match?(category)
     end
-    puts productList
-    return productList.sample.id
+    puts product_list
+    return product_list.sample.id
   end
 
   def budget_match?(required_budget)
     #TODO : ajouter delivery price
-    (price.to_i < required_budget.to_i) && (price.to_i > (required_budget.to_i * 0.75))
+    (price.to_i <= required_budget.to_i) && (price.to_i >= (required_budget.to_i * 0.75))
   end
 
   def gender_match?(required_gender)
-    if required_gender = "indifferent"
-      return true
-    else
       return true
       # return required_gender == @product.gender
-    end
   end
 
   def category_match?(required_category)
@@ -52,5 +48,18 @@ def self.random(budget, gender, category)
     # setting a "dealbreaker" status if the score is too low
     status = "unsurprising" if (score < 0.25 && nb_ratings >= 10) || (score < 0.5 && nb_ratings >= 15)
   end
+
+  def scrap
+    surprise_supplier = self.supplier.name
+    case surprise_supplier
+      when "Amazon"
+        scrap_amazon
+      when "L'Avant-Gardiste"
+        scrap_avant_gardiste
+      else
+    end
+  end
+
+  def scrap_amazon
 
 end

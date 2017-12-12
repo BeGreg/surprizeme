@@ -1,11 +1,19 @@
-<div class="animation"></div>
-<div class="pince-animation">
-  <div id="poulis", class="rond"></div>
-  <div class="down">
-    <div id="fil", class="fil"></div>
-<!--     <div id="fil2", class="fil2"></div> -->
-    <div class="pince"></div>
-    <div id="pince"> </div>
+<div class="wrapper" >
+  <div class="intro">
+    <h2>SurpriZe en approche !</h2>
+    <p>SurpriZe Me est en train de commander votre surprise</p>
+    <p>Merci de bien vouloir patienter</p>
   </div>
-  <span class="rotate"></span>
+  <div id="animation" class="animation" data-surprise-id="<%= params[:surprise_id] %>">
+    <div class="gifts"></div>
+    <div class="pince-animation">
+      <div id="poulis" class="rond"></div>
+      <div class="down">
+        <div id="fil" class="fil"></div>
+        <div class="pince"></div>
+        <div id="pince"> </div>
+      </div>
+      <span class="rotate"></span>
+    </div>
+  </div>
 </div>
