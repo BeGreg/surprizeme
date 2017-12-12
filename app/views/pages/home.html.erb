@@ -3,7 +3,6 @@
 
     <!-- Profile picture with dropdown list -->
 <div class="row home-selection">
-
     <div class="col-xs-6 category-select" id="product">
       <button class="product-title">PRODUIT</button>
       <div class="product-form event-hide"> <%= render "../views/products/search" %>
@@ -15,12 +14,6 @@
       <div class="moment-form event-hide"> <%= render "../views/moments/search" %>
       </div>
     </div>
-
-    <div class="login">
-      <%= link_to "S'enregistrer", new_user_registration_path %>
-      <%= link_to "Se connecter", user_session_path %>
-    </div>
-
     <div class="headline move-down">
     </div>
 
@@ -37,25 +30,23 @@
 </div>
 
 <div class="hide-how" id="how-it-works">
-  <div class="info-card">
-    <p>1/ Choisir une catégorie de Surprise</p>
-
+  <div class="col-xs-3 col-md-6-offset" id="info-card">
+    <%= image_tag "light.png", class: "gift-image"%>
+    <p> 1/ Choisir entre les deux boutons soit <em>Produit</em> soit <em>Surprise</em></p>
   </div>
-  <div class="info-card">
-    <p>2/ S'inscrire ou se connecter</p>
-
+  <div class="col-xs-3 col-md-6-offset" id="info-card">
+    <%= image_tag "saisir.png", class: "gift-image"%>
+    <p> 2/ Saisir <em>vos critères</em>, vos coordonées et informations utile</p>
   </div>
-  <div class="info-card">
-    <p>3/ Payez</p>
-
+  <div class="col-xs-3 col-md-6-offset" id="info-card">
+    <%= image_tag "paid.png", class: "gift-image"%>
+    <p> 3/ <strong>Payez</strong> de manière sûr</p>
   </div>
-   <div class="info-card">
-    <p>4/ Decouvrez votre suprise</p>
-
+   <div class="col-xs-3 col-md-6-offset" id="info-card">
+    <%= image_tag "gift.png", class: "gift-image" %>
+    <p> 4/ Découvrez votre surprise ! Choisi en fonction du niveau de suprise que <em>vous</em> avez éxigé</p>
   </div>
 </div>
-
-
 <% content_for :after_js do %>
-  homepageAnimation();
+  <script> homepageAnimation(); </script>
 <% end %>
