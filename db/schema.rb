@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211141345) do
+ActiveRecord::Schema.define(version: 20171211160109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,15 +103,15 @@ ActiveRecord::Schema.define(version: 20171211141345) do
     t.integer  "nb_persons"
     t.datetime "moment_date"
     t.float    "ticket_price"
-    t.string   "status",          default: "initiée"
     t.string   "type"
     t.integer  "user_id"
     t.integer  "product_id"
     t.integer  "moment_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "amount_cents",    default: 0,         null: false
-    t.jsonb    "payement"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "amount_cents",    default: 0, null: false
+    t.jsonb    "payment"
+    t.string   "state"
     t.index ["moment_id"], name: "index_surprises_on_moment_id", using: :btree
     t.index ["product_id"], name: "index_surprises_on_product_id", using: :btree
     t.index ["user_id"], name: "index_surprises_on_user_id", using: :btree
