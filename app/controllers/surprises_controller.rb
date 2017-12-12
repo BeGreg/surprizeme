@@ -1,4 +1,5 @@
 class SurprisesController < ApplicationController
+  protect_from_forgery with: :null_session, only: :scrap_achat
   before_action :authenticate_user!, only: [:surprise_details, :show, :index]
   before_action :set_surprise, only: [:show, :edit, :update, :destroy]
 
@@ -46,6 +47,10 @@ class SurprisesController < ApplicationController
 
   def animation
 
+  end
+
+  def scrap_achat
+    sleep 10
   end
 
   private
