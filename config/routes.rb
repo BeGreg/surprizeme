@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   get '/styleguide', to: 'pages#styleguide'
 
+  get '/animation', to: 'surprises#animation'
+
   post 'search', to: 'surprises#initiate_prod_cookie'
 
   root to: 'pages#home'
