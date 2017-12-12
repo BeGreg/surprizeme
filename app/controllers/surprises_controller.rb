@@ -1,7 +1,7 @@
 class SurprisesController < ApplicationController
-  protect_from_forgery with: :null_session, only: :scrap_achat
-  before_action :authenticate_user!, only: [:surprise_details, :show, :index]
-  before_action :set_surprise, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :null_session, only: :scrap_purchase
+  before_action :authenticate_user!, only: [:surprise_details, :show, :index, :animation]
+  before_action :set_surprise, only: [:show, :edit, :update, :destroy, :scrap_purchase]
 
   def index
   end
@@ -52,8 +52,12 @@ class SurprisesController < ApplicationController
 
   end
 
-  def scrap_achat
+  def scrap_purchase
+    puts "on est dans le scrap_purchase"
+    @surprise.product.scrap
     sleep 10
+    url = "/surprise/#{@surprise.id}"
+    render url
   end
 
   private
