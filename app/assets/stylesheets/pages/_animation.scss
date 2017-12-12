@@ -1,13 +1,22 @@
 
-.pince-animation {
-    width: 100px;
-    min-height: 230px;
-    position: relative;
-    -webkit-animation: rond 3s linear 2s 1 normal; /* Safari 4.0 - 8.0 */
-    animation: rond 3s linear 2s 1 normal;
-    animation-fill-mode: both;
+.animation {
+  width: 800px;
+  height: 400px;
+  position: absolute;
+  left: calc(50% - 400px);
+  top: calc(70% - 200px);
+  background-image: url(image-path('gifts.png'));
+  background-size: cover;
+  z-index: 4;
 }
 
+.pince-animation {
+  width: 100px;
+  min-height: 230px;
+  position: relative;
+  animation: rond 3s linear 1s 1 normal;
+  animation-fill-mode: both;
+}
 
 .rond {
   width: 30px;
@@ -15,10 +24,8 @@
   margin: 0 auto;
   background-image: url(image-path('poulis.png'));
   background-size: cover;
-  -webkit-animation: poulis 3s linear 5.5s 1 alternate; /* Safari 4.0 - 8.0 */
-  animation: poulis 1.5s linear 5.5s 5 alternate;
+  animation: poulis 1.5s linear 4.5s infinite alternate;
   position:relative;
-
 }
 
 .down {
@@ -32,8 +39,20 @@
   margin: 0 auto;
   position: absolute;
   top: 0px;
-  -webkit-animation: fil 3s linear 5.5s 1 alternate; /* Safari 4.0 - 8.0 */
-  animation: fil 1.5s linear 5.5s 5 alternate;
+  animation: fil 1.5s linear 4.5s infinite alternate;
+  animation-fill-mode: backwards;
+  position:relative;
+}
+
+.fil2 {
+  width: 5px;
+  height: 100px;
+  background-color: gray;
+  margin: 0 auto;
+  position: absolute;
+  top: 0px;
+  animation: filbis 3s linear 0s 1 alternate;
+  animation-fill-mode: forwards;
   position:relative;
 }
 
@@ -44,26 +63,35 @@
   background-size: cover;
   margin: 0 auto;
   position: absolute;
+  z-index: 2;
 }
 
-// Animation horizontale
-/* Safari 4.0 - 8.0 */
-@-webkit-keyframes rond {
-    0%   {left:200px; top:200px;}
-    100% {left:700px; top:200px;}
+.pince-cadeau {
+  width: 100px;
+  height: 100px;
+  background-image: url(image-path('pince_gift.png'));
+  background-size: cover;
+  margin: 0 auto;
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+  animation: pincegift 1.5s linear 1.5s 1 normal;
+  animation-fill-mode: forwards;
 }
+
+
+// Animation horizontale
 
 /* Standard syntax */
 @keyframes rond {
-    0%   {left:200px; top:200px;}
-    100% {left:700px; top:200px;}
+    0%   {left:32%; top:200px;}
+    100% {left:50%; top:200px;}
 }
 
-// Fil augmente et diminue
-/* Safari 4.0 - 8.0 */
-@-webkit-keyframes fil {
-    0%   {height: 100px;}
-    100% {height: 350px;}
+@keyframes pincegift {
+    0%   {opacity:0;}
+    1%   {opacity:1;}
+    100% {opacity:1;}
 }
 
 /* Standard syntax */
@@ -72,12 +100,14 @@
     100% {height: 350px;}
 }
 
-// poulis tourne
-/* Safari 4.0 - 8.0 */
-@-webkit-keyframes poulis {
-    0%   {-webkit-transform: rotate(0deg)}
-    100% {-webkit-transform: rotate(360deg)}
+@keyframes filbis {
+    0%   {height: 100px;}
+    40%  {height: 350px;}
+    60%  {height: 350px;}
+    100% {height: 100px;}
 }
+
+// poulis tourne
 
 /* Standard syntax */
 @keyframes poulis {
@@ -85,7 +115,4 @@
     100% {transform: rotate(360deg)}
 }
 
-.rotate {
-  -webkit-transform: rotate(150deg);
-  -moz-transform: rotate(150deg);
-}
+
