@@ -107,7 +107,28 @@ driver.get url
 puts "scrapping Amazon"
 
 
+browser.visit url
+binding.pry
+products = browser.all '.s-item-container'
 
+
+
+products.each do |article|
+  if article.has_css?('.a-icon-star')
+    note = article.all('.a-icon-star')[0].text[0]
+    if note.to_i > 3
+      puts name = article.find('.s-access-title').text
+      puts note = article.all('.a-icon-star')[0].text[0]
+      note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
+      print note.to_f
+      print nb_note = article.all("a").last.text
+      # print article.all('.s-access-detail-page')[:url]
+      print url = article.find('.s-access-detail-page')[:href]
+      product = Product.new(name: name, supplier_review: note.to_f, supplier_review_number: nb_note, url: url, status:"créé", supplier_id:1)
+      selection << product
+    end
+  end
+end
 
 products.each do |article|
   if article.has_css?('.a-icon-star')
@@ -128,6 +149,8 @@ products.each do |article|
   product.photo_url1 = browser.find('.imgTagWrapper img', visible: :all)[:src]
   product.save!
 end
+
+
 
 # BILLET REDUC START
 # puts 'Start BilletReduc'
