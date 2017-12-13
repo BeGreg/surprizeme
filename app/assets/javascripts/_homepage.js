@@ -74,13 +74,13 @@ function homepageAnimation() {
   // what happense to Title when interacting with page
   function TitleMove(x, y, a, b) {
     if (x.classList.contains("cat-show")) {
-      a.style.top ="5vh"
+      a.style.top ="15%"
       a.style.transition = "all 500ms"
-      b.style.top ="25vh"
+      b.style.top ="50%"
       b.style.transition = "all 500ms"
 
     }else{
-      a.style.top ="25vh"
+      a.style.top ="50%"
       a.style.transition = "all 500ms"
       }
     }
