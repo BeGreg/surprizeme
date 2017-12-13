@@ -28,18 +28,10 @@ class Product < ApplicationRecord
   def self.random(budget, gender, category)
     product_list = []
     # Product.where(supplier_id: 1, status: ["scrapped", "modified"]).each do |product|
-    puts produits_amazon = []
-    binding.pry
     Product.all.each do |product|
-      produits_amazon << product if product.supplier_id = 1
-    end
-    produits_amazon.each do |product|
       product_list << product if product.budget_match?(budget) && product.gender_match?(gender) && product.category_match?(category)
     end
-    puts product_list
     product_id = product_list.sample.id
-    puts "on va printer l'ID du produit choisi"
-    puts product_id
     return product_id
   end
 
@@ -174,7 +166,7 @@ class Product < ApplicationRecord
     driver.find_element(:id, 'hlb-ptc-btn-native').click
     sleep(2)
     driver.find_element(:id, 'ap_email').send_keys('gregory.blain@gmail.com')
-    driver.find_element(:id, 'ap_password').send_keys('IWMKM38!')
+    driver.find_element(:id, 'ap_password').send_keys('#####')
     driver.find_element(:id, 'signInSubmit').submit
     sleep(5)
     # driver.find_element(:class, 'change-address-popover-link').click
@@ -197,8 +189,8 @@ class Product < ApplicationRecord
     driver.find_element(:id, 'pm_1').click
     sleep(3)
 
-    driver.find_element(:class, 'payment-selected').find_element(:id, 'addCreditCardNumber').send_keys('4979930223400398')
-    driver.find_element(:class, 'payment-selected').find_element(:id, 'addCreditCardVerificationNumber').send_keys('872')
+    driver.find_element(:class, 'payment-selected').find_element(:id, 'addCreditCardNumber').send_keys('#######')
+    driver.find_element(:class, 'payment-selected').find_element(:id, 'addCreditCardVerificationNumber').send_keys('###')
     driver.find_element(:class, 'payment-selected').find_element(:id, 'confirm-card').click
 
     sleep(5)

@@ -7,30 +7,25 @@ require 'selenium-webdriver'
 
 # Config for selenium ###
 # # Configure to not blow up on websites with js errors aka every website with js
-Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
-  end
-
-  # Configure Capybara to use Poltergeist as the driver
-  Capybara.default_driver = :selenium
-
-
-# Config for Poltergeist ###
-
-# Configure Poltergeist to not blow up on websites with js errors aka every website with js
-# See more options at https://github.com/teampoltergeist/poltergeist#customization
-# Capybara.register_driver :poltergeist do |app|
-#     Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+# Capybara.register_driver :selenium do |app|
+#     Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
 #   end
 
 #   # Configure Capybara to use Poltergeist as the driver
-#   Capybara.default_driver = :poltergeist
-
-
-# selection = []
+#   Capybara.default_driver = :selenium
 
 
 ####### SCRAPPING PRODUCTS FROM AMAZON ############
+# Config for Poltergeist ###
+# Configure Poltergeist to not blow up on websites with js errors aka every website with js
+# See more options at https://github.com/teampoltergeist/poltergeist#customization
+Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+  end
+
+  # Configure Capybara to use Poltergeist as the driver
+  Capybara.default_driver = :poltergeist
+
 selection = []
 puts "scrapping Amazon"
 browser = Capybara.current_session
