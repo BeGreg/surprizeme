@@ -54,6 +54,10 @@ function scratchCard() {
         document.addEventListener('keypress', function (e) {
             $('canvas').remove();
          });
+        removeButton = document.find_by_id('remove').
+        removeButton.addEventListener('click', function (e) {
+            $('canvas').remove();
+         });
 
     }
     var screenWidth = screen.width;
