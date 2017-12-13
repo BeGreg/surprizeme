@@ -1,0 +1,138 @@
+.intro {
+  margin: 150px auto 20px auto;
+  width: 600px;
+}
+
+// Bloc qui englobe toute l'animation
+.animation {
+  width: 600px;
+  height: 600px;
+  position: relative;
+  margin: 10px auto;
+}
+
+// visuel "cadeaux" posé en premier plan
+.gifts {
+  width:100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  background-image: url(image-path('gifts.png'));
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+// div avec poulis + fil + pince --> animation 1
+.pince-animation {
+  width: 100px;
+  min-height: 230px;
+  position: relative;
+  animation: translation 3s linear 1s 1 normal;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+}
+
+// poulis qui va tourner sur elle-même quand le fil descend / monte --> animation 2
+.rond {
+  position:relative;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  background-image: url(image-path('poulis.png'));
+  background-size: cover;
+  animation: poulis 1.5s linear 4.5s infinite alternate;
+}
+
+// div qui regroupe ce qui descend : fil + pince
+.down {
+  position: relative;
+}
+
+// fil qui grandit / diminue indéfiniement en attendant la fin de la requête AJAX --> animation 3
+.fil {
+  position:relative;
+  width: 5px;
+  height: 100px;
+  background-color: gray;
+  margin: 0 auto;
+  top: 0px;
+  animation: fil 3s linear 4.5s infinite alternate;
+  animation-fill-mode: backwards;
+}
+
+// fil qui remonte avec le cadeau après la requête AJAX --> animation 4
+.fil2 {
+  position:relative;
+  width: 5px;
+  top: 0px;
+  height: 100px;
+  margin: 0 auto;
+  background-color: gray;
+  animation: filbis 3s linear 0s 1 alternate;
+  animation-fill-mode: forwards;
+}
+
+// pince à vide (bouge avec fil)
+.pince {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  z-index: 2;
+  background-image: url(image-path('pince.png'));
+  background-size: cover;
+}
+
+// pince avec cadeau (bouge avec fil2). Cachée puis affichée après requête AJAX --> animation 5
+.pince-cadeau {
+  width: 100px;
+  height: 100px;
+  background-image: url(image-path('pince_gift.png'));
+  background-size: cover;
+  margin: 0 auto;
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+  animation: pincegift 1.5s linear 1.5s 1 normal;
+  animation-fill-mode: forwards;
+}
+
+
+// Animation 1
+@keyframes translation {
+    0%   {left:5%; top:85px;}
+    100% {left:50%; top:85px;}
+}
+
+// Animation 2 : poulis tourne
+@keyframes poulis {
+    0%   {transform: rotate(0deg)}
+    100% {transform: rotate(360deg)}
+}
+
+// Animation 3 : fil qui grandit / diminue
+@keyframes fil {
+    0%   {height: 100px;}
+    50%  {height: 350px;}
+    100% {height: 100px;}
+}
+
+// Animation 4 : fil post-Ajax qui va chercher le cadeau
+@keyframes filbis {
+    0%   {height: 100px;}
+    40%  {height: 350px;}
+    60%  {height: 350px;}
+    100% {height: 100px;}
+}
+
+// Animation 5 : pince avec cadeau qui apparaît quand le fil2 est en bas
+@keyframes pincegift {
+    0%   {opacity:0;}
+    1%   {opacity:1;}
+    100% {opacity:1;}
+}
+
+
