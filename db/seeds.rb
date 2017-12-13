@@ -269,6 +269,7 @@ end
 #     delivery_time: 3,
 #     supplier_category: "Du Palais",
 #     supplier_review: 0,
+#     gender: "male"
 #     )
 # end
 
