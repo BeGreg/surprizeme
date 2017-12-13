@@ -18,9 +18,9 @@ class PaymentsController < ApplicationController
   )
 
   @surprise.update(payment: charge.to_json, state: 'paid')
-  redirect_to surprise_path(@surprise)
+  redirect_to animation_path(@surprise)
 
-rescue Stripe::CardError => e
+  rescue Stripe::CardError => e
   flash[:alert] = e.message
   redirect_to new_surprise_payment_path(@surprise)
   end
