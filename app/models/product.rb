@@ -1,13 +1,12 @@
-# require 'selenium-webdriver'
-# # Config for selenium ###
-# # # Configure to not blow up on websites with js errors aka every website with js
-# Capybara.register_driver :selenium do |app|
-#     Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
-#   end
+require 'selenium-webdriver'
+# Config for selenium ###
+# # Configure to not blow up on websites with js errors aka every website with js
+Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+  end
 
-#   # Configure Capybara to use Poltergeist as the driver
-#   Capybara.default_driver = :selenium
-
+  # Configure Capybara to use Poltergeist as the driver
+  Capybara.default_driver = :selenium
 
 class Product < ApplicationRecord
   belongs_to :supplier
@@ -26,15 +25,22 @@ class Product < ApplicationRecord
   enum status: [ :scrapped, :modified, :unsurprising, :archived ]
   monetize :price_cents
 
-def self.random(budget, gender, category)
+  def self.random(budget, gender, category)
     product_list = []
-    Product.where(status: ["scrapped", "modified"]).each do |product|
+    # Product.where(supplier_id: 1, status: ["scrapped", "modified"]).each do |product|
+    puts produits_amazon = []
+    Product.all.each do |product|
+      produits_amazon << product if product.supplier.name = "Amazon"
+    end
+    produits_amazon.each do |product|
       product_list << product if product.budget_match?(budget) && product.gender_match?(gender) && product.category_match?(category)
     end
     puts product_list
-    return product_list.sample.id
+    product_id = product_list.sample.id
+    puts "on va printer l'ID du produit choisi"
+    puts product_id
+    return product_id
   end
-
 
   def check_status
     # couting the ratings and defining a score
@@ -53,6 +59,8 @@ def self.random(budget, gender, category)
         scrap_raffineurs
       when "L'Avant-Gardiste"
         scrap_avant_gardiste
+      when "Amazon"
+        scrap_amazon
       else
     end
   end
@@ -79,7 +87,7 @@ def self.random(budget, gender, category)
     ##### SCRAPPING ACHAT RAFFINEURS WITH SELENIUM ######
     driver = Selenium::WebDriver.for :firefox
     driver.get self.url
-    sleep(5)
+    sleep(15)
     # Ajout panier
     driver.find_element(:id, 'add_to_cart').click
     sleep(5)
@@ -122,6 +130,7 @@ def self.random(budget, gender, category)
     driver = Selenium::WebDriver.for :firefox
     driver.get self.url
     # Ajout panier
+    sleep(15)
     driver.find_elements(:class, 'exclusive')[1].click
     sleep(1)
     # Affichage panier
@@ -152,5 +161,48 @@ def self.random(budget, gender, category)
     driver.find_element(css: 'input[name="cvc"]').send_keys('###')
     driver.switch_to.default_content
     driver.find_element(:class, 'stripe-submit-button').click
+  end
+
+  def scrap_amazon
+    #### SCRAPPING ACHAT AMAZON WITH SELENIUM ######
+    driver = Selenium::WebDriver.for :firefox
+    driver.get self.url
+    sleep(10)
+    driver.find_element(:id, 'add-to-cart-button').click
+    sleep(2)
+    driver.find_element(:id, 'hlb-ptc-btn-native').click
+    sleep(2)
+    driver.find_element(:id, 'ap_email').send_keys('gregory.blain@gmail.com')
+    driver.find_element(:id, 'ap_password').send_keys('IWMKM38!')
+    driver.find_element(:id, 'signInSubmit').submit
+    sleep(5)
+    # driver.find_element(:class, 'change-address-popover-link').click
+    # sleep(5)
+    # driver.find_element(:id, 'spc-popover-add-new-address-link').find_element(:tag_name, 'a').click
+    # sleep(5)
+    driver.find_element(:id, 'enterAddressFullName').send_keys('Le Wagon Gregory Blain ')
+    driver.find_element(:id, 'enterAddressAddressLine1').send_keys('24 rue Paul Montrochet')
+    sleep(1)
+    driver.find_element(:id, 'enterAddressCity').send_keys('Lyon')
+    driver.find_element(:id, 'enterAddressPostalCode').send_keys('69002')
+    sleep(1)
+    driver.find_element(:id, 'enterAddressPhoneNumber').send_keys('0601020304')
+    driver.find_element(:class, 'submit-button-with-name').click
+
+    sleep(5)
+    driver.find_element(:class, 'a-button-text').click
+    # driver.find_elements(:class, 'checkout-continue-link')[0].click
+    sleep(5)
+    driver.find_element(:id, 'pm_1').click
+    sleep(3)
+
+    driver.find_element(:class, 'payment-selected').find_element(:id, 'addCreditCardNumber').send_keys('4979930223400398')
+    driver.find_element(:class, 'payment-selected').find_element(:id, 'addCreditCardVerificationNumber').send_keys('872')
+    driver.find_element(:class, 'payment-selected').find_element(:id, 'confirm-card').click
+
+    sleep(5)
+    driver.find_element(:id, 'continue-top').submit
+    sleep(5)
+    driver.find_element(:class, 'place-your-order-button').click
   end
 end

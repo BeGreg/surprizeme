@@ -41,29 +41,29 @@ Capybara.register_driver :selenium do |app|
 
 
 
-## Config for Poltergeist ###
+# Config for Poltergeist ###
 
-# # Configure Poltergeist to not blow up on websites with js errors aka every website with js
-# # See more options at https://github.com/teampoltergeist/poltergeist#customization
-# Capybara.register_driver :poltergeist do |app|
-#     Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
-#   end
+# Configure Poltergeist to not blow up on websites with js errors aka every website with js
+# See more options at https://github.com/teampoltergeist/poltergeist#customization
+Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+  end
 
-#   # Configure Capybara to use Poltergeist as the driver
-#   Capybara.default_driver = :poltergeist
+  # Configure Capybara to use Poltergeist as the driver
+  Capybara.default_driver = :poltergeist
 
 
 # selection = []
 
 
-# products_url = []
-# browser = Capybara.current_session
+products_url = []
+browser = Capybara.current_session
 # url = "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
-# # url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+insolite&rh=n%3A13921051%2Ck%3Agadget+insolite&qid=1512384836&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
+url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+high+tech&rh=n%3A13921051%2Ck%3Agadget+high+tech&qid=1513164051&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
 # # # url pour test produit binding pry
 
-# browser.visit url
-# # products = browser.all '.s-item-container'
+browser.visit url
+
 
 
 ##### SCRAPPING ACHAT L'AVANGARDISTE WITH SELENIUM ######
@@ -100,8 +100,8 @@ Capybara.register_driver :selenium do |app|
 selection = []
 url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+high+tech&rh=n%3A13921051%2Ck%3Agadget+high+tech&qid=1513164051&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
 
-driver = Selenium::WebDriver.for :firefox
-driver.get url
+# driver = Selenium::WebDriver.for :firefox
+# driver.get url
 
 puts "scrapping Amazon"
 
@@ -109,8 +109,7 @@ products = driver.find_elements(:class,'s-item-container')
 # products = driver.find_elements(:class,'a-icon-alt')
 
 products.each do |article|
-binding.pry
-  if driver.find_elements(:class, 'a-icon-star').count > 0
+  if browser.find_elements(:class, 'a-icon-star').count > 0
     note = article.all('.a-icon-star')[0].text[0]
     if note.to_i > 3
       puts name = article.find('.s-access-title').text
