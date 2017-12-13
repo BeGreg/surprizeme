@@ -1,0 +1,35 @@
+#payment-content {
+  text-align: center;
+}
+
+.payment-title {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  background: none;
+  border: 2px solid white;
+  box-sizing: border-box;
+  margin: 1em;
+  padding: 0.25em 0.5em;
+
+  color: white;
+  font-size: inherit;
+  font-weight: 700;
+}
+
+.payment-description {
+  text-align: center;
+  color: white;
+}
+.payment-action {
+  text-align: center;
+}
+
+.amount {
+  display: inline-block;
+  padding: 5px;
+  background: white;
+  -webkit-box-shadow: 0 10px 6px -6px #61045F;
+  -moz-box-shadow: 0 10px 6px -6px #61045F;
+  box-shadow: 0 10px 6px -6px #61045F;
+}

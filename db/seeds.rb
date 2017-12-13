@@ -39,7 +39,7 @@ require 'capybara/poltergeist'
 # Configure Poltergeist to not blow up on websites with js errors aka every website with js
 # See more options at https://github.com/teampoltergeist/poltergeist#customization
 Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+    Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path, timeout: 60)
   end
 
   # Configure Capybara to use Poltergeist as the driver
@@ -57,97 +57,97 @@ browser = Capybara.current_session
 # browser.visit url
 # products = browser.all '.s-item-container'
 
-# BILLET REDUC START
-puts 'Start BilletReduc'
-driver = Selenium::WebDriver.for :firefox
-# lien scrap de base
-driver.get "http://www.billetreduc.com/a-lyon/liste/"
-puts 'je suis sur le site'
+# # BILLET REDUC START
+# puts 'Start BilletReduc'
+# driver = Selenium::WebDriver.for :firefox
+# # lien scrap de base
+# driver.get "http://www.billetreduc.com/a-lyon/liste/"
+# puts 'je suis sur le site'
 
-# Pour scraper toutes les pages du lien de scrap au dessus
-total_events = driver.find_element(:class, "headerInfo").text.scan(/\d+/).join("").to_i
-# 30 produits par page, donc calcul du nb de pages
-max = (total_events / 30.0).ceil
-i = 0
+# # Pour scraper toutes les pages du lien de scrap au dessus
+# total_events = driver.find_element(:class, "headerInfo").text.scan(/\d+/).join("").to_i
+# # 30 produits par page, donc calcul du nb de pages
+# max = (total_events / 30.0).ceil
+# i = 0
 
-while i < max do
-  i+=1
-  driver.get "http://www.billetreduc.com/a-lyon/liste/s.htm?gp=3&Lpg=#{i}"
-  puts "je suis sur le site page #{i}"
-
-
-  events = []
-
-  # chaque lien de spectacle
-  driver.find_elements(:class, 'leEvt').each do |event|
-    events << event.find_element(:tag_name, "a")[:href]
-  end
-
-  # que faire avec chaque lien
-  events.each do |link|
-    driver.get link
-    # aller sur la page du lieu du spectacle pour scraper les infos
-    location_url = driver.find_element(:class, "fn")[:href]
-    driver.get  location_url
-    location_name = driver.find_element(:class, "bgbeige").text
-    location_address = driver.find_element(:class, "bgbeige").text
-    # créer location en premier, car les autres (moment, représentation) en dépendent
-    location = Location.find_or_create_by(name: location_name, address: location_address)
-  puts 'Location created'
-    driver.get link
-    name = driver.find_element(:class, "summary").text
-    url = link
-    description = "<p><strong>" + driver.find_element(:tag_name, "h6").text + "</strong></p><p>" + driver.find_element(:id, "speDescription").text + "</p>"
-
-    # pour éviter erreur image
-    begin
-    photo_url1 = driver.find_element(:class, "photoevt")[:src]
-    rescue Selenium::WebDriver::Error::NoSuchElementError
-    false
-    end
-
-    location_id = location.id
-    # créer un moment si pas trouvé dans la DB
-    moment = Moment.find_or_create_by(url: url)
-    moment.update(name: name ,
-                  url: url,
-                  description: description,
-                  photo_url1: photo_url1,
-                  location_id: location_id)
-    puts 'Moment created'
-    # éviter le bug du "il n'y a pas de dates & tarifs"
-    begin
-    driver.find_element(:link_text, "Dates & Tarifs").click
-
-      driver.find_elements(:class, "calendrierhome").each do |cal_month|
-      month = cal_month[:m].to_i
-      year = cal_month[:y].to_i
-
-      cal_month.find_elements(:class, "day").each do |cal_day|
-        day = cal_day[:d].to_i
-
-        cal_day.find_elements(:tag_name, "a").each do |show|
-
-          prices = show[:title].scan(/\d+\W\d{2}/).each { |p| p.gsub!("€", ".")}
-          time = show.text
-            hour = time.split('h')[0].to_i
-            minutes = time.split('h')[1].to_i
-          date = DateTime.new(year, month, day, hour, minutes)
-
-          delivery_price = 1.95
+# while i < max do
+#   i+=1
+#   driver.get "http://www.billetreduc.com/a-lyon/liste/s.htm?gp=3&Lpg=#{i}"
+#   puts "je suis sur le site page #{i}"
 
 
-          representation = Representation.find_or_create_by(moment_id: moment.id, date: date)
-          representation.update(price_collection: prices, del_price: delivery_price)
-          puts 'Representation created'
-        end
-      end
-    end
-    rescue Selenium::WebDriver::Error::NoSuchElementError
-      false
-    end
-  end
-end
+#   events = []
+
+#   # chaque lien de spectacle
+#   driver.find_elements(:class, 'leEvt').each do |event|
+#     events << event.find_element(:tag_name, "a")[:href]
+#   end
+
+#   # que faire avec chaque lien
+#   events.each do |link|
+#     driver.get link
+#     # aller sur la page du lieu du spectacle pour scraper les infos
+#     location_url = driver.find_element(:class, "fn")[:href]
+#     driver.get  location_url
+#     location_name = driver.find_element(:class, "bgbeige").text
+#     location_address = driver.find_element(:class, "bgbeige").text
+#     # créer location en premier, car les autres (moment, représentation) en dépendent
+#     location = Location.find_or_create_by(name: location_name, address: location_address)
+#   puts 'Location created'
+#     driver.get link
+#     name = driver.find_element(:class, "summary").text
+#     url = link
+#     description = "<p><strong>" + driver.find_element(:tag_name, "h6").text + "</strong></p><p>" + driver.find_element(:id, "speDescription").text + "</p>"
+
+#     # pour éviter erreur image
+#     begin
+#     photo_url1 = driver.find_element(:class, "photoevt")[:src]
+#     rescue Selenium::WebDriver::Error::NoSuchElementError
+#     false
+#     end
+
+#     location_id = location.id
+#     # créer un moment si pas trouvé dans la DB
+#     moment = Moment.find_or_create_by(url: url)
+#     moment.update(name: name ,
+#                   url: url,
+#                   description: description,
+#                   photo_url1: photo_url1,
+#                   location_id: location_id)
+#     puts 'Moment created'
+#     # éviter le bug du "il n'y a pas de dates & tarifs"
+#     begin
+#     driver.find_element(:link_text, "Dates & Tarifs").click
+
+#       driver.find_elements(:class, "calendrierhome").each do |cal_month|
+#       month = cal_month[:m].to_i
+#       year = cal_month[:y].to_i
+
+#       cal_month.find_elements(:class, "day").each do |cal_day|
+#         day = cal_day[:d].to_i
+
+#         cal_day.find_elements(:tag_name, "a").each do |show|
+
+#           prices = show[:title].scan(/\d+\W\d{2}/).each { |p| p.gsub!("€", ".")}
+#           time = show.text
+#             hour = time.split('h')[0].to_i
+#             minutes = time.split('h')[1].to_i
+#           date = DateTime.new(year, month, day, hour, minutes)
+
+#           delivery_price = 1.95
+
+
+#           representation = Representation.find_or_create_by(moment_id: moment.id, date: date)
+#           representation.update(price_collection: prices, del_price: delivery_price)
+#           puts 'Representation created'
+#         end
+#       end
+#     end
+#     rescue Selenium::WebDriver::Error::NoSuchElementError
+#       false
+#     end
+#   end
+# end
 
 
 
@@ -206,70 +206,70 @@ end
 
 
 
-# # Scrap Raffineurs
-# puts 'startin les raffineurs, du palais, capybara'
+# Scrap Raffineurs
+puts 'startin les raffineurs, du palais, capybara'
 
-# Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
+Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
 
-# url = "https://www.lesraffineurs.com/18-du-palais"
-# browser.visit url
-# products = browser.all '.product-container'
-# products.each do |product|
-#   products_url << product.find('.product-name')[:href]
-# end
+url = "https://www.lesraffineurs.com/18-du-palais"
+browser.visit url
+products = browser.all '.product-container'
+products.each do |product|
+  products_url << product.find('.product-name')[:href]
+end
 
-# products_url.each do |url|
-#   browser = Capybara.current_session
-#   browser.visit url
-#   name = browser.find('.pb-center-column').find('h1').text.strip
-#   price = browser.find('.price').find('span').text.strip
-#   description = browser.find('.pb-center-column').find_by_id('short_description_block').first('p').text.strip
+products_url.each do |url|
+  browser = Capybara.current_session
+  browser.visit url
+  name = browser.find('.pb-center-column').find('h1').text.strip
+  price = browser.find('.price').find('span').text.strip
+  description = browser.find('.pb-center-column').find_by_id('short_description_block').first('p').text.strip
 
-#   #photo of the product
-#   results = []
-#   elems = browser.all(".zoomWindow", visible: :all)
-#   elems.each do |elem|
-#     style = elem['style']
+  #photo of the product
+  results = []
+  elems = browser.all(".zoomWindow", visible: :all)
+  elems.each do |elem|
+    style = elem['style']
 
-#     match = style.scan( /background-image\: url\((.+)\)/).last
-#     results << match.first
-#   end
-#   photo_one = results[0]
+    match = style.scan( /background-image\: url\((.+)\)/).last
+    results << match.first
+  end
+  photo_one = results[0]
 
-#   #If second photo exists, put in photo_two. Idem until photo_four
-#   if !results[1].nil?
-#     photo_two = results[1]
-#   else
-#     photo_two = nil
-#   end
+  #If second photo exists, put in photo_two. Idem until photo_four
+  if !results[1].nil?
+    photo_two = results[1]
+  else
+    photo_two = nil
+  end
 
-#   if !results[2].nil?
-#     photo_three = results[2]
-#   else
-#     photo_three = nil
-#   end
+  if !results[2].nil?
+    photo_three = results[2]
+  else
+    photo_three = nil
+  end
 
-#   if !results[3].nil?
-#     photo_four = results[3]
-#   else
-#     photo_four = nil
-#   end
+  if !results[3].nil?
+    photo_four = results[3]
+  else
+    photo_four = nil
+  end
 
-#   Product.create(
-#     name: name,
-#     url: url,
-#     price: price.gsub('€', '').to_i,
-#     description: description,
-#     photo_url1: photo_one,
-#     photo_url2: photo_two,
-#     photo_url3: photo_three,
-#     photo_url4: photo_four,
-#     supplier_id: 1,
-#     delivery_price: 6,
-#     delivery_time: 3,
-#     supplier_category: "Du Palais",
-#     supplier_review: 0,
-#     )
-# end
+  Product.create(
+    name: name,
+    url: url,
+    price: price.gsub('€', '').to_i,
+    description: description,
+    photo_url1: photo_one,
+    photo_url2: photo_two,
+    photo_url3: photo_three,
+    photo_url4: photo_four,
+    supplier_id: 1,
+    delivery_price: 6,
+    delivery_time: 3,
+    supplier_category: "Du Palais",
+    supplier_review: 0,
+    )
+end
 
 
