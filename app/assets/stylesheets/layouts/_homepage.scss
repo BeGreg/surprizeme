@@ -66,17 +66,19 @@ body {
 
 .headline {
   position: absolute;
+  top: calc(5vh-85px);
   margin-top: 10px;
   height: 100px;
   width: 200px;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
   text-align: center;
-  transition: all 200ms;
+  transition: all ease-in .2s;
 }
 
 .headline-text {
   position: absolute;
+  top: calc(5vh-85px);
   margin-top: 10px;
   left: 50%;
   transform: translateX(-50%);
@@ -85,18 +87,18 @@ body {
   font-size: 35px;
   color: white;
   text-align: center;
-  transition: all 200ms;
+  transition: all ease-in .2s;
 }
 
-.move-down {
-  top: calc(15vh-85px);
-  transition: top ease-in .2s;
-}
+// .move-down {
+//   top: calc(15vh-85px);
+//   transition: top ease-in .2s;
+// }
 
-.move-up {
-  top: calc(5vh-85px);
-  transition: top ease-in .2s;
-}
+// .move-up {
+//   top: calc(5vh-85px);
+//   transition: top ease-in .2s;
+// }
 
 // .how {
 //   position: absolute;
@@ -127,7 +129,8 @@ body {
 
 .product-title {
   position: absolute;
-  top: calc(25vh-85px);
+  top: 50%;
+  transform: translateY(-50%);
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
@@ -188,7 +191,8 @@ body {
 
 .moment-title {
   position: absolute;
-  top: calc(25vh-85px);
+  top: 50%;
+  transform: translateY(-50%);
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
