@@ -97,7 +97,6 @@ Capybara.register_driver :selenium do |app|
 # products = browser.all '.s-item-container'
 
 
-##### SCRAPPING MOMENTS BILLETREDUC WITH SELENIUM ######
 selection = []
 url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+high+tech&rh=n%3A13921051%2Ck%3Agadget+high+tech&qid=1513164051&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
 
@@ -106,17 +105,59 @@ driver.get url
 
 puts "scrapping Amazon"
 
+products = driver.find_elements(:class,'s-item-container')
+# products = driver.find_elements(:class,'a-icon-alt')
 
-browser.visit url
+products.each do |article|
 binding.pry
-products = browser.all '.s-item-container'
+  if driver.find_elements(:class, 'a-icon-star').count > 0
+    note = article.all('.a-icon-star')[0].text[0]
+    if note.to_i > 3
+      puts name = article.find('.s-access-title').text
+      puts note = article.all('.a-icon-star')[0].text[0]
+      note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
+      print note.to_f
+      print nb_note = article.all("a").last.text
+      # print article.all('.s-access-detail-page')[:url]
+      print url = article.find('.s-access-detail-page')[:href]
+      product = Product.new(name: name, supplier_review: note.to_f, supplier_review_number: nb_note, url: url, status:"créé", supplier_id:1)
+      selection << product
+    end
+  end
+end
+
+selection.each do |product|
+  browser.visit product.url
+  product.description = browser.find_by_id('productDescription').text
+  if browser.has_no_text?(:visible, "Nouveau Prix")
+    price_text = browser.find_by_id('priceblock_ourprice').text
+  else
+    price_text = browser.find_by_id('priceblock_saleprice').text
+  end
+  product.price = price_text.last(5).gsub(",",".").to_f
+  product.characteristic = browser.all('.techD')[0].text
+  if browser.find_by_id('wayfinding-breadcrumbs_feature_div')
+    product.supplier_category = browser.find_by_id('wayfinding-breadcrumbs_feature_div').all('li').last.text
+  else
+    product.supplier_category = "Gadget"
+  end
+
+  script = browser.all('script', visible: false)[3].text(:all)
+  script.each do
+    images = browser.find_by_id('landingImage')['data-a-dynamic-image'.to_sym]
+    hash_images = (eval images).to_a
+    nb_photos = hash_images.size
+    product.photo_url1 = hash_images.first[0]
+    product.photo_url2 = hash_images[1][0] if nb_photos >= 2
+    product.photo_url3 = hash_images[2][0] if nb_photos >= 3
+    product.photo_url4 = hash_images[3][0] if nb_photos >= 4
+    product.save!
+  end
+end
 
 
 
-
-
-
-
+##### SCRAPPING MOMENTS BILLETREDUC WITH SELENIUM ######
 # BILLET REDUC START
 # puts 'Start BilletReduc'
 # driver = Selenium::WebDriver.for :firefox
