@@ -5,30 +5,6 @@ require 'selenium-webdriver'
 
 # puts "starting les raffineurs, sac et maroquinerie"
 
-# url = "https://www.lesraffineurs.com/35-sacs-et-maroquinerie"
-# html_file = open(url).read
-# html_doc = Nokogiri::HTML(html_file)
-# html_doc.search('.product-container').search('.product-name').each do |element|
-#   title = element.text.strip
-#   url = element.attr('href')
-#   selection << { name: title, url: url }
-#   p selection
-# end
-
-#   selection << { name: title, url: url }
-#   p selection
-# end
-
-# puts "starting les raffineurs, gosier"
-# puts 'starting Nokogiri'
-
-# selection = []
-# url = "https://www.lesraffineurs.com/19-du-gosier"
-# html_file = open(url).read
-# html_dol }
-#   p selection
-# end
-
 # Config for selenium ###
 # # Configure to not blow up on websites with js errors aka every website with js
 Capybara.register_driver :selenium do |app|
@@ -39,122 +15,85 @@ Capybara.register_driver :selenium do |app|
   Capybara.default_driver = :selenium
 
 
-
-
 # Config for Poltergeist ###
 
 # Configure Poltergeist to not blow up on websites with js errors aka every website with js
 # See more options at https://github.com/teampoltergeist/poltergeist#customization
-Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
-  end
+# Capybara.register_driver :poltergeist do |app|
+#     Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+#   end
 
-  # Configure Capybara to use Poltergeist as the driver
-  Capybara.default_driver = :poltergeist
+#   # Configure Capybara to use Poltergeist as the driver
+#   Capybara.default_driver = :poltergeist
 
 
 # selection = []
 
 
-products_url = []
-browser = Capybara.current_session
-# url = "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
-url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+high+tech&rh=n%3A13921051%2Ck%3Agadget+high+tech&qid=1513164051&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
-# # # url pour test produit binding pry
-
-browser.visit url
-
-
-
-##### SCRAPPING ACHAT L'AVANGARDISTE WITH SELENIUM ######
-# driver = Selenium::WebDriver.for :firefox
-# driver.get "https://www.lavantgardiste.com/salle-de-bains/3132-lumiere-de-bain-disco-5060243077875.html"
-# # binding.pry
-# driver.find_elements(:class, 'exclusive')[1].click
-# sleep(1)
-# driver.find_element(:class, 'shopping_cart').click
-# sleep(5)
-# driver.find_element(:class, 'standard-checkout').click
-# sleep(5)
-# # driver.find_element(:class, 'button-orange').click
-# # sleep(5)
-# driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
-# driver.find_element(:id, 'passwd').send_keys("jE2Ob6k4")
-# sleep(3)
-# driver.find_element(:id, 'SubmitLogin').click
-# sleep(3)
-# driver.find_elements(:tag_name, 'button')[0].click
-
-# sleep(3)
-# driver.find_elements(:class, 'delivery_option_radio')[0].click
-# driver.find_elements(:tag_name, 'button')[0].click
-
-# # bouton "Valider"
-# driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame3"]'))
-# driver.find_element(css: 'input[name="cardnumber"]').send_keys('####')
-
-# browser.visit url
-# products = browser.all '.s-item-container'
-
-
+####### SCRAPPING PRODUCTS FROM AMAZON ############
 selection = []
-url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+high+tech&rh=n%3A13921051%2Ck%3Agadget+high+tech&qid=1513164051&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
-
-# driver = Selenium::WebDriver.for :firefox
-# driver.get url
-
 puts "scrapping Amazon"
-
-products = driver.find_elements(:class,'s-item-container')
-# products = driver.find_elements(:class,'a-icon-alt')
-
+browser = Capybara.current_session
+url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+high+tech&rh=n%3A13921051%2Ck%3Agadget+high+tech&qid=1513164051&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
+browser.visit url
+products = browser.all '.s-item-container'
+puts "starting l'itération"
 products.each do |article|
-  if browser.find_elements(:class, 'a-icon-star').count > 0
+# binding.pry
+  if article.has_css?('.a-icon-star')
     note = article.all('.a-icon-star')[0].text[0]
-    if note.to_i > 3
+    print nb_note = article.all("a").last.text
+    if (note.to_i > 3) && nb_note.to_i
       puts name = article.find('.s-access-title').text
       puts note = article.all('.a-icon-star')[0].text[0]
       note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
       print note.to_f
-      print nb_note = article.all("a").last.text
       # print article.all('.s-access-detail-page')[:url]
       print url = article.find('.s-access-detail-page')[:href]
-      product = Product.new(name: name, supplier_review: note.to_f, supplier_review_number: nb_note, url: url, status:"créé", supplier_id:1)
+      product = Product.new(
+        name: name,
+        supplier_review: (note.to_f * 10),
+        supplier_review_number: nb_note,
+        url: url,
+        status:"scrapped",
+        supplier_id:Supplier.where(name:"Amazon")[0].id)
       selection << product
     end
   end
 end
 
 selection.each do |product|
+  puts "on débute le zoom produit"
   browser.visit product.url
-  product.description = browser.find_by_id('productDescription').text
+  # binding.pry
+  product.description = browser.find_by_id('productDescription')['outerHTML']
   if browser.has_no_text?(:visible, "Nouveau Prix")
     price_text = browser.find_by_id('priceblock_ourprice').text
   else
     price_text = browser.find_by_id('priceblock_saleprice').text
   end
-  product.price = price_text.last(5).gsub(",",".").to_f
+  product.price = price_text.last(5).gsub(",",".").to_i
   product.characteristic = browser.all('.techD')[0].text
-  if browser.find_by_id('wayfinding-breadcrumbs_feature_div')
+  if browser.has_css?('a-breadcrumb')
     product.supplier_category = browser.find_by_id('wayfinding-breadcrumbs_feature_div').all('li').last.text
   else
     product.supplier_category = "Gadget"
   end
-
-  script = browser.all('script', visible: false)[3].text(:all)
-  script.each do
-    images = browser.find_by_id('landingImage')['data-a-dynamic-image'.to_sym]
-    hash_images = (eval images).to_a
-    nb_photos = hash_images.size
-    product.photo_url1 = hash_images.first[0]
-    product.photo_url2 = hash_images[1][0] if nb_photos >= 2
-    product.photo_url3 = hash_images[2][0] if nb_photos >= 3
-    product.photo_url4 = hash_images[3][0] if nb_photos >= 4
-    product.save!
+  browser.all('.imageThumbnail').each do |element|
+    element.trigger('mousemove')
   end
+    product.photo_url1 = browser.find_by_id('imgTagWrapperId').find('img', visible: :all)['src']
+  if browser.has_css?('.itemNo2')
+    product.photo_url1 = browser.find('.itemNo2', visible: :all).find('img', visible: :all)['src']
+  end
+  if browser.has_css?('.itemNo3')
+    product.photo_url1 = browser.find('.itemNo3', visible: :all).find('img', visible: :all)['src']
+  end
+  if browser.has_css?('.itemNo4')
+    product.photo_url1 = browser.find('.itemNo4', visible: :all).find('img', visible: :all)['src']
+  end
+  product.save!
 end
-
-
 
 ##### SCRAPPING MOMENTS BILLETREDUC WITH SELENIUM ######
 # BILLET REDUC START
@@ -174,7 +113,6 @@ end
 #   i+=1
 #   driver.get "http://www.billetreduc.com/a-lyon/liste/s.htm?gp=3&Lpg=#{i}"
 #   puts "je suis sur le site page #{i}"
-
 
 #   events = []
 
@@ -272,34 +210,6 @@ toto = 'foo'
 #   product.save!
 # end
 
-
-# driver.find_elements(:class, "exclusive")[1].click
-# driver.get "https://www.lavantgardiste.com/commande"
-# driver.find_elements(:class, 'standard-checkout')[0].click
-# driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
-# driver.find_element(:id, 'passwd').send_keys("jE2Ob6k4")
-# driver.find_element(:id, 'SubmitLogin').submit
-# # driver.find_element(:id, 'SubmitLogin')[0].click
-# # browser.has_checked_field?('addressesAreEquals')
-# # browser.uncheck('addressesAreEquals')
-# # browser.find('.button.button-small.btn.btn-default', visible: :all).click
-# # browser.find_by_id('addressesAreEquals').trigger('click')
-# # browser.find('a.btn', visible: :all).trigger('click')
-# # browser.fill_in 'company', with: 'Le Wagon'
-# # browser.fill_in 'address1', with: '23 rue Paul Montrochet'
-# # browser.fill_in 'postcode', with: '69002'
-# # browser.fill_in 'city', with: 'Lyon'
-# # browser.fill_in 'phone_mobile', with: '0607830808'
-# # browser.fill_in 'alias', with: 'Wagon'
-# # browser.find_by_id('submitAddress').click
-# # browser.select 'Wagon', from: 'id_address_delivery'
-# # browser.select 'Mon adresse', from: 'id_address_invoice'
-# driver.find_element(:tag_name, 'button').submit
-# browser.all("input")[0].trigger('click')
-# browser.find('.button.orange').click
-# within_frame '__privateStripeFrame5' do page.driver.browser.find_element(:id, 'card_number').send_keys('4242')
-# end
-
 ### Scrap Raffineurs ###
 # puts 'startin les raffineurs, du palais, capybara'
 
@@ -365,5 +275,4 @@ toto = 'foo'
 #     supplier_review: 0,
 #     )
 # end
-
 
