@@ -4,7 +4,13 @@
     <%=favicon_link_tag%>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Surprize Me</title>
+
+    <title>
+      <% title = yield(:head) %>
+      <%= title.blank? ? "Surprize me" : title %>
+    </title>
+
+    <!-- meta référencement -->
     <meta name="Description" content="Offrez-vous une surprize en 2 minutes.">
     <meta name="Keywords" content="surprise, cadeaux, spectacle, théâtre, produit, high-tech, décoration, livres, offrir, concert, dégustation ">
     <meta name="Language" content="fr">
