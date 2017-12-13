@@ -1,22 +1,3 @@
-// function() {
-//   // Do something (callback)
-//   fetch("/add_item", {
-//     method: "POST",
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-//     },
-//     body: JSON.stringify({ id: event.currentTarget.id, quantity:1 }),
-//     credentials: 'same-origin'
-//   })
-
-// function onPlaceChanged(address_field) {
-//   var place = this.getPlace();
-//   var adress = document.getElementById(address_field);
-//   address.blur();
-//   address.value = place.formatted_address;
-// }
-
 
 document.addEventListener("DOMContentLoaded", function() {
   var surpriseId = document.getElementById("animation").getAttribute('data-surprise-id')
