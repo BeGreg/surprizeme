@@ -33,14 +33,15 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     body: JSON.stringify({ id: surpriseId }),
     credentials: 'same-origin'
-  }).then((answer) => {
-      var url = answer
+  }).then((response) => response.json())
+    .then((answer) => {
+      var url = answer.url
       fil.addEventListener("animationiteration", function() {
         fil.classList.remove('fil');
         fil.classList.add('fil2');
         pince.classList.add('pince-cadeau');
         fil.addEventListener("animationend", function() {
-        window.location.href = url
+        window.location.pathname = url
       });
     });
   });
