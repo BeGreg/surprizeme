@@ -17,9 +17,13 @@ Rails.application.routes.draw do
 
   get '/surprise_details', to: 'surprises#surprise_details'
 
-  get "/hot_or_not", to: "ratings#hot_or_not"
+  get '/hot_or_not', to: 'ratings#hot_or_not'
 
   get '/styleguide', to: 'pages#styleguide'
+
+  get '/animation/:surprise_id', to: 'surprises#animation', as: 'animation'
+
+  post 'scrap-purchase', to: 'surprises#scrap_purchase'
 
   post 'search', to: 'surprises#initiate_prod_cookie'
 
