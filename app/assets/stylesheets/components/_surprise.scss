@@ -1,7 +1,7 @@
 .surprise {
-  background: -webkit-linear-gradient(to right, #61045F, #AA076B);
-  background: linear-gradient(to right, #61045F, #AA076B);
-  // background: #FAFAFA;
+  // background: -webkit-linear-gradient(to right, #61045F, #AA076B);
+  // background: linear-gradient(to right, #61045F, #AA076B);
+  background: linear-gradient(to right, #AA076B, #61045F, #AA076B);
   font-family: $headers-font;
 
 
@@ -11,10 +11,12 @@
 .grid-surprise{
   display:grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 75% 25%;
+  grid-template-rows: 65% 35%;
   height: 100vh;
   margin-left: 15vh;
   margin-right: 15vh;
+  padding-top: 90px;
+  padding-bottom: 5px;
 
 }
 
@@ -40,7 +42,6 @@
 }
 
 .card-thumbs{
-  padding-top: 60px;
   font-size: 35px;
   text-decoration: none;
   display:block;
@@ -54,7 +55,7 @@
     padding-bottom: 25px;
   }
   h2 {
-    font-weight: bold;
+    font-weight: lighter;
     font-size: 30px;
   }
 }
@@ -92,7 +93,6 @@ transition: 0.5s ease;
   h1 {
     font-weight: bold;
     font-size: 40px;
-    text-align: justify;
   }
   .fa {
     color: #AA076B;
@@ -113,10 +113,10 @@ transition: 0.5s ease;
   // color: #AA076B;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   padding-top: 5px;
-  padding-left: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
   border-radius: 5px;
   margin: 10px;
-    overflow-wrap: break-word;
 
 
   h1 {
