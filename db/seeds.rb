@@ -32,61 +32,74 @@ selection = []
 #   puts title_element
 # end
 
+######## PURCHASING ON AMAZON ######################
 browser = Capybara.current_session
-# url = "https://www.amazon.fr/gadget-high-tech-High-Tech/s?ie=UTF8&page=1&rh=n%3A13921051%2Ck%3Agadget%20high%20tech"
-# url pour test produit binding pry
-url = "https://www.amazon.fr/Organiseur-Universe-Accessoires-Electroniques-Capacit%C3%A9/dp/B014ZJKX1W/ref=sr_1_2?s=electronics&ie=UTF8&qid=1512513598&sr=1-2&keywords=gadget+high+tech"
-
+url = "https://www.amazon.fr/Eastpak-Padded-PakR-Sac-Black/dp/B000CRBEJ2"
 browser.visit url
-binding.pry
-products = browser.all '.s-item-container'
 
 
+######## SCRAPPING PRODUCTS FROM AMAZON ############
+# browser = Capybara.current_session
+# url = "https://www.amazon.fr/sports-loisirs-fitness/b/ref=gbph_ftr_m-2_12b4_page_1?node=325614031&nocache=1513178819938&gb_f_first=enforcedCategories:325614031,dealStates:AVAILABLE%252CWAITLIST%252CWAITLISTFULL%252CUPCOMING,dealTypes:LIGHTNING_DEAL%252CDEAL_OF_THE_DAY%252CBEST_DEAL,sortOrder:BY_SCORE&pf_rd_p=dab9270c-7e42-45c3-a483-1999957e12b4&pf_rd_s=merchandised-search-2&pf_rd_t=101&pf_rd_i=325614031&pf_rd_m=A1X6FK5RDHNB96&pf_rd_r=3D85GRWE7SHMYVN0AWD2&ie=UTF8"
+# browser.visit url
+# products = browser.all '.s-item-container'
+# puts "starting l'itération"
+# products.each do |article|
+# # binding.pry
+#   if article.has_css?('.a-icon-star')
+#     note = article.all('.a-icon-star')[0].text[0]
+#     print nb_note = article.all("a").last.text
+#     if (note.to_i > 3) && nb_note.to_i
+#       puts name = article.find('.s-access-title').text
+#       puts note = article.all('.a-icon-star')[0].text[0]
+#       note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
+#       print note.to_f
+#       # print article.all('.s-access-detail-page')[:url]
+#       print url = article.find('.s-access-detail-page')[:href]
+#       product = Product.new(
+#         name: name,
+#         supplier_review: (note.to_f * 10),
+#         supplier_review_number: nb_note,
+#         url: url,
+#         status:"scrapped",
+#         supplier_id:Supplier.where(name:"Amazon")[0].id)
+#       selection << product
+#     end
+#   end
+# end
 
-products.each do |article|
-  if article.has_css?('.a-icon-star')
-    note = article.all('.a-icon-star')[0].text[0]
-    if note.to_i > 3
-      puts name = article.find('.s-access-title').text
-      puts note = article.all('.a-icon-star')[0].text[0]
-      note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
-      print note.to_f
-      print nb_note = article.all("a").last.text
-      # print article.all('.s-access-detail-page')[:url]
-      print url = article.find('.s-access-detail-page')[:href]
-      product = Product.new(name: name, supplier_review: note.to_f, supplier_review_number: nb_note, url: url, status:"créé", supplier_id:1)
-      selection << product
-    end
-  end
-end
-
-selection.each do |product|
-  browser.visit product.url
-  product.description = browser.find_by_id('productDescription').text
-  if browser.has_no_text?(:visible, "Nouveau Prix")
-    price_text = browser.find_by_id('priceblock_ourprice').text
-  else
-    price_text = browser.find_by_id('priceblock_saleprice').text
-  end
-  product.price = price_text.last(5).gsub(",",".").to_f
-  product.characteristic = browser.all('.techD')[0].text
-  if browser.find_by_id('wayfinding-breadcrumbs_feature_div')
-    product.supplier_category = browser.find_by_id('wayfinding-breadcrumbs_feature_div').all('li').last.text
-  else
-    product.supplier_category = "Gadget"
-  end
-
-  script = browser.all('script', visible: false)[3].text(:all)
-  script.each do
-  images = browser.find_by_id('landingImage')['data-a-dynamic-image'.to_sym]
-  hash_images = (eval images).to_a
-  nb_photos = hash_images.size
-  product.photo_url1 = hash_images.first[0]
-  product.photo_url2 = hash_images[1][0] if nb_photos >= 2
-  product.photo_url3 = hash_images[2][0] if nb_photos >= 3
-  product.photo_url4 = hash_images[3][0] if nb_photos >= 4
-  product.save!
-end
+# selection.each do |product|
+#   puts "on débute le zoom produit"
+#   browser.visit product.url
+#   # binding.pry
+#   product.description = browser.find_by_id('productDescription')['outerHTML']
+#   if browser.has_no_text?(:visible, "Nouveau Prix")
+#     price_text = browser.find_by_id('priceblock_ourprice').text
+#   else
+#     price_text = browser.find_by_id('priceblock_saleprice').text
+#   end
+#   product.price = price_text.last(5).gsub(",",".").to_f
+#   product.characteristic = browser.all('.techD')[0].text
+#   if browser.has_css?('a-breadcrumb')
+#     product.supplier_category = browser.find_by_id('wayfinding-breadcrumbs_feature_div').all('li').last.text
+#   else
+#     product.supplier_category = "Sport"
+#   end
+#   browser.all('.imageThumbnail').each do |element|
+#     element.trigger('mousemove')
+#   end
+#     product.photo_url1 = browser.find_by_id('imgTagWrapperId').find('img', visible: :all)['src']
+#   if browser.has_css?('.itemNo2')
+#     product.photo_url1 = browser.find('.itemNo2', visible: :all).find('img', visible: :all)['src']
+#   end
+#   if browser.has_css?('.itemNo3')
+#     product.photo_url1 = browser.find('.itemNo3', visible: :all).find('img', visible: :all)['src']
+#   end
+#   if browser.has_css?('.itemNo4')
+#     product.photo_url1 = browser.find('.itemNo4', visible: :all).find('img', visible: :all)['src']
+#   end
+#     product.save!
+# end
 
 # A CONSERVER pour scrapper les autres images
 # browser.all('script', visible: false)[3].text(:all)
