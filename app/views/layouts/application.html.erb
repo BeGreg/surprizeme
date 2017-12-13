@@ -10,9 +10,11 @@
   </head>
   <body>
     <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-    <%= yield %>
-    <%= javascript_include_tag 'application' %>
-    <%= yield :after_js %>
+    <div class="body-layout-general">
+      <%= render 'shared/flashes' %>
+      <%= yield %>
+      <%= javascript_include_tag 'application' %>
+      <%= yield :after_js %>
+    </div>
   </body>
 </html>
