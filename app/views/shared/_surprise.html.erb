@@ -30,7 +30,9 @@
   </div>
 
     <div class="carac-surprise" id="carac-surprise">
-      <h1><%= @product.name %></h1>
+      <div class="separator">
+        <h1><%= @product.name %></h1>
+      </div>
               <p><i class="fa fa-shopping-bag" aria-hidden="true"></i> <strong>Marchand: </strong><%= @product.supplier.name %></p>
 
               <% if @product.supplier_review > 0 %>
