@@ -1,13 +1,15 @@
 class SurprisesController < ApplicationController
-  before_action :authenticate_user!, only: [:surprise_details, :show, :index]
-  before_action :set_surprise, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :null_session, only: :scrap_purchase
+  before_action :authenticate_user!, only: [:surprise_details, :show, :index, :animation]
+  before_action :set_surprise, only: [:show, :edit, :update, :destroy, :scrap_purchase]
 
   def index
   end
 
   def show
     @product = Product.find(@surprise[:product_id])
-    @surprise.update_attributes(status: "confirmé")
+    # @surprise.update_attributes(status: "confirmé")
+    # @surpise = Surprise.where(state: 'paid').find(params[:id])
     # authorize @surprise
   end
 
@@ -18,9 +20,11 @@ class SurprisesController < ApplicationController
     @surprise = Surprise.new(surprise_params2)
     @surprise.product_id = session[:product_id]
     @surprise.user_id = current_user.id
-    @surprise.total_price = @surprise.product.price
+    @surprise.amount = @surprise.product.price
+    @surprise.state = 'pending'
     @surprise.save!
-    redirect_to surprise_path(@surprise)
+    # redirect_to surprise_path(@surprise)
+    redirect_to new_surprise_payment_path(surprise_id: @surprise.id)
   end
 
 
@@ -43,6 +47,19 @@ class SurprisesController < ApplicationController
     session[:product_id] = @product_id
     redirect_to surprise_details_path
   end
+
+  def animation
+
+  end
+
+  def scrap_purchase
+    puts "on est dans le scrap_purchase"
+    @surprise.product.scrap
+    sleep 10
+    url = surprise_path(@surprise)
+    render json: { url: url }
+  end
+
   private
 
   def set_surprise

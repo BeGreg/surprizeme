@@ -24,12 +24,16 @@ gem 'poltergeist'
 gem 'launchy'
 gem 'pundit'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 gem 'selenium-webdriver', '~> 3.8.0'
 gem 'geckodriver-helper'
 gem 'geocoder'
 gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '>= 1.0.0.rc'
 gem 'rails_admin_grid'
+gem 'money-rails'
+gem 'stripe'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'
