@@ -1,7 +1,7 @@
 <div class="surprise">
   <div class="grid-surprise">
     <div class="image-surprise" id="image-surprise">
-        <div class="slider" >
+      <div class="slider" >
         <input type="radio" name="slide_switch" id="id1" checked="checked"/>
         <label for="id1">
           <img src="<%= @product.photo_url1 %>" width="80"/>
@@ -25,36 +25,42 @@
           <img src="<%= @product.photo_url4 %>" width="80"/>
         </label>
         <img src="<%= @product.photo_url4 %>"/>
-
       </div>
   </div>
-
-    <div class="carac-surprise" id="carac-surprise">
-      <div class="separator">
-        <h1><%= @product.name %></h1>
-      </div>
-              <p><i class="fa fa-shopping-bag" aria-hidden="true"></i> <strong>Marchand: </strong><%= @product.supplier.name %></p>
-
-              <% if @product.supplier_review > 0 %>
-              <p><i class="fa fa-star" aria-hidden="true"> </i> Notes des internauts <%= @product.supplier_review / 10 %></p>
-              <% end %>
-              <p><i class="fa fa-tag" aria-hidden="true"></i><strong> Prix: </strong> <%= @surprise.amount %>    <i class="fa fa-eur" aria-hidden="true"></i></p>
-              <p><i class="fa fa-truck" aria-hidden="true"></i></i> <strong> Livraison: </strong> Votre produit sera livré dans <%= @product.delivery_time %> jours</p>
-
-              <div class="card-thumbs">
-                <h2>SURPRIS ?</h2>
-                  <a href="#" class="shrink-up"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
-                  <a href="#" class="shrink-down"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
-              </div>
-
+  <div class="carac-surprise" id="carac-surprise">
+    <div class="separator">
+      <h1><%= @product.name.split[0...11].join(' ') %></h1>
     </div>
-      <div class="surprise-description" id="description-surprise">
-        <h1>Description:</h1>
-        <p><%= @product.description %></p>
-      </div>
-   </div>
+    <p>
+      <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+      <strong>Marchand : </strong><%= @product.supplier.name %>
+    </p>
+    <% if @product.supplier_review > 0 %>
+      <p>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <strong>Notes des internautes :</strong> <%= @product.supplier_review / 10 %> (<%= @product.supplier_review_number %> notes)
+      </p>
+    <% end %>
+    <p>
+      <i class="fa fa-tag" aria-hidden="true"></i>
+      <strong> Prix : </strong> <%= @surprise.amount %>
+      <i class="fa fa-eur" aria-hidden="true"></i>
+    </p>
+    <p><i class="fa fa-truck" aria-hidden="true"></i>
+      <strong> Livraison : </strong> Votre produit sera livré dans <%= @product.delivery_time %> jours
+    </p>
+    <div class="card-thumbs">
+      <h2>SURPRIS ?</h2>
+      <a href="#" class="shrink-up"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+      <a href="#" class="shrink-down"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+    </div>
+  </div>
+  <div class="surprise-description" id="description-surprise">
+    <h1>Description:</h1>
+    <p><%= @product.description.html_safe %></p>
+  </div>
  </div>
-
+</div>
 <% content_for :after_js do %>
   <script> scratchCard(); </script>
 <% end %>
