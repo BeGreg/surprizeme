@@ -26,7 +26,7 @@ def self.random(budget, gender, category)
 
   def budget_match?(required_budget)
     #TODO : ajouter delivery price
-    (price.to_i < required_budget.to_i) && (price.to_i > (required_budget.to_i * 0.75))
+    (price.to_i <= required_budget.to_i) && (price.to_i >= (required_budget.to_i * 0.75))
   end
 
   def gender_match?(required_gender)
