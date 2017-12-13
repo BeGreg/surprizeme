@@ -4,6 +4,8 @@
   // background: #FAFAFA;
   font-family: $headers-font;
 
+
+
 }
 
 .grid-surprise{
@@ -11,6 +13,8 @@
   grid-template-columns: 50% 50%;
   grid-template-rows: 75% 25%;
   height: 100vh;
+  margin-left: 15vh;
+  margin-right: 15vh;
 
 }
 
@@ -18,6 +22,9 @@
   grid-row: 1/ span 1;
   grid-column: 1/ span 1;
 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .carac-surprise{
@@ -33,14 +40,15 @@
 }
 
 .card-thumbs{
-  margin-top: 60px;
-  margin-left: 35%;
-  display:inline-block;
+  padding-top: 60px;
   font-size: 35px;
   text-decoration: none;
+  display:block;
+  position: relative;
   a {
     color: black;
     letter-spacing: 6px;
+
   }
   i {
     padding-bottom: 25px;
@@ -48,7 +56,6 @@
   h2 {
     font-weight: bold;
     font-size: 30px;
-    text-align: justify;
   }
 }
 .shrink-up {
@@ -75,7 +82,7 @@ transition: 0.5s ease;
 #carac-surprise {
   // border: 3px solid #61045F;
   background-color: #FAFAFA;
-  color: #AA076B;
+  // color: #AA076B;
   padding-bottom: 5px;
   padding-left: 20px;
   padding-right: 20px;
@@ -86,6 +93,9 @@ transition: 0.5s ease;
     font-weight: bold;
     font-size: 40px;
     text-align: justify;
+  }
+  .fa {
+    color: #AA076B;
   }
 }
 
@@ -100,13 +110,14 @@ transition: 0.5s ease;
 #description-surprise {
   // border: 3px solid #61045F;
   background-color: #FAFAFA;
-  color: #AA076B;
+  // color: #AA076B;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   padding-top: 5px;
   padding-left: 10px;
   border-radius: 5px;
   margin: 10px;
-  text-overflow: ellipsis;
+    overflow-wrap: break-word;
+
 
   h1 {
     font-weight: bold;
