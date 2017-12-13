@@ -1,29 +1,36 @@
 
 
-
-    <!-- Profile picture with dropdown list -->
-<div class="row home-selection">
-    <div class="col-xs-6 category-select" id="product">
-      <button class="product-title">PRODUIT</button>
-      <div class="product-form event-hide"> <%= render "../views/products/search" %>
-      </div>
-    </div>
-
-    <div class="col-xs-6 category-select" id="moment">
-      <button class="moment-title">MOMENT</button>
-      <div class="moment-form event-hide"> <%= render "../views/moments/search" %>
-      </div>
-    </div>
-
-    <div class="headline">
-    </div>
-    <div class="headline-text"> Offrez-vous une Surprize en 2 clicks</br>Choisissez entre un produit et un moment !
-    </div>
+<div class="headline-mobile hidden-md hidden-lg">
+      Offrez-vous une Surprize en 2 clicks
+      <div>Choisissez entre un produit et un moment !</div>
 </div>
+<div class="home-selection container-fluid">
+  <div class="row">
+      <div class="col-xs-12 col-sm-6 category-select" id="product">
+        <button class="product-title">PRODUIT</button>
+        <div class="product-form event-hide">
+          <%= render "../views/products/search" %>
+        </div>
+      </div>
 
+      <div class="col-xs-12 col-sm-6 category-select" id="moment">
+        <button class="moment-title">MOMENT</button>
+        <div class="moment-form event-hide">
+          <%= render "../views/moments/search" %>
+        </div>
+      </div>
+
+      <!-- <div class="headline hidden-xs hidden-sm">
+      </div> -->
+      <div class="headline-text hidden-xs hidden-sm">
+        Offrez-vous une Surprize en 2 clicks
+        <div>Choisissez entre un produit et un moment !</div>
+      </div>
+  </div>
+</div>
 <!-- <div class="how"> -->
     <!-- test -->
-    <div class="flex">
+    <div class="how-it-works-arrow-down flex hidden-xs hidden-sm">
       <a href="#how-it-works">
         <p>Comment ça marche ?</p>
         <i class="arrow down"></i>
@@ -32,29 +39,32 @@
 <!-- fin/test -->
 <!-- </div> -->
 
-<div id="how-it-works">
-  <div class="how-it-works-title">
-    <h2>Une surprize sur mesure en quelques clicks</h2>
+<div class="how-it-works container-fluid">
+  <div class="row">
+    <div class="how-it-works-title col-md-12">
+      <h2>Une surprize sur mesure en quelques clicks</h2>
+    </div>
   </div>
-  <div class="container" id="how-it-works-cards">
-    <div class="col-xs-3 col-md-6-offset" id="info-card">
+  <div id="how-it-works-cards" class="row">
+    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
       <%= image_tag "light.png", class: "gift-image"%>
       <p> 1/ Choisir entre un <em>Produit</em> ou un <em>Moment</em></p>
     </div>
-    <div class="col-xs-3 col-md-6-offset" id="info-card">
+    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
       <%= image_tag "saisir.png", class: "gift-image"%>
       <p> 2/ Saisir <em>vos critères</em>, vos coordonées et informations utiles</p>
     </div>
-    <div class="col-xs-3 col-md-6-offset" id="info-card">
+    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
       <%= image_tag "paid.svg", class: "gift-image"%>
       <p> 3/ <strong>Payez</strong> de manière sécurisée</p>
     </div>
-     <div class="col-xs-3 col-md-6-offset" id="info-card">
+    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
       <%= image_tag "gift.png", class: "gift-image" %>
       <p> 4/ Découvrez votre surprise ! Choisie en fonction du niveau de suprise que <em>vous</em> avez éxigé</p>
     </div>
   </div>
 </div>
+
 <% content_for :after_js do %>
   <script> homepageAnimation(); </script>
 <% end %>
