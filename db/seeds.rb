@@ -56,13 +56,17 @@ browser = Capybara.current_session
 
 # browser.visit url
 # products = browser.all '.s-item-container'
+
+# BILLET REDUC START
 puts 'Start BilletReduc'
 driver = Selenium::WebDriver.for :firefox
+# lien scrap de base
 driver.get "http://www.billetreduc.com/a-lyon/liste/"
 puts 'je suis sur le site'
 
+# Pour scraper toutes les pages du lien de scrap au dessus
 total_events = driver.find_element(:class, "headerInfo").text.scan(/\d+/).join("").to_i
-
+# 30 produits par page, donc calcul du nb de pages
 max = (total_events / 30.0).ceil
 i = 0
 
@@ -74,19 +78,20 @@ while i < max do
 
   events = []
 
+  # chaque lien de spectacle
   driver.find_elements(:class, 'leEvt').each do |event|
     events << event.find_element(:tag_name, "a")[:href]
   end
 
-
+  # que faire avec chaque lien
   events.each do |link|
     driver.get link
-
+    # aller sur la page du lieu du spectacle pour scraper les infos
     location_url = driver.find_element(:class, "fn")[:href]
     driver.get  location_url
     location_name = driver.find_element(:class, "bgbeige").text
     location_address = driver.find_element(:class, "bgbeige").text
-
+    # créer location en premier, car les autres (moment, représentation) en dépendent
     location = Location.find_or_create_by(name: location_name, address: location_address)
   puts 'Location created'
     driver.get link
@@ -94,6 +99,7 @@ while i < max do
     url = link
     description = "<p><strong>" + driver.find_element(:tag_name, "h6").text + "</strong></p><p>" + driver.find_element(:id, "speDescription").text + "</p>"
 
+    # pour éviter erreur image
     begin
     photo_url1 = driver.find_element(:class, "photoevt")[:src]
     rescue Selenium::WebDriver::Error::NoSuchElementError
@@ -101,7 +107,7 @@ while i < max do
     end
 
     location_id = location.id
-
+    # créer un moment si pas trouvé dans la DB
     moment = Moment.find_or_create_by(url: url)
     moment.update(name: name ,
                   url: url,
@@ -109,6 +115,7 @@ while i < max do
                   photo_url1: photo_url1,
                   location_id: location_id)
     puts 'Moment created'
+    # éviter le bug du "il n'y a pas de dates & tarifs"
     begin
     driver.find_element(:link_text, "Dates & Tarifs").click
 
