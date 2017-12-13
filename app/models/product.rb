@@ -29,8 +29,9 @@ class Product < ApplicationRecord
     product_list = []
     # Product.where(supplier_id: 1, status: ["scrapped", "modified"]).each do |product|
     puts produits_amazon = []
+    binding.pry
     Product.all.each do |product|
-      produits_amazon << product if product.supplier.name = "Amazon"
+      produits_amazon << product if product.supplier_id = 1
     end
     produits_amazon.each do |product|
       product_list << product if product.budget_match?(budget) && product.gender_match?(gender) && product.category_match?(category)
