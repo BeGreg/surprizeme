@@ -1,3 +1,14 @@
+# require 'selenium-webdriver'
+# # Config for selenium ###
+# # # Configure to not blow up on websites with js errors aka every website with js
+# Capybara.register_driver :selenium do |app|
+#     Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+#   end
+
+#   # Configure Capybara to use Poltergeist as the driver
+#   Capybara.default_driver = :selenium
+
+
 class Product < ApplicationRecord
   belongs_to :supplier
   has_many :surprises
@@ -24,20 +35,6 @@ def self.random(budget, gender, category)
     return product_list.sample.id
   end
 
-  def budget_match?(required_budget)
-    #TODO : ajouter delivery price
-    (price.to_i <= required_budget.to_i) && (price.to_i >= (required_budget.to_i * 0.75))
-  end
-
-  def gender_match?(required_gender)
-      return true
-      # return required_gender == @product.gender
-  end
-
-  def category_match?(required_category)
-    # required_category == @product.supplier_category
-    true
-  end
 
   def check_status
     # couting the ratings and defining a score
@@ -59,6 +56,24 @@ def self.random(budget, gender, category)
       else
     end
   end
+
+
+  def budget_match?(required_budget)
+    #TODO : ajouter delivery price
+    (price.to_i <= required_budget.to_i) && (price.to_i >= (required_budget.to_i * 0.75))
+  end
+
+  def gender_match?(required_gender)
+      return true
+      # return required_gender == @product.gender
+  end
+
+  def category_match?(required_category)
+    # required_category == @product.supplier_category
+    true
+  end
+
+  private
 
   def scrap_raffineurs
     ##### SCRAPPING ACHAT RAFFINEURS WITH SELENIUM ######
