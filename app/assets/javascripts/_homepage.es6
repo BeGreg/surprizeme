@@ -113,3 +113,12 @@ function homepageAnimation() {
 //     };
 //   };
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const home = document.querySelector('.home-selection');
+
+  if (home) {
+    homepageAnimation();
+  }
+});

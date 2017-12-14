@@ -6,5 +6,3 @@
 //= require google_autocomplete
 //= require_tree .
 
-
-
