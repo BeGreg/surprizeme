@@ -4,8 +4,8 @@
   // taille et oculeur
   height: 85px;
   padding: 0px 5px;
-  // background: linear-gradient(to right, $dark-red, $clear-red, $dark-red);
-  background-color: $clear-red;
+  background: linear-gradient(to right, $clear-red, $dark-red);
+  // background-color: $clear-red;
   // positionnement
   display: flex;
   flex-direction: row-reverse;
@@ -127,4 +127,5 @@
   transform: rotate(45deg);
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
+}
 }
