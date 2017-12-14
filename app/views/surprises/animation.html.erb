@@ -17,3 +17,7 @@
     </div>
   </div>
 </div>
+<% content_for :after_js do %>
+    <script> initCheckboxBillingAddress(); </script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBTatMTb2qrJDAwzylTpE7DVHjzR_yCJQs"></script>
+<% end %>
