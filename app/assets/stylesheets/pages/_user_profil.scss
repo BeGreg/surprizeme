@@ -2,6 +2,11 @@
   background: white;
 }
 
+#list-surprise-user em{
+  text-align: center;
+  margin-bottom: 4px;
+}
+
 #user-info p{
   background-color: white;
   border-bottom: 2px lightgrey solid;
@@ -20,7 +25,7 @@ p{
   padding: 0;
 }
 
-#list-surprise-user {
+#list-surprise-user li{
   background: white;
   margin-top: 0px;
   border-top: 2px lightgrey solid;
@@ -29,7 +34,9 @@ p{
 // #list-surprise-user:hover {
 
 // }
-
+#lien-edit a{
+  text-decoration: none;
+}
 
 
 

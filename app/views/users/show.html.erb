@@ -1,4 +1,4 @@
-<div class='container form-container' style="height: 100vh;">
+<div class='container form-container'>
   <div class="form-title">
     <h2>Mon compte</h2>
   </div>
@@ -30,13 +30,23 @@
           <td>adresse: </td>
           <td><%= current_user.address %></td>
         </tr>
+        <tr>
+          <td>N° de téléphone: </td>
+          <td><%= current_user.mobile_phone %></td>
+        </tr>
         </table>
+      <p id="lien-edit"><%=link_to "Mettre a jour mes informations", edit_user_path%></p>
+      <p> Historique de mes surprises :</p>
       <li id="list-surprise-user">
-        <p> Historique de mes surprises :</p>
+        <% current_user.surprises.all.each do |surprise|%>
+        <br><%= surprise.product.name %>
+        <br><%= surprise.product.created_at %>
+        <br><em><%= surprise.product.price %></em><%="€"%>
+        <% end %>
       </li>
     </ul>
-  </div>
 
+  </div>
 </div>
 
 
