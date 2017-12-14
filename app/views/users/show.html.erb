@@ -39,7 +39,7 @@
       <p> Historique de mes surprises :</p>
       <li id="list-surprise-user">
         <% current_user.surprises.all.each do |surprise|%>
-        <br><%= surprise.product.name %>
+        <li><br><%= surprise.product.name %></li>
         <br><%= surprise.product.created_at %>
         <br><em><%= surprise.product.price %></em><%="€"%>
         <% end %>
