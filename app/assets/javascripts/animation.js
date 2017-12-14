@@ -1,8 +1,10 @@
 
 document.addEventListener("DOMContentLoaded", function() {
-  var surpriseId = document.getElementById("animation").getAttribute('data-surprise-id')
-  fil = document.getElementById("fil");
-  pince = document.getElementById("pince");
+  if (document.getElementById("animation")) {
+    var surpriseId = document.getElementById("animation").getAttribute('data-surprise-id')
+  }
+  var fil = document.getElementById("fil");
+  var pince = document.getElementById("pince");
 
   if (fil) {
   console.log('on va fetcher');
