@@ -139,6 +139,7 @@ body {
   &::before,
   &::after {
     border: 2px solid transparent;
+    border-radius: 40px;
     width: 0;
     height: 0;
   }
@@ -198,6 +199,7 @@ body {
   &::before,
   &::after {
     border: 2px solid transparent;
+    border-radius: 40px;
     width: 0;
     height: 0;
   }
@@ -274,9 +276,9 @@ button {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: #AA076B; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top right, #AA076B, #61045F); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top right, #AA076B, #61045F);
+  background: $dark-red; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom left, $dark-red, $clear-red); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top right, $dark-red, $clear-red);
   position: relative;
 }
 
@@ -300,9 +302,9 @@ button {
   justify-content: center;
   height: 100vh;
 
-  background: #AA076B; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top left, #AA076B, #61045F); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top left, #AA076B, #61045F);
+  background: $dark-red; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top left, $dark-red, $clear-red); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top left, $dark-red, $clear-red);
 
 
 }
