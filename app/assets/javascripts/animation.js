@@ -1,3 +1,17 @@
+var translation = document.getElementById("translation")
+
+function setRandomAnimationDistance() {
+  animationDistance = (Math.random()*60 + 20) + '%';
+  setProperty(animationDistance);
+}
+
+function setProperty(distance) {
+  animation.style.setProperty('--animation-distance', distance);
+}
+
+if (translation) {
+  animation.addEventListener("animationiteration", setRandomAnimationDistance)
+}
 
 document.addEventListener("DOMContentLoaded", function() {
   if (document.getElementById("animation")) {
@@ -21,14 +35,12 @@ document.addEventListener("DOMContentLoaded", function() {
       var url = answer.url
       fil.addEventListener("animationiteration", function() {
         fil.classList.remove('fil');
-        fil.classList.add('fil2');
+        fil.classList.add('fil2') ;
         pince.classList.add('pince-cadeau');
         fil.addEventListener("animationend", function() {
-        window.location.pathname = url
+          window.location.pathname = url
+        });
       });
     });
-  });
   }
 });
-
-

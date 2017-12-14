@@ -1,3 +1,8 @@
+:root {
+  --animation-distance: 50%;
+}
+
+
 .intro {
   margin: 150px auto 20px auto;
   width: 600px;
@@ -18,7 +23,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 4;
+  z-index: 7;
   background-image: url(image-path('gifts.png'));
   background-size: 100%;
   background-repeat: no-repeat;
@@ -30,8 +35,18 @@
   width: 100px;
   min-height: 230px;
   position: relative;
-  animation: translation 3s linear 1s 1 normal;
-  animation-fill-mode: both;
+  animation: translation 6s linear 0s infinite normal;
+  animation-fill-mode: backwards;
+  animation-timing-function: ease-in-out;
+}
+
+// version qui bouge quand le cadeau est trouvé--> animation 6
+.pince-animation2 {
+  width: 100px;
+  min-height: 230px;
+  position: relative;
+  animation: translationbis 6s linear 0s infinite normal;
+  animation-fill-mode: backwards;
   animation-timing-function: ease-in-out;
 }
 
@@ -43,7 +58,7 @@
   margin: 0 auto;
   background-image: url(image-path('poulis.png'));
   background-size: cover;
-  animation: poulis 1.5s linear 4.5s infinite alternate;
+  animation: poulis 6s linear 0s infinite normal;
 }
 
 // div qui regroupe ce qui descend : fil + pince
@@ -59,11 +74,11 @@
   background-color: gray;
   margin: 0 auto;
   top: 0px;
-  animation: fil 3s linear 4.5s infinite alternate;
+  animation: fil 6s linear 0s infinite normal;
   animation-fill-mode: backwards;
 }
 
-// fil qui remonte avec le cadeau après la requête AJAX --> animation 4
+// fil version du fil qui ne bouge qu'une fois après la requête AJAX --> animation 4
 .fil2 {
   position:relative;
   width: 5px;
@@ -71,8 +86,8 @@
   height: 100px;
   margin: 0 auto;
   background-color: gray;
-  animation: filbis 3s linear 0s 1 alternate;
-  animation-fill-mode: forwards;
+  animation: filbis 6s linear 0s 1 normal;
+  animation-fill-mode: backwards;
 }
 
 // pince à vide (bouge avec fil)
@@ -94,45 +109,61 @@
   background-size: cover;
   margin: 0 auto;
   position: absolute;
-  z-index: 3;
+  z-index: 6;
   opacity: 0;
-  animation: pincegift 1.5s linear 1.5s 1 normal;
+  animation: pincegift 6s linear 0s 1 normal;
   animation-fill-mode: forwards;
 }
-
 
 // Animation 1
 @keyframes translation {
     0%   {left:5%; top:85px;}
-    100% {left:50%; top:85px;}
+    25%  {left:var(--animation-distance); top:85px;}
+    75%  {left:var(--animation-distance); top:85px;}
+    100% {left:5%; top:85px;}
+
 }
 
 // Animation 2 : poulis tourne
 @keyframes poulis {
     0%   {transform: rotate(0deg)}
-    100% {transform: rotate(360deg)}
+    25%  {transform: rotate(0deg)}
+    50%  {transform: rotate(360deg)}
+    75%  {transform: rotate(0deg)}
+    100% {transform: rotate(0deg)}
 }
 
 // Animation 3 : fil qui grandit / diminue
 @keyframes fil {
     0%   {height: 100px;}
+    25%  {height: 100px;}
     50%  {height: 350px;}
+    75%  {height: 100px;}
     100% {height: 100px;}
 }
 
 // Animation 4 : fil post-Ajax qui va chercher le cadeau
 @keyframes filbis {
     0%   {height: 100px;}
-    40%  {height: 350px;}
-    60%  {height: 350px;}
+    25%  {height: 100px;}
+    50%  {height: 350px;}
+    75%  {height: 100px;}
     100% {height: 100px;}
 }
 
 // Animation 5 : pince avec cadeau qui apparaît quand le fil2 est en bas
 @keyframes pincegift {
     0%   {opacity:0;}
-    1%   {opacity:1;}
+    49%  {opacity:0;}
+    50%  {opacity:1;}
     100% {opacity:1;}
 }
 
+// Animation 6
+@keyframes translationbis {
+    0%   {left:5%; top:85px;}
+    25%  {left:var(--animation-distance); top:85px;}
+    75%  {left:var(--animation-distance); top:85px;}
+    100% {left:5%; top:85px;}
 
+}
