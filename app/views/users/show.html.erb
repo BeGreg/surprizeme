@@ -1,2 +1,46 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% content_for :head do %>
+  Mon compte-Surprize me
+<% end %>
+<div class='container form-container' style="height: 100vh;">
+  <div class="form-title">
+    <h1>Users show</h1>
+    <h2>Mon compte</h2>
+  </div>
+
+  <div class="col-xs-3 col-md-6-offset" id="informations-profil">
+    <figure class="snip1344">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample1.jpg" alt="profile-sample1" class="background-profil"/>
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample1.jpg" alt="profile-sample1" class="profile"/>
+      <figcaption>
+        <h3><%=current_user.first_name%><span>Admin</span></h3>
+      </figcaption>
+    </figure>
+    <ul id="user-info">
+      <p> Mes informations personnel : </p>
+        <table>
+        <tr>
+          <td>Prénom: </td>
+          <td><%= current_user.first_name %></td>
+        </tr>
+        <tr>
+          <td>Nom: </td>
+          <td><%= current_user.last_name %></td>
+        </tr>
+        <tr>
+          <td>E-mail: </td>
+          <td><%= current_user.email %></td>
+        </tr>
+        <tr>
+          <td>adresse: </td>
+          <td><%= current_user.address %></td>
+        </tr>
+        </table>
+      <li id="list-surprise-user">
+        <p> Historique de mes surprises :</p>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+
