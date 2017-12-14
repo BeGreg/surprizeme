@@ -92,7 +92,7 @@ class Product < ApplicationRecord
     sleep(5)
     # Identification
     driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
-    driver.find_element(:id, 'passwd').send_keys("***REMOVED***")
+    driver.find_element(:id, 'passwd').send_keys("#####")
     driver.find_element(:id, 'SubmitLogin').click
     sleep(5)
     # Validation adresse
@@ -110,10 +110,10 @@ class Product < ApplicationRecord
     # Paiement
     driver.switch_to.frame 'be2bill_iframe'
     sleep(2)
-    driver.find_element(:id, 'b2b-ccnum-input').send_keys("***REMOVED***")
-    driver.find_element(:id, 'b2b-month-input').send_keys("09")
-    driver.find_element(:id, 'b2b-year-input').send_keys("18")
-    driver.find_element(:id, 'b2b-cvv-input').send_keys("***REMOVED***")
+    driver.find_element(:id, 'b2b-ccnum-input').send_keys("###")
+    driver.find_element(:id, 'b2b-month-input').send_keys("###")
+    driver.find_element(:id, 'b2b-year-input').send_keys("###")
+    driver.find_element(:id, 'b2b-cvv-input').send_keys("###")
     sleep(1)
     driver.find_element(:id, 'b2b-submit').click
   end
@@ -166,7 +166,7 @@ class Product < ApplicationRecord
     driver.find_element(:id, 'hlb-ptc-btn-native').click
     sleep(2)
     driver.find_element(:id, 'ap_email').send_keys('gregory.blain@gmail.com')
-    driver.find_element(:id, 'ap_password').send_keys('***REMOVED***')
+    driver.find_element(:id, 'ap_password').send_keys('#####!')
     driver.find_element(:id, 'signInSubmit').submit
     sleep(5)
     # driver.find_element(:class, 'change-address-popover-link').click
@@ -189,8 +189,8 @@ class Product < ApplicationRecord
     driver.find_element(:id, 'pm_1').click
     sleep(3)
 
-    driver.find_element(:class, 'payment-selected').find_element(:id, 'addCreditCardNumber').send_keys('***REMOVED***')
-    driver.find_element(:class, 'payment-selected').find_element(:id, 'addCreditCardVerificationNumber').send_keys('***REMOVED***')
+    driver.find_element(:class, 'payment-selected').find_element(:id, 'addCreditCardNumber').send_keys('######')
+    driver.find_element(:class, 'payment-selected').find_element(:id, 'addCreditCardVerificationNumber').send_keys('#####')
     driver.find_element(:class, 'payment-selected').find_element(:id, 'confirm-card').click
 
     sleep(5)
