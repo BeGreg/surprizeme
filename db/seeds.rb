@@ -80,16 +80,7 @@ selection.each do |product|
 end
 
 
-######## Config for Selenium ################
-# Configure to not blow up on websites with js errors aka every website with js
-Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
-  end
-
-  # Configure Capybara to use Poltergeist as the driver
-  Capybara.default_driver = :selenium
-
-########## SCRAP PRODUITS Raffineurs (Selenium) ##########
+########## SCRAP PRODUITS Raffineurs (Poltergeist) ##########
 
 puts 'startin les raffineurs, du palais, capybara'
 Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
@@ -155,6 +146,19 @@ products_url.each do |url|
     gender: "male"
     )
 end
+
+######## Config for Selenium ################
+# Configure to not blow up on websites with js errors aka every website with js
+Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+  end
+
+  # Configure Capybara to use Poltergeist as the driver
+  Capybara.default_driver = :selenium
+
+
+########## SCRAP PRODUITS L'avant-gardiste (Selenium) ##########
+
 
 
 
