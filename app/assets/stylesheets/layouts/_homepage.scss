@@ -89,11 +89,11 @@ body {
   top: 10%;
   left: 0;
   right: 0;
-  width: 450px;
+  width: 475px;
   margin: 10px auto 0;
   font-family:'Catamaran', sans-serif;
   font-weight: lighter;
-  font-size: 16px;
+  font-size: 30px;
   color: white;
   text-align: center;
   transition: all ease-in .2s;
@@ -123,14 +123,19 @@ body {
 }
 
 .headline-mobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 45vh;
   background: #293133;
   color: #FFF;
   text-align: center;
   padding: 10px;
-  font-size: 16px;
+  font-size: 2.5rem;
 
   > div {
-    font-size: 25px;
+    padding-top: 8rem;
+    font-size: 2rem;
   }
 }
 
@@ -520,14 +525,14 @@ $animation:0.2s all ease;
 
 }
 #how-it-works-cards {
-  display: flex;
-  justify-content: space-evenly;
+  // display: flex;
+  // justify-content: space-evenly;
 
 }
 .how-it-works {
   padding-top: 20vh;
 
-  height: 100%;
+  height: auto;
 
   background: #293133;
 
@@ -537,11 +542,11 @@ $animation:0.2s all ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   border: $purple 3px;
-  margin: 5px auto;
+  margin: 10px 10px;
   background: white;
   height: 250px;
-  width: 200px;
   -webkit-box-shadow: 0 10px 6px -6px #61045F;
   -moz-box-shadow: 0 10px 6px -6px #61045F;
   box-shadow: 0 10px 6px -6px #61045F;
@@ -602,11 +607,27 @@ $animation:0.2s all ease;
 @media only screen and (max-width: 769px) {
 
     #product, #moment {
-      height: calc((100vh - 162px) / 2);
+      height: calc((55vh - 85px) / 2);
+
+
+
 
       &.category-expand {
         height: calc(100vh - 162px);
+
       }
     }
 
+    .product-title, .moment-title {
+      border: 2px solid white;
+      padding: 0 0.1em;
+    }
+
+    .cat-selected {
+      font-size: 50px !important;
+    }
+
+    .cat-show {
+      top: 25%;
+    }
 }
