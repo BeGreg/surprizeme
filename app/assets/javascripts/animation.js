@@ -1,8 +1,24 @@
+var translation = document.getElementById("translation")
+
+function setRandomAnimationDistance() {
+  animationDistance = (Math.random()*60 + 20) + '%';
+  setProperty(animationDistance);
+}
+
+function setProperty(distance) {
+  animation.style.setProperty('--animation-distance', distance);
+}
+
+if (translation) {
+  animation.addEventListener("animationiteration", setRandomAnimationDistance)
+}
 
 document.addEventListener("DOMContentLoaded", function() {
-  var surpriseId = document.getElementById("animation").getAttribute('data-surprise-id')
-  fil = document.getElementById("fil");
-  pince = document.getElementById("pince");
+  if (document.getElementById("animation")) {
+    var surpriseId = document.getElementById("animation").getAttribute('data-surprise-id')
+  }
+  var fil = document.getElementById("fil");
+  var pince = document.getElementById("pince");
 
   if (fil) {
   console.log('on va fetcher');
@@ -19,14 +35,12 @@ document.addEventListener("DOMContentLoaded", function() {
       var url = answer.url
       fil.addEventListener("animationiteration", function() {
         fil.classList.remove('fil');
-        fil.classList.add('fil2');
+        fil.classList.add('fil2') ;
         pince.classList.add('pince-cadeau');
         fil.addEventListener("animationend", function() {
-        window.location.pathname = url
+          window.location.pathname = url
+        });
       });
     });
-  });
   }
 });
-
-

@@ -22,5 +22,4 @@ document.addEventListener("DOMContentLoaded", function() {
       onPlaceChanged('surprise_bill_address')
     });
   }
-
 });

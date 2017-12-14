@@ -6,7 +6,7 @@
   </div>
   <div id="animation" class="animation" data-surprise-id="<%= params[:surprise_id] %>">
     <div class="gifts"></div>
-    <div class="pince-animation">
+    <div id="translation" class="pince-animation">
       <div id="poulis" class="rond"></div>
       <div class="down">
         <div id="fil" class="fil"></div>
@@ -17,3 +17,7 @@
     </div>
   </div>
 </div>
+<% content_for :after_js do %>
+    <script> initCheckboxBillingAddress(); </script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBTatMTb2qrJDAwzylTpE7DVHjzR_yCJQs"></script>
+<% end %>
