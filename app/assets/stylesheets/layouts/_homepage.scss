@@ -190,7 +190,6 @@ body {
   &::before,
   &::after {
     border: 2px solid transparent;
-    border-radius: 40px;
     width: 0;
     height: 0;
   }
@@ -253,7 +252,7 @@ body {
   &::before,
   &::after {
     border: 2px solid transparent;
-    border-radius: 40px;
+    border-radius: 10px;
     width: 0;
     height: 0;
   }

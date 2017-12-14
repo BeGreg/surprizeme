@@ -18,7 +18,7 @@
   z-index: 7;
   top:0;
   font-weight: bold;
-  // box-shadow: 1px 1px 1px $broken-white;
+  box-shadow: 2px 1px 1px $dark-red;
 
   box-sizing: border-box;
 
@@ -88,7 +88,7 @@
   font-size: 18px;
   text-align: center;
   padding: 20px;
-
+}
 .navbar-wagon-link:hover {
   color: $black;
   &:hover {
