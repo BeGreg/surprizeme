@@ -48,7 +48,7 @@ class Product < ApplicationRecord
   def scrap
     surprise_supplier = self.supplier.name
     case surprise_supplier
-      when "Raffineurs"
+      when "Les Raffineurs"
         scrap_raffineurs
       when "L'Avant-Gardiste"
         scrap_avant_gardiste

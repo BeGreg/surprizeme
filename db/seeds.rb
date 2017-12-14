@@ -4,6 +4,12 @@ require 'capybara/poltergeist'
 require 'selenium-webdriver'
 
 
+Supplier.create(name:"Amazon", url:"www.amazon.fr")
+Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
+Supplier.create(name:"L'Avantgardiste", url:"www.lavantgardiste.com")
+
+
+
 ######### Config for Poltergeist ############
 # Configure Poltergeist to not blow up on websites with js errors aka every website with js
 # See more options at https://github.com/teampoltergeist/poltergeist#customization
@@ -80,72 +86,72 @@ selection.each do |product|
 end
 
 
-# ########## SCRAP PRODUITS Raffineurs (Poltergeist) ##########
+########## SCRAP PRODUITS Raffineurs (Poltergeist) ##########
 
-# puts 'startin les raffineurs, du palais, capybara'
-# Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
+puts 'startin les raffineurs, du palais, capybara'
+Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
 
-# url = "https://www.lesraffineurs.com/18-du-palais"
-# browser.visit url
-# products = browser.all '.product-container'
-# products.each do |product|
-#   products_url << product.find('.product-name')[:href]
-# end
+url = "https://www.lesraffineurs.com/18-du-palais"
+browser.visit url
+products = browser.all '.product-container'
+products.each do |product|
+  products_url << product.find('.product-name')[:href]
+end
 
-# products_url.each do |url|
-#   browser = Capybara.current_session
-#   browser.visit url
-#   name = browser.find('.pb-center-column').find('h1').text.strip
-#   price = browser.find('.price').find('span').text.strip
-#   description = browser.find('.pb-center-column').find_by_id('short_description_block').first('p').text.strip
+products_url.each do |url|
+  browser = Capybara.current_session
+  browser.visit url
+  name = browser.find('.pb-center-column').find('h1').text.strip
+  price = browser.find('.price').find('span').text.strip
+  description = browser.find('.pb-center-column').find_by_id('short_description_block').first('p').text.strip
 
-#   #photo of the product
-#   results = []
-#   elems = browser.all(".zoomWindow", visible: :all)
-#   elems.each do |elem|
-#     style = elem['style']
+  #photo of the product
+  results = []
+  elems = browser.all(".zoomWindow", visible: :all)
+  elems.each do |elem|
+    style = elem['style']
 
-#     match = style.scan( /background-image\: url\((.+)\)/).last
-#     results << match.first
-#   end
-#   photo_one = results[0]
+    match = style.scan( /background-image\: url\((.+)\)/).last
+    results << match.first
+  end
+  photo_one = results[0]
 
-#   #If second photo exists, put in photo_two. Idem until photo_four
-#   if !results[1].nil?
-#     photo_two = results[1]
-#   else
-#     photo_two = nil
-#   end
+  #If second photo exists, put in photo_two. Idem until photo_four
+  if !results[1].nil?
+    photo_two = results[1]
+  else
+    photo_two = nil
+  end
 
-#   if !results[2].nil?
-#     photo_three = results[2]
-#   else
-#     photo_three = nil
-#   end
+  if !results[2].nil?
+    photo_three = results[2]
+  else
+    photo_three = nil
+  end
 
-#   if !results[3].nil?
-#     photo_four = results[3]
-#   else
-#     photo_four = nil
-#   end
+  if !results[3].nil?
+    photo_four = results[3]
+  else
+    photo_four = nil
+  end
 
-#   Product.create(
-#     name: name,
-#     url: url,
-#     price: price.gsub('€', '').to_i,
-#     description: description,
-#     photo_url1: photo_one,
-#     photo_url2: photo_two,
-#     photo_url3: photo_three,
-#     photo_url4: photo_four,
-#     supplier_id: 1,
-#     delivery_price: 6,
-#     delivery_time: 3,
-#     supplier_category: "Du Palais",
-#     supplier_review: 0,
-#     gender: "male"
-#     )
-# end
+  Product.create(
+    name: name,
+    url: url,
+    price: price.gsub('€', '').to_i,
+    description: description,
+    photo_url1: photo_one,
+    photo_url2: photo_two,
+    photo_url3: photo_three,
+    photo_url4: photo_four,
+    supplier_id: 1,
+    delivery_price: 6,
+    delivery_time: 3,
+    supplier_category: "Du Palais",
+    supplier_review: 0,
+    gender: "male"
+    )
+end
 
 ######## Config for Selenium ################
 # Configure to not blow up on websites with js errors aka every website with js
