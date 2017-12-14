@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", function() {
   var billAddress = document.getElementById('surprise_bill_address');
   var delAddress = document.getElementById('surprise_del_address');
 
-  autocompletes.forEach()
-
   if (delAddress) {
     var autocomplete = new google.maps.places.Autocomplete(delAddress, { types: ['geocode'], componentRestrictions: {country: 'fr'} });
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
