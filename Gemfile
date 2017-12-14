@@ -33,6 +33,8 @@ gem 'rails_admin', '>= 1.0.0.rc'
 gem 'rails_admin_grid'
 gem 'money-rails'
 gem 'stripe'
+gem 'sprockets', '>= 3.0.0'
+gem 'sprockets-es6'
 
 
 group :development do
