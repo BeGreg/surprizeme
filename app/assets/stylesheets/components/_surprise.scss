@@ -1,6 +1,6 @@
 .surprise {
   // background: -webkit-linear-gradient(to right, #61045F, #AA076B);
-  background: linear-gradient(to right, $dark-red, $clear-red);
+  background: linear-gradient(to right, $dark-red, $dark-red, $clear-red);
   // background: linear-gradient(to right, #AA076B, #61045F, #AA076B);
   font-family: $headers-font;
 
@@ -95,7 +95,7 @@ transition: 0.5s ease;
     font-size: 40px;
   }
   .fa {
-    color: $clear-red;
+    color: $dark-red;
   }
 }
 
