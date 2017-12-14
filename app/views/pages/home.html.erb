@@ -1,54 +1,72 @@
 
 
-
-    <!-- Profile picture with dropdown list -->
-<div class="row home-selection">
-    <div class="col-xs-6 category-select" id="product">
-      <button class="product-title">PRODUIT</button>
-      <div class="product-form event-hide"> <%= render "../views/products/search" %>
-      </div>
-    </div>
-
-    <div class="col-xs-6 category-select" id="moment">
-      <button class="moment-title">MOMENT</button>
-      <div class="moment-form event-hide"> <%= render "../views/moments/search" %>
-      </div>
-    </div>
-    <div class="headline move-down">
-    </div>
-
-    <div class="headline-text move-down">
-    <h1>Offrez-vous une surprize en 2 minutes.</h1>
-    <p>Cliquez sur une des deux catégories :</p>
-    </div>
+<div class="headline-mobile hidden-md hidden-lg">
+      Offrez-vous une Surprize en 2 clicks
+      <div>Choisissez entre un produit et un moment !</div>
 </div>
+<div class="home-selection container-fluid">
+  <div class="row">
+      <div class="col-xs-12 col-sm-6 category-select" id="product">
+        <button class="product-title">PRODUIT</button>
+        <div class="product-form event-hide">
+          <%= render "../views/products/search" %>
+        </div>
+      </div>
 
-<div class="how">
+      <div class="col-xs-12 col-sm-6 category-select" id="moment">
+        <button class="moment-title">MOMENT</button>
+        <div class="moment-form event-hide">
+          <%= render "../views/moments/search" %>
+        </div>
+      </div>
+
+
+      <!-- <div class="headline hidden-xs hidden-sm">
+      </div> -->
+      <div class="headline-text hidden-xs hidden-sm">
+        Offrez-vous une surprize en 2 minutes !
+        <div>Cliquez sur une des deux catégories :</div>
+      </div>
+  </div>
+
+</div>
+<!-- <div class="how"> -->
     <!-- test -->
-    <div class="flex">
-      <a href="#how-it-works" id= 'how-link' class="bttn">SurpriZe Me?</a>
+    <div class="how-it-works-arrow-down flex hidden-xs hidden-sm">
+      <a href="#how-it-works">
+        <p>Comment ça marche ?</p>
+        <i class="arrow down"></i>
+      </a>
     </div>
 <!-- fin/test -->
+<!-- </div> -->
+
+<div class="how-it-works container-fluid">
+  <div class="row">
+    <div class="how-it-works-title col-md-12">
+      <h2>Une surprize sur mesure en quelques clicks</h2>
+    </div>
+  </div>
+  <div id="how-it-works-cards" class="row">
+    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
+      <%= image_tag "light.png", class: "gift-image"%>
+      <p> 1/ Choisir entre un <em>Produit</em> ou un <em>Moment</em></p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
+      <%= image_tag "saisir.png", class: "gift-image"%>
+      <p> 2/ Saisir <em>vos critères</em>, vos coordonées et informations utiles</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
+      <%= image_tag "paid.svg", class: "gift-image"%>
+      <p> 3/ <strong>Payez</strong> de manière sécurisée</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
+      <%= image_tag "gift.png", class: "gift-image" %>
+      <p> 4/ Découvrez votre surprise ! Choisie en fonction du niveau de suprise que <em>vous</em> avez éxigé</p>
+    </div>
+  </div>
 </div>
 
-<div class="hide-how" id="how-it-works">
-  <div class="col-xs-3 col-md-6-offset" id="info-card">
-    <%= image_tag "light.png", class: "gift-image"%>
-    <p> 1/ Choisir entre les deux boutons soit <em>Produit</em> soit <em>Surprise</em></p>
-  </div>
-  <div class="col-xs-3 col-md-6-offset" id="info-card">
-    <%= image_tag "saisir.png", class: "gift-image"%>
-    <p> 2/ Saisir <em>vos critères</em>, vos coordonées et informations utile</p>
-  </div>
-  <div class="col-xs-3 col-md-6-offset" id="info-card">
-    <%= image_tag "paid.svg", class: "gift-image"%>
-    <p> 3/ <strong>Payez</strong> de manière sûr</p>
-  </div>
-   <div class="col-xs-3 col-md-6-offset" id="info-card">
-    <%= image_tag "gift.png", class: "gift-image" %>
-    <p> 4/ Découvrez votre surprise ! Choisi en fonction du niveau de suprise que <em>vous</em> avez éxigé</p>
-  </div>
-</div>
 <% content_for :after_js do %>
   <script> homepageAnimation(); </script>
 <% end %>
