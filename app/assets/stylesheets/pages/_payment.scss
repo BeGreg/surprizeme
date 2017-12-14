@@ -1,31 +1,43 @@
 #payment-content {
   text-align: center;
-  width: 70%;
+}
 
+.col {
+  height: 100vh;
 }
 
 .payment-title {
   margin-left: auto;
   margin-right: auto;
-  display: inline-block;
   background: none;
-  border: 2px solid white;
   box-sizing: border-box;
   margin: 1em;
   padding: 0.25em 0.5em;
   color: white;
-
 }
 
 .payment-description {
   display: inline;
   color: white;
   font-weight: 300;
-
+  h2 {
+    font-size: 30px;
+  }
 }
 .payment-action {
-  text-align: center;
+  width: 40%;
+  margin: 5 auto;
+  color: $clear-red;
+  font-weight: 100;
+  letter-spacing: 0.01em;
+  font-size: 20px;
+  margin-bottom: 2px;
+  .information {
+  color: $black;
+  font-size: 18px;
+  }
 }
+
 
 .amount {
   display: inline-block;

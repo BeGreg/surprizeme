@@ -45,6 +45,8 @@ class SurprisesController < ApplicationController
     # On crée une instance de surprise et on la met dans le cookie (miam !)
     session[:product_id] = nil
     session[:product_id] = @product_id
+    session[:budget] = nil
+    session[:budget] = @budget
     redirect_to surprise_details_path
   end
 
