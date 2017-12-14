@@ -2,7 +2,6 @@
 .navbar-wagon {
   // transition: all 0.3s ease;
   // taille et oculeur
-  width: 100%;
   height: 85px;
   padding: 0px 5px;
   background: linear-gradient(to right, #AA076B, #61045F, #AA076B);
@@ -12,8 +11,14 @@
   align-items: center;
   align-self: center;
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 7;
   top:0;
+  font-weight: bold;
+
+  box-sizing: border-box;
 
 }
 
@@ -35,10 +40,17 @@
   width: 100px;
   text-align: center;
   position: absolute;
-  left: calc(50% - 50px) ;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   color: white;
   img {
-  height: 50px;
+    height: 50px;
+  }
+
+  &:hover {
+    color: #FFF;
+    text-decoration: none;
   }
 }
 
@@ -72,11 +84,11 @@
   font-size: 18px;
   text-align: center;
   padding: 20px;
-}
 
-.navbar-wagon-link:hover {
-  color: #da552f;
-  text-decoration: none;
+  &:hover {
+    color: #da552f;
+    text-decoration: none;
+  }
 }
 
 /* Dropdown menu */
