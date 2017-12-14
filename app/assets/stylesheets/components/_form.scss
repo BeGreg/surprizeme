@@ -9,9 +9,9 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #AA076B;
-  background: -webkit-linear-gradient(to right, #61045F, #AA076B);
-  background: linear-gradient(to right, #61045F, #AA076B);
+  background: $clear-red;
+  background: -webkit-linear-gradient(to right, $dark-red, $clear-red);
+  background: linear-gradient(to right, $dark-red, $clear-red);
   width: 100%;
 
 
@@ -22,7 +22,7 @@ html, body {
 }
   .form-description{
     text-align: center;
-    color: $magenta;
+    color: $clear-red;
     font-weight: light;
   }
     .generic-form {
@@ -55,22 +55,22 @@ html, body {
         letter-spacing: 0.01em;
         position: relative;
         transition: background-color 0.40s ease;
-        background: #AA076B;
-        background: -webkit-linear-gradient(to left, #61045F, #AA076B);
-        background: linear-gradient(to left, #61045F, #AA076B);
+        background: $clear-red;
+        background: -webkit-linear-gradient(to left, $dark-red, $clear-red);
+        background: linear-gradient(to left, $dark-red, $clear-red);
         color: white;
         opacity: 0.8;
 
         &:hover, &:focus{
-          color: $magenta;
+          color: $clear-red;
           background: white;
-          border: 1px solid $magenta;
+          border: 1px solid $clear-red;
           opacity: none;
         }
       }
 
     label {
-      color: $magenta;
+      color: $clear-red;
       font-weight: 100;
       letter-spacing: 0.01em;
       font-size: 20px;
@@ -84,7 +84,7 @@ html, body {
     .form-inputs {
       input {
         background-color: none;
-        border: 0.6px solid $magenta;
+        border: 0.6px solid $clear-red;
         line-height: 0;
         font-size: 17px;
         width: 100%;
@@ -135,8 +135,8 @@ html, body {
             filter: none;
 }
 .icon-card{
-    background: -webkit-linear-gradient(to left, #61045F, #AA076B);
-    background: linear-gradient(to left, #61045F, #AA076B);
+    background: -webkit-linear-gradient(to left, $dark-red, $clear-red);
+    background: linear-gradient(to left, $dark-red, $clear-red);
     color: white !important;
     border-radius: 30px;
     padding: 5px 5px;
