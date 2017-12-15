@@ -4,8 +4,18 @@
       Offrez-vous une Surprize en 2 clicks
       <div>Choisissez entre un produit et un moment !</div>
 </div>
+
 <div class="home-selection container-fluid">
   <div class="row">
+      <div class="col-xs-12 col-sm-6 category-select" id="moment">
+        <button class="moment-title">MOMENT</button>
+        <div class="moment-form event-hide">
+          <%= render "../views/moments/search" %>
+        </div>
+      </div>
+
+
+
       <div class="col-xs-12 col-sm-6 category-select" id="product">
         <button class="product-title">PRODUIT</button>
         <div class="product-form event-hide">
@@ -13,12 +23,6 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-sm-6 category-select" id="moment">
-        <button class="moment-title">MOMENT</button>
-        <div class="moment-form event-hide">
-          <%= render "../views/moments/search" %>
-        </div>
-      </div>
 
 
       <!-- <div class="headline hidden-xs hidden-sm">
@@ -28,13 +32,12 @@
         <div>Cliquez sur une des deux catégories :</div>
       </div>
   </div>
-
 </div>
 <!-- <div class="how"> -->
     <!-- test -->
     <div class="how-it-works-arrow-down flex hidden-xs hidden-sm">
       <a href="#how-it-works">
-        <p>Comment ça marche ?</p>
+        <p id="ccm">Comment ça marche ?</p>
         <i class="arrow down"></i>
       </a>
     </div>

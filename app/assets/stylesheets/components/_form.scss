@@ -4,7 +4,7 @@ html, body {
 }
 
 
-.form-container .page-container{
+.form-container, .page-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -141,9 +141,6 @@ html, body {
 }
 .icon-card{
 
-
-
-
     border-radius: 30px;
     padding: 5px 5px;
     text-align: center;
@@ -180,12 +177,12 @@ html, body {
     color: white !important;
 }
 
-#gr-wrp {
-  display: grid;
-  // grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
-  // grid-auto-rows: minmax(100px, auto);
-}
+// #gr-wrp {
+//   display: grid;
+//   // grid-template-columns: repeat(4, 1fr);
+//   grid-gap: 10px;
+//   // grid-auto-rows: minmax(100px, auto);
+// }
 
 // #budget-label {
 //   grid-column: 1;
