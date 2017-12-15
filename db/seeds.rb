@@ -13,12 +13,12 @@ Supplier.create(name:"L'Avantgardiste", url:"www.lavantgardiste.com")
 ######### Config for Poltergeist ############
 # Configure Poltergeist to not blow up on websites with js errors aka every website with js
 # See more options at https://github.com/teampoltergeist/poltergeist#customization
-Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path, timeout: 60)
-  end
+# Capybara.register_driver :poltergeist do |app|
+#     Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path, timeout: 60)
+#   end
 
-  # Configure Capybara to use Poltergeist as the driver
-  Capybara.default_driver = :poltergeist
+#   # Configure Capybara to use Poltergeist as the driver
+#   Capybara.default_driver = :poltergeist
 
 ####### SCRAPPING PRODUCTS FROM AMAZON (Poltergeist) ############
 # selection = []
@@ -91,23 +91,14 @@ Capybara.register_driver :poltergeist do |app|
 # puts 'startin les raffineurs, du palais, capybara'
 # Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
 
-<<<<<<< HEAD
-products_url = []
+# products_url = []
 
-url = "https://www.lesraffineurs.com/18-du-palais"
-browser.visit url
-products = browser.all '.product-container'
-products.each do |product|
-  products_url << product.find('.product-name')[:href]
-end
-=======
 # url = "https://www.lesraffineurs.com/18-du-palais"
 # browser.visit url
 # products = browser.all '.product-container'
 # products.each do |product|
 #   products_url << product.find('.product-name')[:href]
 # end
->>>>>>> 558bda6e19f0eaecad8d1f7172799041f545fa1d
 
 # products_url.each do |url|
 #   browser = Capybara.current_session
@@ -166,22 +157,19 @@ end
 
 ######## Config for Selenium ################
 # Configure to not blow up on websites with js errors aka every website with js
-Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
-  end
-
-  # Configure Capybara to use Poltergeist as the driver
-  Capybara.default_driver = :selenium
+chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
+driver = Selenium::WebDriver.for(:chrome, options: chrome_opts)
 
 
 ########## SCRAP PRODUITS L'avant-gardiste (Selenium) ##########
 puts 'scrap avant-gardiste'
-driver = Selenium::WebDriver.for :firefox
 driver.get "https://www.lavantgardiste.com/149-idees-cadeaux"
 product_avant_gardiste = []
 products = driver.find_elements(:class, 'product-container')
 products.delete_at(32)
 products.delete_at(31)
+products.delete_at(30)
 
 products.each do |product|
   title = product.find_element(:tag_name, 'h5').text
@@ -216,7 +204,7 @@ product_avant_gardiste.each do |product|
     if evaluation.nil?
      product.supplier_review = 0
     else
-     product.supplier_review = 0,5 * evaluation.gsub('Évaluations positives à ','').to_f
+     product.supplier_review = 0.5 * evaluation.gsub('Évaluations positives à ','').to_f
     end
     description = driver.find_element(:id, 'short_description_content').attribute("innerHTML")
     description += driver.find_elements(:class, 'rte')[1].attribute("innerHTML")
@@ -248,7 +236,9 @@ end
 # ##### SCRAPPING MOMENTS BILLETREDUC (SELENIUM) ######
 # # BILLET REDUC START
 # puts 'Start BilletReduc'
-# driver = Selenium::WebDriver.for :firefox
+# chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+# chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
+# driver = Selenium::WebDriver.for(:chrome, options: chrome_opts)
 # # # lien scrap de base
 # driver.get "http://www.billetreduc.com/a-lyon/liste/"
 # puts 'je suis sur le site'
