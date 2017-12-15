@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", function() {
       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
     },
     body: JSON.stringify({ id: surpriseId }),
-    credentials: 'same-origin'
+    credentials: 'same-origin',
+    timeout: 60000
   }).then((response) => response.json())
     .then((answer) => {
       var url = answer.url
