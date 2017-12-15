@@ -13,3 +13,12 @@
 @import "layouts/index";
 @import "components/index";
 @import "pages/index";
+
+.footer-safe {
+  padding: 1px;
+  min-height: calc(100vh - 183px);
+}
+
+.surprise-show ul {
+  margin-left: 30px !important;
+}

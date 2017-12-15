@@ -20,9 +20,19 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
   <body>
+<<<<<<< Updated upstream
     <%= render 'shared/navbar' %>
     <%= yield %>
+=======
+    <div class="footer-safe">
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/flashes' %>
+      <%= yield %>
+    </div>
+
+>>>>>>> Stashed changes
     <%= render 'shared/footer' %>
+
     <%= javascript_include_tag 'application' %>
     <%= yield :after_js %>
   </body>
