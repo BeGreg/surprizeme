@@ -203,7 +203,7 @@ product_avant_gardiste.each do |product|
     if evaluation.nil?
      product.supplier_review = 0
     else
-     product.supplier_review = 0,5 * evaluation.gsub('Évaluations positives à ','').to_f
+     product.supplier_review = 0.5 * evaluation.gsub('Évaluations positives à ','').to_f
     end
     description = driver.find_element(:id, 'short_description_content').attribute("innerHTML")
     description += driver.find_elements(:class, 'rte')[1].attribute("innerHTML")
