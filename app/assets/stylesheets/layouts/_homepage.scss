@@ -526,9 +526,9 @@ $animation:0.2s all ease;
 
 }
 .how-it-works {
-  padding-top: 20vh;
+  padding-top: 14vh;
 
-  // height: 100%;
+  min-height: 100%;
 
   background: #293133;
 
@@ -537,7 +537,7 @@ $animation:0.2s all ease;
 .info-card{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding-top: 8%;
   border: $purple 3px;
   margin: 5px auto;
   background: white;
