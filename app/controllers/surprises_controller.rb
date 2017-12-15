@@ -57,7 +57,7 @@ class SurprisesController < ApplicationController
   def scrap_purchase
     puts "on est dans le scrap_purchase"
     # @surprise.product.scrap
-    sleep(30)
+    sleep(20)
     url = surprise_path(@surprise)
     render json: { url: url }
   end
