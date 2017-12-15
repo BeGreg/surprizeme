@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="col-xs-12 col-md-6">
-        <div class='right-col'>
+        <div class='column'>
           <div class="payment-title">
             <h1>Surprize sélectionnée !</h1>
           </div>
@@ -19,10 +19,10 @@
             <h2>Qu'est-ce que ça pourrait bien être ?</h2>
           </div>
           <div class="payment-action generic-form">
-            <p>Valeur de la surprize : <%= number_to_currency(@surprise.amount, unit: "€", separator: ",", delimiter: "", format: "%n %u") %></p>
+            <p>Valeur de la surprize : <strong> <%= number_to_currency(@surprise.amount, unit: "€", separator: ",", delimiter: "", format: "%n %u") %></strong></p>
             <p class="information">(rappel de votre budget maximum : <%= @budget %>€).</p>
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-label="Payer par Payer par Carte Bancaire"
+              data-label="Payer par Carte Bancaire"
               data-locale="auto"
 
               data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
@@ -32,6 +32,7 @@
               data-amount="<%= @surprise.amount_cents %>"
               data-currency="<%= @surprise.amount.currency %>">
             </script>
+            <p class="information"><i>Paiement sécurisé via notre partenaire Stripe.</i></p>
           </div>
         </div>
       </div>
