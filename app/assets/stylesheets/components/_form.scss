@@ -127,24 +127,23 @@ html, body {
             appearance:none;
 }
 
-.male{
 
-  }
-.female{}
-.indifferent {}
-.extravagant {}
-.moderate {}
 
 .icon-selector input:active +.icon-card{opacity: 1;}
 .icon-selector input:checked +.icon-card{
     -webkit-filter: none;
        -moz-filter: none;
             filter: none;
-}
-.icon-card{
+    opacity: 1;
     background: -webkit-linear-gradient(to left, $dark-red, $clear-red);
     background: linear-gradient(to left, $dark-red, $clear-red);
     color: white !important;
+}
+.icon-card{
+
+
+
+
     border-radius: 30px;
     padding: 5px 5px;
     text-align: center;
@@ -158,6 +157,12 @@ html, body {
     display:inline-block;
     width: 130px;
     height: auto;
+
+    color: $clear-red;
+          background: white;
+          border: 1px solid $clear-red;
+          opacity: none;
+
     -webkit-transition: all 100ms ease-in;
        -moz-transition: all 100ms ease-in;
             transition: all 100ms ease-in;
@@ -169,6 +174,10 @@ html, body {
     -webkit-filter: brightness(1) grayscale(.5) opacity(.8);
        -moz-filter: brightness(1) grayscale(.5) opacity(.8);
             filter: brightness(1) grayscale(.5) opacity(.8);
+    opacity: 0.8;
+    background: -webkit-linear-gradient(to left, $dark-red, $clear-red);
+    background: linear-gradient(to left, $dark-red, $clear-red);
+    color: white !important;
 }
 
 #gr-wrp {
@@ -238,6 +247,9 @@ html, body {
   width: 100%;
   position: relative;
   overflow: hidden;
+
+
+
 
   &-label {
     float: left;
