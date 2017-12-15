@@ -91,23 +91,14 @@ Capybara.register_driver :poltergeist do |app|
 # puts 'startin les raffineurs, du palais, capybara'
 # Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
 
-<<<<<<< HEAD
 products_url = []
 
-url = "https://www.lesraffineurs.com/18-du-palais"
-browser.visit url
-products = browser.all '.product-container'
-products.each do |product|
-  products_url << product.find('.product-name')[:href]
-end
-=======
 # url = "https://www.lesraffineurs.com/18-du-palais"
 # browser.visit url
 # products = browser.all '.product-container'
 # products.each do |product|
 #   products_url << product.find('.product-name')[:href]
 # end
->>>>>>> 558bda6e19f0eaecad8d1f7172799041f545fa1d
 
 # products_url.each do |url|
 #   browser = Capybara.current_session
@@ -166,17 +157,13 @@ end
 
 ######## Config for Selenium ################
 # Configure to not blow up on websites with js errors aka every website with js
-Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
-  end
-
-  # Configure Capybara to use Poltergeist as the driver
-  Capybara.default_driver = :selenium
+chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
+driver = Selenium::WebDriver.for(:chrome, options: chrome_opts)
 
 
 ########## SCRAP PRODUITS L'avant-gardiste (Selenium) ##########
 puts 'scrap avant-gardiste'
-driver = Selenium::WebDriver.for :firefox
 driver.get "https://www.lavantgardiste.com/149-idees-cadeaux"
 product_avant_gardiste = []
 products = driver.find_elements(:class, 'product-container')
@@ -248,7 +235,9 @@ end
 # ##### SCRAPPING MOMENTS BILLETREDUC (SELENIUM) ######
 # # BILLET REDUC START
 # puts 'Start BilletReduc'
-# driver = Selenium::WebDriver.for :firefox
+# chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+# chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
+# driver = Selenium::WebDriver.for(:chrome, options: chrome_opts)
 # # # lien scrap de base
 # driver.get "http://www.billetreduc.com/a-lyon/liste/"
 # puts 'je suis sur le site'
