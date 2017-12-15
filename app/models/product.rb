@@ -50,7 +50,7 @@ class Product < ApplicationRecord
     case surprise_supplier
       when "Les Raffineurs"
         scrap_raffineurs
-      when "L'Avant-Gardiste"
+      when "L'Avantgardiste"
         scrap_avant_gardiste
       when "Amazon"
         scrap_amazon
@@ -138,7 +138,7 @@ class Product < ApplicationRecord
     sleep(5)
     # Identification
     driver.find_element(:id, 'email').send_keys("gregory.blain@gmail.com")
-    driver.find_element(:id, 'passwd').send_keys("#####")
+    driver.find_element(:id, 'passwd').send_keys(ENV['AV_PD'])
     driver.find_element(:id, 'SubmitLogin').click
     sleep(3)
     # Validation adresse livraison
@@ -149,13 +149,13 @@ class Product < ApplicationRecord
     driver.find_elements(:tag_name, 'button')[0].click
     # Paiement via Stripe
     driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame3"]'))
-    driver.find_element(css: 'input[name="cardnumber"]').send_keys('####')
+    driver.find_element(css: 'input[name="cardnumber"]').send_keys(ENV['CB_NB'])
     driver.switch_to.default_content
     driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame5"]'))
-    driver.find_element(css: 'input[name="exp-date"]').send_keys('##/##')
+    driver.find_element(css: 'input[name="exp-date"]').send_keys(ENV['CB_DATE'])
     driver.switch_to.default_content
     driver.switch_to.frame(driver.find_element(css: 'iframe[name="__privateStripeFrame4"]'))
-    driver.find_element(css: 'input[name="cvc"]').send_keys('###')
+    driver.find_element(css: 'input[name="cvc"]').send_keys(ENV['CB_CVC'])
     driver.switch_to.default_content
     driver.find_element(:class, 'stripe-submit-button').click
   end
