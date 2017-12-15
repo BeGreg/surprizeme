@@ -4,14 +4,22 @@
 
 
 .intro {
-  margin: 150px auto 20px auto;
+  margin: 0 auto 20px auto;
   width: 600px;
+  color: white;
+}
+
+.animation-wrapper {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 40px;
+  padding: 20pxpara
+
 }
 
 // Bloc qui englobe toute l'animation
 .animation {
   width: 600px;
-  height: 600px;
+  height: 515px;
   position: relative;
   margin: 10px auto;
 }
@@ -117,10 +125,10 @@
 
 // Animation 1
 @keyframes translation {
-    0%   {left:5%; top:85px;}
-    25%  {left:var(--animation-distance); top:85px;}
-    75%  {left:var(--animation-distance); top:85px;}
-    100% {left:5%; top:85px;}
+    0%   {left:5%; top:0px;}
+    25%  {left:var(--animation-distance); top:0px;}
+    75%  {left:var(--animation-distance); top:0px;}
+    100% {left:5%; top:0px;}
 
 }
 

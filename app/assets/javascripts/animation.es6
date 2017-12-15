@@ -1,7 +1,7 @@
 var translation = document.getElementById("translation")
 
 function setRandomAnimationDistance() {
-  animationDistance = (Math.random()*60 + 20) + '%';
+  var animationDistance = (Math.random()*60 + 20) + '%';
   setProperty(animationDistance);
 }
 
