@@ -168,9 +168,9 @@ html, body {
             filter: brightness(1.2)  opacity(.6);
 }
 .icon-card:hover{
-    -webkit-filter: brightness(1) grayscale(.5) opacity(.8);
-       -moz-filter: brightness(1) grayscale(.5) opacity(.8);
-            filter: brightness(1) grayscale(.5) opacity(.8);
+    -webkit-filter: brightness(1) grayscale(.2) opacity(.8);
+       -moz-filter: brightness(1) grayscale(.2) opacity(.8);
+            filter: brightness(1) grayscale(.2) opacity(.8);
     opacity: 0.8;
     background: -webkit-linear-gradient(to left, $dark-red, $clear-red);
     background: linear-gradient(to left, $dark-red, $clear-red);

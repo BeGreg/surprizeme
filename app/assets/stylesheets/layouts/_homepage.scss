@@ -606,7 +606,7 @@ $animation:0.2s all ease;
       height: calc((100vh - 162px) / 2);
 
       &.category-expand {
-        height: calc(100vh - 162px);
+        height: calc(100vh - 100px);
       }
     }
 
@@ -616,6 +616,10 @@ $animation:0.2s all ease;
 
     .generic-form {
       margin-top: 0 !important;
+    }
+
+    .icon-card {
+      font-size: 12px !important;
     }
 
 }
