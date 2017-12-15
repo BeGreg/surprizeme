@@ -25,17 +25,24 @@ html, body {
     color: $clear-red;
     font-weight: light;
   }
+
+  .generic-form-container {
+    position: relative;
+    z-index: 15;
+    margin: 0 auto;
+    max-width: 500px;
+  }
     .generic-form {
       background: rgba(255, 255, 255, 0.7);
       border-radius: 40px;
-      margin: 40px 0;
+      margin: 40px auto;
       position: relative;
       display: inline-block;
       max-width: 700px;
       min-width: 500px;
       padding: 25px 25px;
       border-radius: 40px;
-      margin: 5px 0;
+      // margin: 5px 0;
     }
 
       .form-actions {
@@ -120,24 +127,23 @@ html, body {
             appearance:none;
 }
 
-.male{
 
-  }
-.female{}
-.indifferent {}
-.extravagant {}
-.moderate {}
 
 .icon-selector input:active +.icon-card{opacity: 1;}
 .icon-selector input:checked +.icon-card{
     -webkit-filter: none;
        -moz-filter: none;
             filter: none;
-}
-.icon-card{
+    opacity: 1;
     background: -webkit-linear-gradient(to left, $dark-red, $clear-red);
     background: linear-gradient(to left, $dark-red, $clear-red);
     color: white !important;
+}
+.icon-card{
+
+
+
+
     border-radius: 30px;
     padding: 5px 5px;
     text-align: center;
@@ -151,6 +157,12 @@ html, body {
     display:inline-block;
     width: 130px;
     height: auto;
+
+    color: $clear-red;
+          background: white;
+          border: 1px solid $clear-red;
+          opacity: none;
+
     -webkit-transition: all 100ms ease-in;
        -moz-transition: all 100ms ease-in;
             transition: all 100ms ease-in;
@@ -162,4 +174,139 @@ html, body {
     -webkit-filter: brightness(1) grayscale(.5) opacity(.8);
        -moz-filter: brightness(1) grayscale(.5) opacity(.8);
             filter: brightness(1) grayscale(.5) opacity(.8);
+    opacity: 0.8;
+    background: -webkit-linear-gradient(to left, $dark-red, $clear-red);
+    background: linear-gradient(to left, $dark-red, $clear-red);
+    color: white !important;
+}
+
+#gr-wrp {
+  display: grid;
+  // grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  // grid-auto-rows: minmax(100px, auto);
+}
+
+#budget-label {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#sex-label {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#type-label {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+#input-budget {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#input-box-male {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#input-box-female {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+#input-box-sex-ind {
+  grid-column: 4;
+  grid-row: 2;
+}
+
+
+#input-box-extravagent {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+#input-box-moderate {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+#input-box-type-ind {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+#product-button-submit {
+  grid-column: 2 / 3;
+  grid-row: 4;
+}
+
+.sp-form {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+
+
+
+  &-label {
+    float: left;
+    width: 25%;
+    text-align: left;
+    padding-top: 10px;
+  }
+
+  &-content {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    width: 75%;
+    text-align: left;
+
+    &-currency {
+      > input {
+        padding-right: 80px;
+      }
+
+      // Copy this to have currency on the right
+      // Parent div needs to be in position relative or absolute
+      &:before {
+        content: '€';
+        background: #AA076B;
+        color: #FFF;
+        padding: 12px 0;
+
+        text-align: center;
+        position: absolute;
+        right: 1px; top: 1px; bottom: 6px;
+        width: 80px;
+        border-radius: 0 60px 60px 0;
+      }
+    }
+
+    &-12 {
+      float: left;
+      width: 100%;
+
+      > input {
+        width: 100%;
+      }
+    }
+
+    &-4 {
+      float: left;
+      width: 33.3333%;
+      padding: 0 5px;
+
+      > input[type="radio"] {
+        display: none;
+      }
+    }
+
+    // TODO
+    // Set .sp-form-content-4 to width 100% for responsive
+
+  }
 }
