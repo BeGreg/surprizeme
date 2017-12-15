@@ -13,12 +13,12 @@ Supplier.create(name:"L'Avantgardiste", url:"www.lavantgardiste.com")
 ######### Config for Poltergeist ############
 # Configure Poltergeist to not blow up on websites with js errors aka every website with js
 # See more options at https://github.com/teampoltergeist/poltergeist#customization
-Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path, timeout: 60)
-  end
+# Capybara.register_driver :poltergeist do |app|
+#     Capybara::Poltergeist::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path, timeout: 60)
+#   end
 
-  # Configure Capybara to use Poltergeist as the driver
-  Capybara.default_driver = :poltergeist
+#   # Configure Capybara to use Poltergeist as the driver
+#   Capybara.default_driver = :poltergeist
 
 ###### SCRAPPING PRODUCTS FROM AMAZON (Poltergeist) ############
 selection = []
@@ -94,6 +94,7 @@ end
 
 # products_url = []
 
+
 # url = "https://www.lesraffineurs.com/18-du-palais"
 # browser.visit url
 # products = browser.all '.product-container'
@@ -159,89 +160,90 @@ end
 
 ######## Config for Selenium ################
 # Configure to not blow up on websites with js errors aka every website with js
-# Capybara.register_driver :selenium do |app|
-#     Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
-#   end
 
-#   # Configure Capybara to use Poltergeist as the driver
-#   Capybara.default_driver = :selenium
+chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
+driver = Selenium::WebDriver.for(:chrome, options: chrome_opts)
 
 
-# ########## SCRAP PRODUITS L'avant-gardiste (Selenium) ##########
-# puts 'scrap avant-gardiste'
-# driver = Selenium::WebDriver.for :firefox
-# driver.get "https://www.lavantgardiste.com/149-idees-cadeaux"
-# product_avant_gardiste = []
-# products = driver.find_elements(:class, 'product-container')
-# products.delete_at(32)
-# products.delete_at(31)
+########## SCRAP PRODUITS L'avant-gardiste (Selenium) ##########
+puts 'scrap avant-gardiste'
+driver.get "https://www.lavantgardiste.com/149-idees-cadeaux"
+product_avant_gardiste = []
+products = driver.find_elements(:class, 'product-container')
+products.delete_at(32)
+products.delete_at(31)
+products.delete_at(30)
 
-# products.each do |product|
-#   title = product.find_element(:tag_name, 'h5').text
-#   url = product.find_element(:class, 'product_img_link')[:href]
-#   new_product = Product.new(
-#     name: title,
-#     url: url,
-#     supplier_id: Supplier.where(name:"L'Avantgardiste").first.id,
-#     delivery_time: 4,
-#     delivery_price: 4,
-#     status:"scrapped",
-#     )
-#   new_product
-#   product_avant_gardiste << new_product
-# end
+products.each do |product|
+  title = product.find_element(:tag_name, 'h5').text
+  url = product.find_element(:class, 'product_img_link')[:href]
+  new_product = Product.new(
+    name: title,
+    url: url,
+    supplier_id: Supplier.where(name:"L'Avantgardiste").first.id,
+    delivery_time: 4,
+    delivery_price: 4,
+    status:"scrapped",
+    )
+  new_product
+  product_avant_gardiste << new_product
+end
 
-# product_avant_gardiste.each do |product|
-#   driver.get product.url
-#   unless driver.find_element(:id, 'quantity_wanted_p').attribute("style") == "display: none;"
-#     sleep(1)
-#     product.price = driver.find_element(:id, 'our_price_display').text[0..-3].gsub(',','.').to_i
-#     begin
-#       evaluation = driver.find_element(:id, 'top_count_reviews')[:title]
-#     rescue Selenium::WebDriver::Error::NoSuchElementError
-#       false
-#     end
-#     begin
-#       product.supplier_review_number = driver.find_element(:id, 'top_count_reviews').text[1..-2]
-#     rescue Selenium::WebDriver::Error::NoSuchElementError
-#       false
-#     end
-#     if evaluation.nil?
-#      product.supplier_review = 0
-#     else
-#      product.supplier_review = 0.5 * evaluation.gsub('Évaluations positives à ','').to_f
-#     end
-#     description = driver.find_element(:id, 'short_description_content').attribute("innerHTML")
-#     description += driver.find_elements(:class, 'rte')[1].attribute("innerHTML")
-#     product.description = description
-#     product.supplier_category = driver.find_elements(:css, 'span[itemprop="title"]').last.text
-#     product.photo_url1 = driver.find_element(:id, 'bigpic')[:src]
-#     begin
-#       product.photo_url2 = driver.find_elements(:class, 'alternate_image_url')[0].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[0].nil?
-#     rescue Selenium::WebDriver::Error::NoSuchElementError
-#       false
-#     end
-#     begin
-#       product.photo_url3 = driver.find_elements(:class, 'alternate_image_url')[1].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[1].nil?
-#     rescue Selenium::WebDriver::Error::NoSuchElementError
-#       false
-#     end
-#     begin
-#       product.photo_url4 = driver.find_elements(:class, 'alternate_image_url')[2].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[2].nil?
-#     rescue Selenium::WebDriver::Error::NoSuchElementError
-#       false
-#     end
-#     p product
-#     if (product.supplier_review > 3.5) && (product.supplier_review_number > 5)
-#       product.save!
-#     end
-#   end
-# end
+product_avant_gardiste.each do |product|
+  driver.get product.url
+  unless driver.find_element(:id, 'quantity_wanted_p').attribute("style") == "display: none;"
+    sleep(1)
+    product.price = driver.find_element(:id, 'our_price_display').text[0..-3].gsub(',','.').to_i
+    begin
+      evaluation = driver.find_element(:id, 'top_count_reviews')[:title]
+    rescue Selenium::WebDriver::Error::NoSuchElementError
+      false
+    end
+    begin
+      product.supplier_review_number = driver.find_element(:id, 'top_count_reviews').text[1..-2]
+    rescue Selenium::WebDriver::Error::NoSuchElementError
+      false
+    end
+    if evaluation.nil?
+     product.supplier_review = 0
+    else
+     product.supplier_review = 0.5 * evaluation.gsub('Évaluations positives à ','').to_f
+    end
+    description = driver.find_element(:id, 'short_description_content').attribute("innerHTML")
+    description += driver.find_elements(:class, 'rte')[1].attribute("innerHTML")
+    product.description = description
+    product.supplier_category = driver.find_elements(:css, 'span[itemprop="title"]').last.text
+    product.photo_url1 = driver.find_element(:id, 'bigpic')[:src]
+    begin
+      product.photo_url2 = driver.find_elements(:class, 'alternate_image_url')[0].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[0].nil?
+    rescue Selenium::WebDriver::Error::NoSuchElementError
+      false
+    end
+    begin
+      product.photo_url3 = driver.find_elements(:class, 'alternate_image_url')[1].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[1].nil?
+    rescue Selenium::WebDriver::Error::NoSuchElementError
+      false
+    end
+    begin
+      product.photo_url4 = driver.find_elements(:class, 'alternate_image_url')[2].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[2].nil?
+    rescue Selenium::WebDriver::Error::NoSuchElementError
+      false
+    end
+    p product
+    if (product.supplier_review > 3.5) && (product.supplier_review_number > 5)
+      product.save!
+    end
+  end
+end
+
 
 # ##### SCRAPPING MOMENTS BILLETREDUC (SELENIUM) ######
 # # BILLET REDUC START
 # puts 'Start BilletReduc'
-# driver = Selenium::WebDriver.for :firefox
+# chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+# chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
+# driver = Selenium::WebDriver.for(:chrome, options: chrome_opts)
 # # # lien scrap de base
 # driver.get "http://www.billetreduc.com/a-lyon/liste/"
 # puts 'je suis sur le site'

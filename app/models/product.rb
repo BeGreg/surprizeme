@@ -78,7 +78,9 @@ class Product < ApplicationRecord
 
   def scrap_raffineurs
     ##### SCRAPPING ACHAT RAFFINEURS WITH SELENIUM ######
-    driver = Selenium::WebDriver.for :firefox
+    chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+    chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
+    driver = Selenium::WebDriver.for(:chrome, options: chrome_opts)
     driver.get self.url
     sleep(15)
     # Ajout panier
@@ -120,7 +122,9 @@ class Product < ApplicationRecord
 
   def scrap_avant_gardiste
     #### SCRAPPING ACHAT L'AVANGARDISTE WITH SELENIUM ######
-    driver = Selenium::WebDriver.for :firefox
+    chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+    chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
+    driver = Selenium::WebDriver.for(:chrome, options: chrome_opts)
     driver.get self.url
     # Ajout panier
     sleep(15)
@@ -158,7 +162,9 @@ class Product < ApplicationRecord
 
   def scrap_amazon
     #### SCRAPPING ACHAT AMAZON WITH SELENIUM ######
-    driver = Selenium::WebDriver.for :firefox
+    chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+    chrome_opts = chrome_bin ? { "binary" => chrome_bin } : {}
+    driver = Selenium::WebDriver.for(:chrome, options: chrome_opts)
     driver.get self.url
     sleep(10)
     driver.find_element(:id, 'add-to-cart-button').click
