@@ -169,6 +169,7 @@ product_avant_gardiste = []
 products = driver.find_elements(:class, 'product-container')
 products.delete_at(32)
 products.delete_at(31)
+products.delete_at(30)
 
 products.each do |product|
   title = product.find_element(:tag_name, 'h5').text
