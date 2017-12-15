@@ -8,7 +8,7 @@ function homepageAnimation() {
   var moment_title = document.querySelector(".moment-title");
 
   var headline_text = document.querySelector(".headline-text");
-
+  var ccm = document.getElementById("ccm");
 
   // What happens to title when selected
 
@@ -66,11 +66,14 @@ function homepageAnimation() {
 
   // what happense to Headline when interacting with page
   function HeadlineMove() {
+    var ccm = document.getElementById("ccm");
     if (product_form.classList.contains("cat-show") || moment_form.classList.contains("cat-show")) {
-      headline_text.style.visibility = "hidden"
+      headline_text.style.visibility = "hidden";
+      ccm.style.visibility = "hidden";
 
     }else{
-      headline_text.style.visibility = "visible"
+      headline_text.style.visibility = "visible";
+      ccm.style.visibility = "visible";
     }
   };
 
