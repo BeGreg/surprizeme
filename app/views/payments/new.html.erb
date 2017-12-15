@@ -19,6 +19,8 @@
             <h2>Qu'est-ce que ça pourrait bien être ?</h2>
           </div>
           <div class="payment-action generic-form">
+          <%= form_tag surprise_payments_path(@surprise) do %>
+
             <p>Valeur de la surprize : <strong> <%= number_to_currency(@surprise.amount, unit: "€", separator: ",", delimiter: "", format: "%n %u") %></strong></p>
             <p class="information">(rappel de votre budget maximum : <%= @budget %>€).</p>
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -33,6 +35,7 @@
               data-currency="<%= @surprise.amount.currency %>">
             </script>
             <p class="information"><i>Paiement sécurisé via notre partenaire Stripe.</i></p>
+            <% end %>
           </div>
         </div>
       </div>
