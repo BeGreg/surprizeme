@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     body: JSON.stringify({ id: surpriseId }),
     credentials: 'same-origin'
+    timeout: 60000
   }).then((response) => response.json())
     .then((answer) => {
       var url = answer.url
