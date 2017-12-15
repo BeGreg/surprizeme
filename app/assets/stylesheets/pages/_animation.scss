@@ -2,18 +2,25 @@
   --animation-distance: 50%;
 }
 
+.wrapper{
+  background-color: $broken-white;
+}
 
 .intro {
-  margin: 150px auto 20px auto;
+  margin: 0px auto 0px auto;
   width: 600px;
+  height: calc(100vh-85px);
+  h2 {
+    font-weight: 400;
+  }
 }
 
 // Bloc qui englobe toute l'animation
 .animation {
   width: 600px;
-  height: 600px;
+  height: 100vh;
   position: relative;
-  margin: 10px auto;
+  margin: 0px auto;
 }
 
 // visuel "cadeaux" posé en premier plan
