@@ -91,12 +91,23 @@ Capybara.register_driver :poltergeist do |app|
 # puts 'startin les raffineurs, du palais, capybara'
 # Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
 
+<<<<<<< HEAD
+products_url = []
+
+url = "https://www.lesraffineurs.com/18-du-palais"
+browser.visit url
+products = browser.all '.product-container'
+products.each do |product|
+  products_url << product.find('.product-name')[:href]
+end
+=======
 # url = "https://www.lesraffineurs.com/18-du-palais"
 # browser.visit url
 # products = browser.all '.product-container'
 # products.each do |product|
 #   products_url << product.find('.product-name')[:href]
 # end
+>>>>>>> 558bda6e19f0eaecad8d1f7172799041f545fa1d
 
 # products_url.each do |url|
 #   browser = Capybara.current_session

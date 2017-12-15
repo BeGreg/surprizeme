@@ -1,36 +1,64 @@
 
-
-
 <div class='container form-container' style="background: none">
   <div class="generic-form-container">
     <div class='generic-form'>
+      <%= form_tag("/search", method: :post, id: "gr-wrp") do |f| %>
+        <div class="sp-form form-inputs">
+          <div class="sp-form-label">
+            <%= label_tag(:budget, "Budget max.")  %>
+          </div>
 
-    <%= form_tag("/search", method: :post) do |f| %>
-      <div class="form-inputs inline">
-        <%= label_tag(:budget, "Budget max.")  %>
-        <%= text_field_tag(:budget, nil, placeholder: "exemple : 80€") %>
-      </div>
-      <div class="inline icon-selector">
-        <%= label_tag(:gender, "Sexe")  %>
-        <%= radio_button_tag(:gender, "male") %>
-        <%= label_tag(:gender_male, "Homme", class: "icon-card male") %>
-        <%= radio_button_tag(:gender, "female") %>
-        <%= label_tag(:gender_female, "Femme", class: "icon-card female") %>
-        <%= radio_button_tag(:gender, "indifferent") %>
-        <%= label_tag(:gender_indifferent, "Indifférent", class: "icon-card indifferent") %>
-      </div>
-      <div class="icon-selector inline">
-        <%= label_tag(:surprise_type, "Type")  %>
-        <%= radio_button_tag(:surprise_type, "extravagent") %>
-        <%= label_tag(:surprise_type_extravagent, "Extravagant", class: "icon-card extravagant") %>
-        <%= radio_button_tag(:surprise_type, "moderate") %>
-        <%= label_tag(:surprise_type_moderate, "Modéré", class: "icon-card moderate") %>
+          <div class="sp-form-content">
+            <div class="sp-form-content-12 sp-form-content-currency">
+              <%= text_field_tag(:budget, nil, placeholder: "exemple : 80€") %>
+            </div>
+          </div>
+        </div>
 
-        <%= radio_button_tag(:surprise_type, "indifferent") %>
-        <%= label_tag(:surprise_type_indifferent, "Indifférent", class: "icon-card indifferent") %>
-      </div>
-      <div class="form-actions">
-        <%= submit_tag "Surprenez-moi !", class: "form-button" %>
+        <div class="sp-form">
+          <div class="sp-form-label">
+            <%= label_tag(:gender, "Sexe")  %>
+          </div>
+
+          <div class="sp-form-content">
+            <div class="sp-form-content-4 icon-selector">
+              <%= radio_button_tag(:gender, "male") %>
+              <%= label_tag(:gender_male, "Homme", class: "icon-card male") %>
+            </div>
+            <div class="sp-form-content-4 icon-selector">
+              <%= radio_button_tag(:gender, "female") %>
+              <%= label_tag(:gender_female, "Femme", class: "icon-card female") %>
+            </div>
+            <div class="sp-form-content-4 icon-selector">
+              <%= radio_button_tag(:gender, "indifferent") %>
+              <%= label_tag(:gender_indifferent, "Indifférent", class: "icon-card indifferent") %>
+            </div>
+          </div>
+        </div>
+
+        <div class="sp-form">
+          <div class="sp-form-label">
+            <%= label_tag(:surprise_type, "Type")  %>
+          </div>
+          <div class="sp-form-content">
+            <div class="sp-form-content-4 icon-selector">
+              <%= radio_button_tag(:surprise_type, "extravagent") %>
+              <%= label_tag(:surprise_type_extravagent, "Extravagant", class: "icon-card extravagant") %>
+            </div>
+            <div class="sp-form-content-4 icon-selector">
+              <%= radio_button_tag(:surprise_type, "moderate") %>
+              <%= label_tag(:surprise_type_moderate, "Modéré", class: "icon-card moderate") %>
+            </div>
+            <div class="sp-form-content-4 icon-selector">
+              <%= radio_button_tag(:surprise_type, "indifferent") %>
+              <%= label_tag(:surprise_type_indifferent, "Indifférent", class: "icon-card indifferent") %>
+            </div>
+          </div>
+        </div>
+
+        <div class="sp-form-actions">
+          <%= submit_tag "Surprenez-moi !", class: "form-button" %>
+        </div>
       </div>
       <% end %>
     </div>
