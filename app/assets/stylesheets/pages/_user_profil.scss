@@ -2,25 +2,41 @@
   background: white;
 }
 
+#list-surprise-user em{
+  text-align: center;
+  margin-bottom: 4px;
+}
+
 #user-info p{
   background-color: white;
   border-bottom: 2px lightgrey solid;
+  margin-top: 13px;
+}
+#user-info p:hover{
+  font-size: 19px;
 }
 
-#user-info ul{
+p{
+  text-align: center;
+}
+
+#user-info {
   list-style: none;
+  padding: 0;
 }
 
 #list-surprise-user {
   background: white;
   margin-top: 0px;
-  border-top: 2px lightgrey solid;
+  border-bottom: 2px lightgrey solid;
 }
 
-#list-surprise-user:hover {
-  background-color: lightgrey;
-}
+// #list-surprise-user:hover {
 
+// }
+#lien-edit a{
+  text-decoration: none;
+}
 
 
 
@@ -30,9 +46,10 @@
   position: relative;
   float: left;
   overflow: hidden;
-  margin: 10px 1%;
-  min-width: 230px;
-  max-width: 315px;
+  // margin: 10px 1%;
+  // min-width: 230px;
+  // max-width: 315px;
+  margin-bottom: 7px;
   width: 100%;
   color: #ffffff;
   text-align: center;
@@ -51,7 +68,7 @@
   vertical-align: top;
   opacity: 0.2;
   -webkit-filter: grayscale(100%) blur(10px);
-  filter: grayscale(100%) blur(10px);
+  filter: grayscale(100%) blur(5px);
   -webkit-transition: all 2s ease;
   transition: all 2s ease;
 }
@@ -78,12 +95,7 @@
   margin: 0 0 5px;
   font-weight: 400;
 }
-.snip1344 h3 span {
-  display: block;
-  font-size: 0.6em;
-  color: #f39c12;
-  opacity: 0.75;
-}
+
 .snip1344:hover .background-profil,
 .snip1344.hover .background-profil {
   -webkit-transform: scale(1.3);

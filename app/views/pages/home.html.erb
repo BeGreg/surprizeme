@@ -2,21 +2,28 @@
       Offrez-vous une Surprize en 2 clicks
       <div>Choisissez entre un produit et un moment !</div>
 </div>
+
 <div class="home-selection container-fluid">
   <div class="row">
-      <div class="col-xs-12 col-sm-6 " id="product">
+
+       <div class="col-xs-12 col-md-6 category-select" id="product">
         <button class="product-title">PRODUIT</button>
         <div class="product-form event-hide">
           <%= render "../views/products/search" %>
         </div>
       </div>
 
-      <div class="col-xs-12 col-sm-6 " id="moment">
+      <div class="col-xs-12 col-md-6 category-select" id="moment">
+
         <button class="moment-title">MOMENT</button>
         <div class="moment-form event-hide">
           <%= render "../views/moments/search" %>
         </div>
       </div>
+
+
+
+
 
 
       <!-- <div class="headline hidden-xs hidden-sm">
@@ -26,13 +33,12 @@
         <div>Cliquez sur une des deux catégories :</div>
       </div>
   </div>
-
 </div>
 <!-- <div class="how"> -->
     <!-- test -->
     <div class="how-it-works-arrow-down flex hidden-xs hidden-sm">
       <a href="#how-it-works">
-        <p>Comment ça marche ?</p>
+        <p id="ccm">Comment ça marche ?</p>
         <i class="arrow down"></i>
       </a>
     </div>
@@ -45,22 +51,32 @@
       <h2>Une surprize sur mesure en quelques clicks</h2>
     </div>
   </div>
-  <div id="how-it-works-cards" class="row">
-    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
-      <%= image_tag "light.png", class: "gift-image"%>
-      <p> 1/ Choisir entre un <em>Produit</em> ou un <em>Moment</em></p>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
-      <%= image_tag "saisir.png", class: "gift-image"%>
-      <p> 2/ Saisir <em>vos critères</em>, vos coordonées et informations utiles. Surprize Me sélectionne ensuite votre surprise</p>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
-      <%= image_tag "paid.svg", class: "gift-image"%>
-      <p> 3/ <strong>Payez</strong> de manière sécurisée</p>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-3 info-card">
-      <%= image_tag "gift.png", class: "gift-image" %>
-      <p> 4/ Découvrez votre surprise ! "No way back" : Surprise Me l'a déjà <strong>commandée</strong> pour vous !</p>
+  <div id="how-it-works-cards" >
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="info-card">
+          <%= image_tag "light.png", class: "gift-image"%>
+          <p> 1/ Choisir entre un <em>Produit</em> ou un <em>Moment</em></p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="info-card">
+          <%= image_tag "saisir.png", class: "gift-image"%>
+          <p> 2/ Saisir <em>vos critères</em>, vos coordonées et informations utiles. Surprize Me sélectionne ensuite votre surprise</p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="info-card">
+          <%= image_tag "paid.svg", class: "gift-image"%>
+          <p> 3/ <strong>Payez</strong> de manière sécurisée</p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="info-card">
+          <%= image_tag "gift.png", class: "gift-image" %>
+          <p> 4/ Découvrez votre surprise ! "No way back" : Surprise Me l'a déjà <strong>commandée</strong> pour vous !</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
