@@ -91,6 +91,8 @@ end
 puts 'startin les raffineurs, du palais, capybara'
 Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
 
+products_url = []
+
 url = "https://www.lesraffineurs.com/18-du-palais"
 browser.visit url
 products = browser.all '.product-container'
