@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
   before_action :set_surprise
 
   def new
+    @budget = session[:budget]
   end
 
   def create

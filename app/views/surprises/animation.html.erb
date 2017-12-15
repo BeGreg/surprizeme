@@ -1,23 +1,21 @@
-<div class="wrapper" >
+<div class="page-container" >
   <div class="intro">
     <h2>SurpriZe en approche !</h2>
-    <p>SurpriZe Me est en train de commander votre surprise via nos partenaires.</p>
-    <p>Cela peut prendre une minute environ. Merci de bien vouloir patienter</p>
+    <p>SurpriZe Me est en train de <strong>commander votre surprise</strong> via notre partenaire <%= Surprise.find(params[:surprise_id]).product.supplier.name %>.</p>
+    <p>Cela va prendre <strong>une minute</strong> environ. Merci de bien vouloir patienter</p>
   </div>
-  <div id="animation" class="animation" data-surprise-id="<%= params[:surprise_id] %>">
-    <div class="gifts"></div>
-    <div id="translation" class="pince-animation">
-      <div id="poulis" class="rond"></div>
-      <div class="down">
-        <div id="fil" class="fil"></div>
-        <div class="pince"></div>
-        <div id="pince"> </div>
+  <div class="animation-wrapper">
+    <div id="animation" class="animation" data-surprise-id="<%= params[:surprise_id] %>">
+      <div class="gifts"></div>
+      <div id="translation" class="pince-animation">
+        <div id="poulis" class="rond"></div>
+        <div class="down">
+          <div id="fil" class="fil"></div>
+          <div class="pince"></div>
+          <div id="pince"> </div>
+        </div>
+        <span class="rotate"></span>
       </div>
-      <span class="rotate"></span>
     </div>
   </div>
 </div>
-<% content_for :after_js do %>
-    <script> initCheckboxBillingAddress(); </script>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBTatMTb2qrJDAwzylTpE7DVHjzR_yCJQs"></script>
-<% end %>

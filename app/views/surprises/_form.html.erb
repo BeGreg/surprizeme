@@ -1,7 +1,7 @@
 
-<div class='container form-container' style="height: 100vh;">
+<div class='container page-container'>
   <div class="form-title">
-    <h2>Surprize Me</h2>
+    <h2>Où envoyer votre surprise ?</h2>
   </div>
 
   <div class="generic-form-container">
@@ -14,13 +14,13 @@
       <%= f.error_notification %>
       <div class="form-inputs address-box">
         <div class="delivery_address">
-        <p>Votre adresse de Livraison:</p>
+        <p>Votre adresse de Livraison :</p>
           <%= f.input :del_first_name, label:"Prenom", input_html: { value: @user.first_name }, required: true, autofocus: true %>
           <%= f.input :del_last_name, label:"Nom de famille", input_html: { value: @user.last_name }, required: true, autofocus: true %>
           <%= f.input :del_address, label:"Adresse", input_html: { value: @user.address }, required: true, autofocus: true %>
 
-          <label for="bill_address">Utiliser cette adresse pour la facturation</label>
-          <input type="checkbox" id="bill_address" checked="unchecked">
+          <label for="bill_address">Utiliser une autre adresse pour la facturation</label>
+          <input type="checkbox" id="bill_address" unchecked>
         </div>
 
         <div class="billing_address bill-hide" >
@@ -42,9 +42,4 @@
 <% content_for :after_js do %>
     <script> initCheckboxBillingAddress(); </script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBTatMTb2qrJDAwzylTpE7DVHjzR_yCJQs"></script>
-<% end %>
-
-<%= form_tag surprises_path do %>
-  <%= hidden_field_tag 'surprise_id', @surprise.id %>
-  <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
 <% end %>

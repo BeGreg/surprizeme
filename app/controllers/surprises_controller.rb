@@ -45,6 +45,8 @@ class SurprisesController < ApplicationController
     # On crée une instance de surprise et on la met dans le cookie (miam !)
     session[:product_id] = nil
     session[:product_id] = @product_id
+    session[:budget] = nil
+    session[:budget] = @budget
     redirect_to surprise_details_path
   end
 
@@ -55,7 +57,7 @@ class SurprisesController < ApplicationController
   def scrap_purchase
     puts "on est dans le scrap_purchase"
     # @surprise.product.scrap
-    sleep(10)
+    sleep(40)
     url = surprise_path(@surprise)
     render json: { url: url }
   end
