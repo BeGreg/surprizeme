@@ -1,7 +1,7 @@
 <div class="page-container" >
   <div class="intro">
     <h2>SurpriZe en approche !</h2>
-    <p>SurpriZe Me est en train de <strong>commander votre surprise</strong> via notre partenaire <%= Surprise.find(params[:surprise_id]).product.supplier.name %>.</p>
+    <p>SurpriZe Me est en train de <strong>commander votre surprise</strong> via notre partenaire <strong><%= Surprise.find(params[:surprise_id]).product.supplier.name %></strong>.</p>
     <p>Cela va prendre <strong>une minute</strong> environ. Merci de bien vouloir patienter</p>
   </div>
   <div class="animation-wrapper">
