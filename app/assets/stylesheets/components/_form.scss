@@ -26,7 +26,7 @@ html, body {
 
   .generic-form-container {
     position: relative;
-    z-index: 15;
+    z-index: 5;
     margin: 0 auto;
     max-width: 500px;
   }
@@ -306,8 +306,10 @@ html, body {
     &-4 {
       float: left;
       width: 33.3333%;
-      padding: 0 5px;
-
+      padding: 0 5px 0 0;
+      &:last-child {
+        padding: 0;
+      }
       > input[type="radio"] {
         display: none;
       }
