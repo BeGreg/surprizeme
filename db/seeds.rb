@@ -20,70 +20,70 @@ Capybara.register_driver :poltergeist do |app|
   # Configure Capybara to use Poltergeist as the driver
   Capybara.default_driver = :poltergeist
 
-####### SCRAPPING PRODUCTS FROM AMAZON (Poltergeist) ############
-# selection = []
-# browser = Capybara.current_session
+###### SCRAPPING PRODUCTS FROM AMAZON (Poltergeist) ############
+selection = []
+browser = Capybara.current_session
 
-# url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+high+tech&rh=n%3A13921051%2Ck%3Agadget+high+tech&qid=1513164051&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
-# browser.visit url
-# products = browser.all '.s-item-container'
-# puts "starting l'itération"
-# products.each do |article|
-#   if article.has_css?('.a-icon-star')
-#     note = article.all('.a-icon-star')[0].text[0]
-#     print nb_note = article.all("a").last.text
-#     if (note.to_i > 3) && (nb_note.to_i > 5)
-#       puts name = article.find('.s-access-title').text
-#       puts note = article.all('.a-icon-star')[0].text[0]
-#       note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
-#       print note.to_f
-#       # print article.all('.s-access-detail-page')[:url]
-#       print url = article.find('.s-access-detail-page')[:href]
-#       product = Product.new(
-#         name: name,
-#         supplier_review: (note.to_f * 10),
-#         supplier_review_number: nb_note,
-#         url: url,
-#         status:"scrapped",
-#         supplier_id:Supplier.where(name:"Amazon")[0].id)
-#       selection << product
+url = "https://www.amazon.fr/s/ref=sr_st_review-rank?keywords=gadget+high+tech&rh=n%3A13921051%2Ck%3Agadget+high+tech&qid=1513164051&__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&sort=review-rank"
+browser.visit url
+products = browser.all '.s-item-container'
+puts "starting l'itération"
+products.each do |article|
+  if article.has_css?('.a-icon-star')
+    note = article.all('.a-icon-star')[0].text[0]
+    print nb_note = article.all("a").last.text
+    if (note.to_i > 3) && (nb_note.to_i > 5)
+      puts name = article.find('.s-access-title').text
+      puts note = article.all('.a-icon-star')[0].text[0]
+      note = "#{note}.#{article.all('.a-icon-star')[0].text[2]}" if note.to_f == 4
+      print note.to_f
+      # print article.all('.s-access-detail-page')[:url]
+      print url = article.find('.s-access-detail-page')[:href]
+      product = Product.new(
+        name: name,
+        supplier_review: (note.to_f * 10),
+        supplier_review_number: nb_note,
+        url: url,
+        status:"scrapped",
+        supplier_id:Supplier.where(name:"Amazon")[0].id)
+      selection << product
 
-#     end
-#   end
-# end
+    end
+  end
+end
 
-# selection.each do |product|
-#   puts "on débute le zoom produit"
-#   browser.visit product.url
-#   # binding.pry
-#   product.description = browser.find_by_id('productDescription')['outerHTML']
-#   if browser.has_no_text?(:visible, "Nouveau Prix")
-#     price_text = browser.find_by_id('priceblock_ourprice').text
-#   else
-#     price_text = browser.find_by_id('priceblock_saleprice').text
-#   end
-#   product.price = price_text.last(5).gsub(",",".").to_i
-#   product.characteristic = browser.all('.techD')[0].text
-#   if browser.has_css?('a-breadcrumb')
-#     product.supplier_category = browser.find_by_id('wayfinding-breadcrumbs_feature_div').all('li').last.text
-#   else
-#     product.supplier_category = "Gadget"
-#   end
-#   browser.all('.imageThumbnail').each do |element|
-#     element.trigger('mousemove')
-#   end
-#     product.photo_url1 = browser.find_by_id('imgTagWrapperId').find('img', visible: :all)['src']
-#   if browser.has_css?('.itemNo2')
-#     product.photo_url1 = browser.find('.itemNo2', visible: :all).find('img', visible: :all)['src']
-#   end
-#   if browser.has_css?('.itemNo3')
-#     product.photo_url1 = browser.find('.itemNo3', visible: :all).find('img', visible: :all)['src']
-#   end
-#   if browser.has_css?('.itemNo4')
-#     product.photo_url1 = browser.find('.itemNo4', visible: :all).find('img', visible: :all)['src']
-#   end
-#   product.save!
-# end
+selection.each do |product|
+  puts "on débute le zoom produit"
+  browser.visit product.url
+  # binding.pry
+  product.description = browser.find_by_id('productDescription')['outerHTML']
+  if browser.has_no_text?(:visible, "Nouveau Prix")
+    price_text = browser.find_by_id('priceblock_ourprice').text
+  else
+    price_text = browser.find_by_id('priceblock_saleprice').text
+  end
+  product.price = price_text.last(5).gsub(",",".").to_i
+  product.characteristic = browser.all('.techD')[0].text
+  if browser.has_css?('a-breadcrumb')
+    product.supplier_category = browser.find_by_id('wayfinding-breadcrumbs_feature_div').all('li').last.text
+  else
+    product.supplier_category = "Gadget"
+  end
+  browser.all('.imageThumbnail').each do |element|
+    element.trigger('mousemove')
+  end
+    product.photo_url1 = browser.find_by_id('imgTagWrapperId').find('img', visible: :all)['src']
+  if browser.has_css?('.itemNo2')
+    product.photo_url1 = browser.find('.itemNo2', visible: :all).find('img', visible: :all)['src']
+  end
+  if browser.has_css?('.itemNo3')
+    product.photo_url1 = browser.find('.itemNo3', visible: :all).find('img', visible: :all)['src']
+  end
+  if browser.has_css?('.itemNo4')
+    product.photo_url1 = browser.find('.itemNo4', visible: :all).find('img', visible: :all)['src']
+  end
+  product.save!
+end
 
 
 # ########## SCRAP PRODUITS Raffineurs (Poltergeist) ##########
@@ -91,23 +91,16 @@ Capybara.register_driver :poltergeist do |app|
 # puts 'startin les raffineurs, du palais, capybara'
 # Supplier.create(name:"Les Raffineurs", url:"www.lesraffineurs.com")
 
-<<<<<<< HEAD
-products_url = []
 
-url = "https://www.lesraffineurs.com/18-du-palais"
-browser.visit url
-products = browser.all '.product-container'
-products.each do |product|
-  products_url << product.find('.product-name')[:href]
-end
-=======
+# products_url = []
+
 # url = "https://www.lesraffineurs.com/18-du-palais"
 # browser.visit url
 # products = browser.all '.product-container'
 # products.each do |product|
 #   products_url << product.find('.product-name')[:href]
 # end
->>>>>>> 558bda6e19f0eaecad8d1f7172799041f545fa1d
+
 
 # products_url.each do |url|
 #   browser = Capybara.current_session
@@ -166,84 +159,84 @@ end
 
 ######## Config for Selenium ################
 # Configure to not blow up on websites with js errors aka every website with js
-Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
-  end
+# Capybara.register_driver :selenium do |app|
+#     Capybara::Selenium::Driver.new(app, js_errors: false, cookies: true, phantomjs: Phantomjs.path)
+#   end
 
-  # Configure Capybara to use Poltergeist as the driver
-  Capybara.default_driver = :selenium
+#   # Configure Capybara to use Poltergeist as the driver
+#   Capybara.default_driver = :selenium
 
 
-########## SCRAP PRODUITS L'avant-gardiste (Selenium) ##########
-puts 'scrap avant-gardiste'
-driver = Selenium::WebDriver.for :firefox
-driver.get "https://www.lavantgardiste.com/149-idees-cadeaux"
-product_avant_gardiste = []
-products = driver.find_elements(:class, 'product-container')
-products.delete_at(32)
-products.delete_at(31)
+# ########## SCRAP PRODUITS L'avant-gardiste (Selenium) ##########
+# puts 'scrap avant-gardiste'
+# driver = Selenium::WebDriver.for :firefox
+# driver.get "https://www.lavantgardiste.com/149-idees-cadeaux"
+# product_avant_gardiste = []
+# products = driver.find_elements(:class, 'product-container')
+# products.delete_at(32)
+# products.delete_at(31)
 
-products.each do |product|
-  title = product.find_element(:tag_name, 'h5').text
-  url = product.find_element(:class, 'product_img_link')[:href]
-  new_product = Product.new(
-    name: title,
-    url: url,
-    supplier_id: Supplier.where(name:"L'Avantgardiste").first.id,
-    delivery_time: 4,
-    delivery_price: 4,
-    status:"scrapped",
-    )
-  new_product
-  product_avant_gardiste << new_product
-end
+# products.each do |product|
+#   title = product.find_element(:tag_name, 'h5').text
+#   url = product.find_element(:class, 'product_img_link')[:href]
+#   new_product = Product.new(
+#     name: title,
+#     url: url,
+#     supplier_id: Supplier.where(name:"L'Avantgardiste").first.id,
+#     delivery_time: 4,
+#     delivery_price: 4,
+#     status:"scrapped",
+#     )
+#   new_product
+#   product_avant_gardiste << new_product
+# end
 
-product_avant_gardiste.each do |product|
-  driver.get product.url
-  unless driver.find_element(:id, 'quantity_wanted_p').attribute("style") == "display: none;"
-    sleep(1)
-    product.price = driver.find_element(:id, 'our_price_display').text[0..-3].gsub(',','.').to_i
-    begin
-      evaluation = driver.find_element(:id, 'top_count_reviews')[:title]
-    rescue Selenium::WebDriver::Error::NoSuchElementError
-      false
-    end
-    begin
-      product.supplier_review_number = driver.find_element(:id, 'top_count_reviews').text[1..-2]
-    rescue Selenium::WebDriver::Error::NoSuchElementError
-      false
-    end
-    if evaluation.nil?
-     product.supplier_review = 0
-    else
-     product.supplier_review = 0,5 * evaluation.gsub('Évaluations positives à ','').to_f
-    end
-    description = driver.find_element(:id, 'short_description_content').attribute("innerHTML")
-    description += driver.find_elements(:class, 'rte')[1].attribute("innerHTML")
-    product.description = description
-    product.supplier_category = driver.find_elements(:css, 'span[itemprop="title"]').last.text
-    product.photo_url1 = driver.find_element(:id, 'bigpic')[:src]
-    begin
-      product.photo_url2 = driver.find_elements(:class, 'alternate_image_url')[0].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[0].nil?
-    rescue Selenium::WebDriver::Error::NoSuchElementError
-      false
-    end
-    begin
-      product.photo_url3 = driver.find_elements(:class, 'alternate_image_url')[1].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[1].nil?
-    rescue Selenium::WebDriver::Error::NoSuchElementError
-      false
-    end
-    begin
-      product.photo_url4 = driver.find_elements(:class, 'alternate_image_url')[2].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[2].nil?
-    rescue Selenium::WebDriver::Error::NoSuchElementError
-      false
-    end
-    p product
-    if (product.supplier_review > 3.5) && (product.supplier_review_number > 5)
-      product.save!
-    end
-  end
-end
+# product_avant_gardiste.each do |product|
+#   driver.get product.url
+#   unless driver.find_element(:id, 'quantity_wanted_p').attribute("style") == "display: none;"
+#     sleep(1)
+#     product.price = driver.find_element(:id, 'our_price_display').text[0..-3].gsub(',','.').to_i
+#     begin
+#       evaluation = driver.find_element(:id, 'top_count_reviews')[:title]
+#     rescue Selenium::WebDriver::Error::NoSuchElementError
+#       false
+#     end
+#     begin
+#       product.supplier_review_number = driver.find_element(:id, 'top_count_reviews').text[1..-2]
+#     rescue Selenium::WebDriver::Error::NoSuchElementError
+#       false
+#     end
+#     if evaluation.nil?
+#      product.supplier_review = 0
+#     else
+#      product.supplier_review = 0.5 * evaluation.gsub('Évaluations positives à ','').to_f
+#     end
+#     description = driver.find_element(:id, 'short_description_content').attribute("innerHTML")
+#     description += driver.find_elements(:class, 'rte')[1].attribute("innerHTML")
+#     product.description = description
+#     product.supplier_category = driver.find_elements(:css, 'span[itemprop="title"]').last.text
+#     product.photo_url1 = driver.find_element(:id, 'bigpic')[:src]
+#     begin
+#       product.photo_url2 = driver.find_elements(:class, 'alternate_image_url')[0].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[0].nil?
+#     rescue Selenium::WebDriver::Error::NoSuchElementError
+#       false
+#     end
+#     begin
+#       product.photo_url3 = driver.find_elements(:class, 'alternate_image_url')[1].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[1].nil?
+#     rescue Selenium::WebDriver::Error::NoSuchElementError
+#       false
+#     end
+#     begin
+#       product.photo_url4 = driver.find_elements(:class, 'alternate_image_url')[2].attribute("innerHTML") unless driver.find_elements(:class, 'alternate_image_url')[2].nil?
+#     rescue Selenium::WebDriver::Error::NoSuchElementError
+#       false
+#     end
+#     p product
+#     if (product.supplier_review > 3.5) && (product.supplier_review_number > 5)
+#       product.save!
+#     end
+#   end
+# end
 
 # ##### SCRAPPING MOMENTS BILLETREDUC (SELENIUM) ######
 # # BILLET REDUC START
