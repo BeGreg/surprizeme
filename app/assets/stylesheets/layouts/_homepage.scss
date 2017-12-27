@@ -623,10 +623,20 @@ $animation:0.2s all ease;
     }
 
     .icon-card {
-      font-size: 0.9rem !important;
+      font-size: 1.4rem !important;
 
     }
+    .icon-selector {
+      margin-top: 0px;
+    }
 
+    .sp-form-label {
+      padding-top: 0;
+    }
+
+    .sp-form {
+      margin-top: 0.2rem;
+    }
 
 
 }
