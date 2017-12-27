@@ -1,65 +1,76 @@
 <div class="surprise">
-  <div class="grid-surprise">
-    <div class="image-surprise" id="image-surprise">
-      <div class="slider" >
-        <input type="radio" name="slide_switch" id="id1" checked="checked"/>
-        <label for="id1">
-          <img src="<%= @product.photo_url1 %>" width="80"/>
-        </label>
-        <img src="<%= @product.photo_url1 %>"/>
+  <div class="row" id="column-surprise">
+    <div class="col-xs-12 col-md-6" >
+      <div class="image-surprise" id="image-surprise">
+        <div class="slider" >
+          <input type="radio" name="slide_switch" id="id1" checked="checked"/>
+          <label for="id1">
+            <img src="<%= @product.photo_url1 %>" width="80"/>
+          </label>
+          <img src="<%= @product.photo_url1 %>"/>
 
-        <input type="radio" name="slide_switch" id="id2"/>
-        <label for="id2">
-          <img src="<%= @product.photo_url2 %>" width="80"/>
-        </label>
-        <img src="<%= @product.photo_url2 %>"/>
+          <% if @product.photo_url2? %>
+            <input type="radio" name="slide_switch" id="id2"/>
+            <label for="id2">
+              <img src="<%= @product.photo_url2 %>" width="80"/>
+            </label>
+            <img src="<%= @product.photo_url2 %>"/>
+          <% end %>
 
-        <input type="radio" name="slide_switch" id="id3"/>
-        <label for="id3">
-          <img src="<%= @product.photo_url3 %>" width="80"/>
-        </label>
-        <img src="<%= @product.photo_url3 %>"/>
+          <% if @product.photo_url3? %>
+            <input type="radio" name="slide_switch" id="id3"/>
+            <label for="id3">
+              <img src="<%= @product.photo_url3 %>" width="80"/>
+            </label>
+            <img src="<%= @product.photo_url3 %>"/>
+          <%end %>
 
-        <input type="radio" name="slide_switch" id="id4"/>
-        <label for="id4">
-          <img src="<%= @product.photo_url4 %>" width="80"/>
-        </label>
-        <img src="<%= @product.photo_url4 %>"/>
+          <% if @product.photo_url4? %>
+            <input type="radio" name="slide_switch" id="id4"/>
+            <label for="id4">
+              <img src="<%= @product.photo_url4 %>" width="80"/>
+            </label>
+            <img src="<%= @product.photo_url4 %>"/>
+          <% end %>
+        </div>
       </div>
-  </div>
-  <div class="carac-surprise" id="carac-surprise">
-    <div class="separator">
-      <h1><%= @product.name.split[0...11].join(' ') %></h1>
     </div>
-    <p>
-      <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-      <strong>Marchand : </strong><%= @product.supplier.name %>
-    </p>
-    <% if @product.supplier_review > 0 %>
-      <p>
-        <i class="fa fa-star" aria-hidden="true"></i>
-        <strong>Notes des internautes :</strong> <%= (@product.supplier_review / 10).round(1) %>/5 (<%= @product.supplier_review_number %> notes)
-      </p>
-    <% end %>
-    <p>
-      <i class="fa fa-tag" aria-hidden="true"></i>
-      <strong> Prix : </strong> <%= @surprise.amount %>
-      <i class="fa fa-eur" aria-hidden="true"></i>
-    </p>
-    <p><i class="fa fa-truck" aria-hidden="true"></i>
-      <strong> Livraison : </strong> Votre produit sera livré dans <%= @product.delivery_time %> jours
-    </p>
-    <div class="card-thumbs">
-      <h2>SURPRIS ?</h2>
-      <a href="#" class="shrink-up"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
-      <a href="#" class="shrink-down"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+
+    <div class="col-xs-12 col-md-6">
+      <div class="carac-surprise" id="carac-surprise">
+        <div class="separator">
+          <h1><%= @product.name.split[0...11].join(' ') %></h1>
+        </div>
+        <p>
+          <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+          <strong>Marchand : </strong><%= @product.supplier.name %>
+        </p>
+        <% if @product.supplier_review > 0 %>
+          <p>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <strong>Notes des internautes :</strong> <%= (@product.supplier_review / 10).round(1) %>/5 (<%= @product.supplier_review_number %> notes)
+          </p>
+        <% end %>
+        <p>
+          <i class="fa fa-tag" aria-hidden="true"></i>
+          <strong> Prix : </strong> <%= @surprise.amount %>
+          <i class="fa fa-eur" aria-hidden="true"></i>
+        </p>
+        <p><i class="fa fa-truck" aria-hidden="true"></i>
+          <strong> Livraison : </strong> Votre produit sera livré dans <%= @product.delivery_time %> jours
+        </p>
+        <div class="card-thumbs">
+          <h2>SURPRIS ?</h2>
+          <a href="#" class="shrink-up"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+          <a href="#" class="shrink-down"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="surprise-description" id="description-surprise">
     <h1>Description:</h1>
     <p><%= @product.description.html_safe %></p>
   </div>
- </div>
 </div>
 <% content_for :after_js do %>
   <script> scratchCard(); </script>

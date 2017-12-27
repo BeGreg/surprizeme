@@ -108,12 +108,15 @@ body {background: #ccc;}
 /*Last thing remaining is to add transitions*/
 .slider>img{
   position: absolute;
-  left: 0; top: 0;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  top: 0;
   transition: all 0.5s;
   // background-size: cover;
    max-width: 100%;
    max-height: 100%;
-   // margin-left: 25%;
+   margin-left: auto;
+   margin-right: auto;
   // border: 1px solid purple;
 
 }
