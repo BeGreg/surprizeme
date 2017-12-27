@@ -1,5 +1,5 @@
 
-<div class='container details-container'>
+<div class='container form-container'>
   <div class="form-title">
     <h2>Où envoyer votre surprise ?</h2>
   </div>
@@ -13,7 +13,7 @@
       <%= f.error_notification %>
       <div class="form-inputs address-box">
         <div class="delivery_address">
-        <p>Votre adresse de Livraison :</p>
+        <p>Adresse de Livraison :</p>
           <%= f.input :del_first_name, label:"Prenom", input_html: { value: @user.first_name }, required: true, autofocus: true %>
           <%= f.input :del_last_name, label:"Nom de famille", input_html: { value: @user.last_name }, required: true, autofocus: true %>
           <%= f.input :del_address, label:"Adresse", input_html: { value: @user.address }, required: true, autofocus: true %>
@@ -23,7 +23,7 @@
         </div>
 
         <div class="billing_address bill-hide" >
-          <p>Votre adresse de Facturation:</p>
+          <p>Adresse de Facturation:</p>
           <%= f.input :bill_first_name, label:"Prenom", input_html: { value: @user.first_name }, required: true, autofocus: true %>
           <%= f.input :bill_last_name, label:"Nom de famille", input_html: { value: @user.last_name }, required: true, autofocus: true %>
           <%= f.input :bill_address, label:"Adresse", input_html: { value: @user.address }, required: true, autofocus: true %>

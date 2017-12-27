@@ -1,6 +1,7 @@
 .billing_address {
   &.hidden{
-    display: none;
+    visibility: none;
+
   }
 }
 .delivery_address {

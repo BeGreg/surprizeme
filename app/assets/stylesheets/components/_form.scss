@@ -13,10 +13,13 @@ html, body {
   background: -webkit-linear-gradient(to right, $dark-red, $clear-red);
   background: linear-gradient(to right, $dark-red, $clear-red);
   width: 100%;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 .form-title {
   color: white;
+  text-align: center;
 }
   .form-description{
     text-align: center;
@@ -176,17 +179,17 @@ html, body {
 }
 
 
-.details-container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: $clear-red;
-  background: -webkit-linear-gradient(to right, $dark-red, $clear-red);
-  background: linear-gradient(to right, $dark-red, $clear-red);
-  width: 100%;
-  height: 100vh;
-}
+// .details-container{
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   background: $clear-red;
+//   background: -webkit-linear-gradient(to right, $dark-red, $clear-red);
+//   background: linear-gradient(to right, $dark-red, $clear-red);
+//   width: 100%;
+//   height: 100vh;
+// }
 
 // #gr-wrp {
 //   display: grid;
