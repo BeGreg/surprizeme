@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function() {
   var pince = document.getElementById("pince");
 
   if (fil) {
-  console.log('on va fetcher');
   fetch("/scrap-purchase", {
     method: "POST",
     headers: {

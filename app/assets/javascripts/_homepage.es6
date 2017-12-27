@@ -117,11 +117,56 @@ function homepageAnimation() {
 //   };
 }
 
+var disclaimer = document.getElementById("disclaimer");
+var disclaimerClose = document.getElementById("disclaimer-close");
 
-document.addEventListener('DOMContentLoaded', () => {
-  const home = document.querySelector('.home-selection');
 
-  if (home) {
-    homepageAnimation();
-  }
+// affiche le disclaimer si pas de cookie disclaimer
+function checkCookie() {
+  var disclaimerCookie = getCookie("disclaimer");
+  if (disclaimerCookie = "") {
+    // faire apparaître le disclaimer
+    disclaimer.style.visibility='visible';
+    // créer le cookie disclaimer
+    setCookie("disclaimer", "true", 365);
+    // permettre de fermer le disclaimer
+    disclaimerClose.addEventListener('click', function() {
+      disclaimer.style.visibility='hidden'
+      });
+  };
+}
+
+// recherche du cookie disclaimer
+function getCookie(cname) {
+var name = cname + "=";
+var decodedCookie = decodeURIComponent(document.cookie);
+var ca = decodedCookie.split(';');
+for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+    }
+}
+return "";
+}
+
+// création d'un cookie si l'utilisateur n'en n'a pas
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("c'est parti");
+  checkCookie();
+  // const home = document.querySelector('.home-selection');
+  // if (home) {
+  //   homepageAnimation();
+  // }
+
 });
