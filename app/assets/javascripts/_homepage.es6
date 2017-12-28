@@ -123,8 +123,10 @@ var disclaimerClose = document.getElementById("disclaimer-close");
 
 // affiche le disclaimer si pas de cookie disclaimer
 function checkCookie() {
+  console.log(" on est dans checkCookie");
   var disclaimerCookie = getCookie("disclaimer");
-  if (disclaimerCookie = "") {
+  if (disclaimerCookie === "") {
+    console.log("on est dans le if")
     // faire apparaître le disclaimer
     disclaimer.style.visibility='visible';
     // créer le cookie disclaimer
